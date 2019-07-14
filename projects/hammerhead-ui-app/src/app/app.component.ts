@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hammerhead-ui-app';
+
+  public onAction(): void {
+    console.log('action clicked!');
+  }
 }

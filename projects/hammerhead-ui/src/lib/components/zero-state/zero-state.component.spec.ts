@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HammerheadUiComponent } from './hammerhead-ui.component';
+import { ZeroStateComponent } from './zero-state.component';
 
-describe('HammerheadUiComponent', () => {
-  let component: HammerheadUiComponent;
-  let fixture: ComponentFixture<HammerheadUiComponent>;
+describe('ZeroStateComponent', () => {
+  let component: ZeroStateComponent;
+  let fixture: ComponentFixture<ZeroStateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HammerheadUiComponent ]
+      declarations: [ ZeroStateComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HammerheadUiComponent);
+    fixture = TestBed.createComponent(ZeroStateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
