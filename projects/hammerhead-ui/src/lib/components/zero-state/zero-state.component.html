@@ -1,0 +1,29 @@
+<mat-card
+    [fxLayout]="flexLayout"
+    fxLayoutAlign="center center"
+    fxLayoutGap="12px"
+>
+    <ng-container *ngIf="hasAction; else simpleMessage;">
+        <button
+            *ngIf="actionPosition === 'above' || actionPosition === 'before'"
+            mat-button
+            color="primary"
+            (click)="doAction.emit()"
+        >
+            {{ actionText }}
+        </button>
+        <p>{{ message }}</p>
+        <button
+            *ngIf="actionPosition === 'below' || actionPosition === 'after'"
+            mat-button
+            color="primary"
+            (click)="doAction.emit()"
+        >
+            {{ actionText }}
+        </button>
+    </ng-container>
+
+    <ng-template #simpleMessage>
+        <p>{{ message }}</p>
+    </ng-template>
+</mat-card>
