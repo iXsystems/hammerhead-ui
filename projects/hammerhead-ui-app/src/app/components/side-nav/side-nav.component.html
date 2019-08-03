@@ -1,0 +1,35 @@
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Components</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-nav-list>
+            <a
+                mat-list-item
+                [routerLink]="'components/' + demo.id"
+                *ngFor="let demo of componentDemos"
+            >
+                {{ demo.name }}
+            </a>
+        </mat-nav-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Services</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-list>
+            <mat-list-item>HelloService</mat-list-item>
+        </mat-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Classes</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-list>
+            <mat-list-item>HelloClass</mat-list-item>
+        </mat-list>
+    </mat-expansion-panel>
+</mat-accordion>

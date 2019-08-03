@@ -1,155 +1,148 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-    "hammerhead-ui": {
-      "projectType": "library",
-      "root": "projects/hammerhead-ui",
-      "sourceRoot": "projects/hammerhead-ui/src",
-      "prefix": "hh",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/hammerhead-ui/tsconfig.lib.json",
-            "project": "projects/hammerhead-ui/ng-package.json"
-          }
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "hammerhead-ui": {
+            "projectType": "library",
+            "root": "projects/hammerhead-ui",
+            "sourceRoot": "projects/hammerhead-ui/src",
+            "prefix": "hh",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "options": {
+                        "tsConfig": "projects/hammerhead-ui/tsconfig.lib.json",
+                        "project": "projects/hammerhead-ui/ng-package.json"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/hammerhead-ui/src/test.ts",
+                        "tsConfig": "projects/hammerhead-ui/tsconfig.spec.json",
+                        "karmaConfig": "projects/hammerhead-ui/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/hammerhead-ui/tsconfig.lib.json",
+                            "projects/hammerhead-ui/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/hammerhead-ui/src/test.ts",
-            "tsConfig": "projects/hammerhead-ui/tsconfig.spec.json",
-            "karmaConfig": "projects/hammerhead-ui/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/hammerhead-ui/tsconfig.lib.json",
-              "projects/hammerhead-ui/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
+        "hammerhead-ui-app": {
+            "projectType": "application",
+            "schematics": {},
+            "root": "projects/hammerhead-ui-app",
+            "sourceRoot": "projects/hammerhead-ui-app/src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/hammerhead-ui-app",
+                        "index": "projects/hammerhead-ui-app/src/index.html",
+                        "main": "projects/hammerhead-ui-app/src/main.ts",
+                        "polyfills": "projects/hammerhead-ui-app/src/polyfills.ts",
+                        "tsConfig": "projects/hammerhead-ui-app/tsconfig.app.json",
+                        "aot": false,
+                        "assets": [
+                            "projects/hammerhead-ui-app/src/favicon.ico",
+                            "projects/hammerhead-ui-app/src/assets"
+                        ],
+                        "styles": ["projects/hammerhead-ui-app/src/styles.scss"],
+                        "scripts": ["node_modules/marked/lib/marked.js"]
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/hammerhead-ui-app/src/environments/environment.ts",
+                                    "with": "projects/hammerhead-ui-app/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "hammerhead-ui-app:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "hammerhead-ui-app:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "hammerhead-ui-app:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/hammerhead-ui-app/src/test.ts",
+                        "polyfills": "projects/hammerhead-ui-app/src/polyfills.ts",
+                        "tsConfig": "projects/hammerhead-ui-app/tsconfig.spec.json",
+                        "karmaConfig": "projects/hammerhead-ui-app/karma.conf.js",
+                        "assets": [
+                            "projects/hammerhead-ui-app/src/favicon.ico",
+                            "projects/hammerhead-ui-app/src/assets"
+                        ],
+                        "styles": ["projects/hammerhead-ui-app/src/styles.scss"],
+                        "scripts": []
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/hammerhead-ui-app/tsconfig.app.json",
+                            "projects/hammerhead-ui-app/tsconfig.spec.json",
+                            "projects/hammerhead-ui-app/e2e/tsconfig.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/hammerhead-ui-app/e2e/protractor.conf.js",
+                        "devServerTarget": "hammerhead-ui-app:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "hammerhead-ui-app:serve:production"
+                        }
+                    }
+                }
+            }
         }
-      }
     },
-    "hammerhead-ui-app": {
-      "projectType": "application",
-      "schematics": {},
-      "root": "projects/hammerhead-ui-app",
-      "sourceRoot": "projects/hammerhead-ui-app/src",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/hammerhead-ui-app",
-            "index": "projects/hammerhead-ui-app/src/index.html",
-            "main": "projects/hammerhead-ui-app/src/main.ts",
-            "polyfills": "projects/hammerhead-ui-app/src/polyfills.ts",
-            "tsConfig": "projects/hammerhead-ui-app/tsconfig.app.json",
-            "aot": false,
-            "assets": [
-              "projects/hammerhead-ui-app/src/favicon.ico",
-              "projects/hammerhead-ui-app/src/assets"
-            ],
-            "styles": [
-              "projects/hammerhead-ui-app/src/styles.css"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "projects/hammerhead-ui-app/src/environments/environment.ts",
-                  "with": "projects/hammerhead-ui-app/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "hammerhead-ui-app:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "hammerhead-ui-app:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "hammerhead-ui-app:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/hammerhead-ui-app/src/test.ts",
-            "polyfills": "projects/hammerhead-ui-app/src/polyfills.ts",
-            "tsConfig": "projects/hammerhead-ui-app/tsconfig.spec.json",
-            "karmaConfig": "projects/hammerhead-ui-app/karma.conf.js",
-            "assets": [
-              "projects/hammerhead-ui-app/src/favicon.ico",
-              "projects/hammerhead-ui-app/src/assets"
-            ],
-            "styles": [
-              "projects/hammerhead-ui-app/src/styles.css"
-            ],
-            "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/hammerhead-ui-app/tsconfig.app.json",
-              "projects/hammerhead-ui-app/tsconfig.spec.json",
-              "projects/hammerhead-ui-app/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/hammerhead-ui-app/e2e/protractor.conf.js",
-            "devServerTarget": "hammerhead-ui-app:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "hammerhead-ui-app:serve:production"
-            }
-          }
-        }
-      }
-    }},
-  "defaultProject": "hammerhead-ui"
+    "defaultProject": "hammerhead-ui"
 }

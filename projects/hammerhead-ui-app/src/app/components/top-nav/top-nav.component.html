@@ -1,0 +1,35 @@
+<mat-toolbar
+    color="primary"
+    fxLayoutAlign="space-between center"
+>
+    <section
+        fxLayoutAlign="start center"
+        fxLayoutGap="8px"
+    >
+        <mat-icon
+            (click)="menuToggle.emit()"
+            class="cursor-pointer"
+        >
+            menu
+        </mat-icon>
+        <h4
+            class="no-margin cursor-pointer"
+            routerLink="/"
+        >
+            Hammerhead UI
+        </h4>
+    </section>
+
+    <section>
+        <a
+            fxLayoutAlign="center center"
+            fxLayoutGap="8px"
+            href="https://github.com/iXsystems/hammerhead-ui"
+            class="github-logo"
+            target="_blank"
+        >
+            <img src="assets/github_logo_white.svg">
+            <p class="no-margin">Github</p>
+        </a>
+    </section>
+</mat-toolbar>

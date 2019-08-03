@@ -1,0 +1,11 @@
+:host {
+    display: block;
+
+    ::ng-deep {
+        mat-card-title {
+            p {
+                font-size: 16px;
+            }
+        }
+    }
+}

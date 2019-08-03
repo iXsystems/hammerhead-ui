@@ -1,0 +1,23 @@
+:host {
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+
+    ::ng-deep {
+        mat-sidenav-container {
+            height: calc(100% - 56px);
+            margin-top: 56px;
+            overflow: hidden;
+
+            mat-sidenav {
+                width: 312px;
+            }
+
+            mat-sidenav-content {
+                box-sizing: border-box;
+                padding: 24px;
+            }
+        }
+    }
+}

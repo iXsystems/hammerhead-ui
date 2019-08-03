@@ -1,0 +1,46 @@
+<app-demo
+    title="Zero State"
+    description="Displays a message and optional action button when no data is available."
+>
+    <section class="examples">
+        <app-demo-example description="Simple message, no action button">
+            <hh-zero-state
+                class="example"
+                message="No data available"
+            ></hh-zero-state>
+        </app-demo-example>
+
+        <app-demo-example description="Message with action button">
+            <div
+                class="example"
+                fxLayout="row wrap"
+                fxLayoutAlign="space-between center"
+                fxLayoutGap="24px"
+            >
+                <hh-zero-state
+                    message="Default action button position is below."
+                    [hasAction]="true"
+                    actionText="Confirm"
+                ></hh-zero-state>
+                <hh-zero-state
+                    message="Action button in 'above' position"
+                    [hasAction]="true"
+                    actionText="Confirm"
+                    actionPosition="above"
+                ></hh-zero-state>
+                <hh-zero-state
+                    message="Action button in 'before' position"
+                    [hasAction]="true"
+                    actionText="Confirm"
+                    actionPosition="before"
+                ></hh-zero-state>
+                <hh-zero-state
+                    message="Action button in 'after' position"
+                    [hasAction]="true"
+                    actionText="Confirm"
+                    actionPosition="after"
+                ></hh-zero-state>
+            </div>
+        </app-demo-example>
+    </section>
+</app-demo>

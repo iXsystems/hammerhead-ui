@@ -6,7 +6,7 @@
     <ng-container *ngIf="hasAction; else simpleMessage;">
         <button
             *ngIf="actionPosition === 'above' || actionPosition === 'before'"
-            mat-button
+            mat-flat-button
             color="primary"
             (click)="doAction.emit()"
         >
@@ -15,7 +15,7 @@
         <p>{{ message }}</p>
         <button
             *ngIf="actionPosition === 'below' || actionPosition === 'after'"
-            mat-button
+            mat-flat-button
             color="primary"
             (click)="doAction.emit()"
         >

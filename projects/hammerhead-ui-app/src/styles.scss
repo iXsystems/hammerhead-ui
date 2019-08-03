@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@angular/material/theming';
+
+$primary: mat-palette($mat-indigo);
+
+html,
+body {
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    margin: 0;
+}
+
+.bg-primary {
+    background: mat-color($primary);
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.no-padding {
+    padding: 0;
+}
