@@ -56,8 +56,16 @@
                             "projects/hammerhead-ui-app/src/favicon.ico",
                             "projects/hammerhead-ui-app/src/assets"
                         ],
-                        "styles": ["projects/hammerhead-ui-app/src/styles.scss"],
-                        "scripts": ["node_modules/marked/lib/marked.js"]
+                        "styles": [
+                            "projects/hammerhead-ui-app/src/styles.scss",
+                            "node_modules/prismjs/themes/prism-okaidia.css"
+                        ],
+                        "scripts": [
+                            "node_modules/marked/lib/marked.js",
+                            "node_modules/prismjs/prism.js",
+                            "node_modules/prismjs/components/prism-typescript.min.js",
+                            "node_modules/prismjs/components/prism-shell-session.min.js"
+                        ]
                     },
                     "configurations": {
                         "production": {
