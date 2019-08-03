@@ -1,6 +1,8 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
-import { map, take } from 'rxjs/operators';
+import { map, take, filter } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
+import { combineLatest } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -14,7 +16,18 @@ export class AppComponent {
 
     public isSidenavOpen = false;
 
-    constructor(private breakpointObserver: BreakpointObserver) {
+    constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
+        /* On app load, determine if the sidenav should be open (desktop) or closed (hand-held device) */
         this.sidenavMode$.pipe(take(1)).subscribe(mode => (this.isSidenavOpen = mode === 'side'));
+
+        /* On smaller viewports, close the sidenav menu after navigation */
+        combineLatest(this.router.events, this.sidenavMode$)
+            .pipe(
+                filter(
+                    ([event, sidenavMode]) =>
+                        event instanceof NavigationEnd && this.isSidenavOpen && sidenavMode === 'over'
+                )
+            )
+            .subscribe(() => (this.isSidenavOpen = false));
     }
 }
