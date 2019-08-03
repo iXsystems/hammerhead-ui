@@ -9,6 +9,7 @@ import {
     MatIconModule,
     MatListModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatToolbarModule
 } from '@angular/material';
 import { HammerheadUiModule } from 'hammerhead-ui';
@@ -25,6 +26,7 @@ const MATERIAL_MODULES = [
     MatIconModule,
     MatListModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatToolbarModule
 ];
 

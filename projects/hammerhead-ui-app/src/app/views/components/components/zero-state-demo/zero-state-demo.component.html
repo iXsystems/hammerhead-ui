@@ -21,24 +21,28 @@
                     message="Default action button position is below."
                     [hasAction]="true"
                     actionText="Confirm"
+                    (doAction)="onAction('below')"
                 ></hh-zero-state>
                 <hh-zero-state
                     message="Action button in 'above' position"
                     [hasAction]="true"
                     actionText="Confirm"
                     actionPosition="above"
+                    (doAction)="onAction('above')"
                 ></hh-zero-state>
                 <hh-zero-state
                     message="Action button in 'before' position"
                     [hasAction]="true"
                     actionText="Confirm"
                     actionPosition="before"
+                    (doAction)="onAction('before')"
                 ></hh-zero-state>
                 <hh-zero-state
                     message="Action button in 'after' position"
                     [hasAction]="true"
                     actionText="Confirm"
                     actionPosition="after"
+                    (doAction)="onAction('after')"
                 ></hh-zero-state>
             </div>
         </app-demo-example>
