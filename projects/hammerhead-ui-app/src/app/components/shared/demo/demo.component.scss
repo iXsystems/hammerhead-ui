@@ -1,0 +1,32 @@
+:host {
+    box-sizing: border-box;
+    display: block;
+    padding-top: 72px;
+    position: relative;
+
+    .demo-header {
+        box-sizing: border-box;
+        color: white;
+        height: 72px;
+        left: -24px;
+        padding: 24px;
+        position: absolute;
+        top: -24px;
+        width: calc(100% + 48px);
+
+        p {
+            font-size: 20px;
+            line-height: 24px;
+        }
+    }
+
+    ::ng-deep {
+        app-demo-example:first-of-type {
+            margin: 32px 0 48px;
+        }
+
+        app-demo-example {
+            margin-bottom: 48px;
+        }
+    }
+}

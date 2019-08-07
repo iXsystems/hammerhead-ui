@@ -1,0 +1,27 @@
+:host {
+    display: block;
+    height: 56px;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+
+    ::ng-deep {
+        mat-toolbar {
+            height: 56px;
+        }
+    }
+
+    .github-logo {
+        text-decoration: none;
+
+        img {
+            height: 24px;
+            width: 24px;
+        }
+
+        p {
+            text-decoration: none !important;
+            color: white;
+        }
+    }
+}
