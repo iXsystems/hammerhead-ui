@@ -4,11 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "yarn run copy_readme_to_assets && ng serve",
-    "build": "yarn run copy_readme_to_assets && ng build",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "copy_readme_to_assets": "cp ./README.md ./projects/hammerhead-ui-app/src/assets"
+    "copy_readme_to_assets": "cp ./README.md ./projects/hammerhead-ui-app/src/assets",
+    "publish_lib": "bash ./publish_lib.sh"
   },
   "private": true,
   "dependencies": {
