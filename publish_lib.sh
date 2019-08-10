@@ -6,9 +6,11 @@ DEMO_APP_PROJECT_NAME="hammerhead-ui-app"
 ### File/directory relative paths ###
 
 ROOT_README="./README.md"
+DEMO_APP_DIST_DIR="./dist/hammerhead-ui-app"
 DEMO_APP_ASSETS_DIR="./projects/hammerhead-ui-app/src/assets"
 DIST_LIB_ROOT="./dist/hammerhead-ui"
 DIST_LIB_TARBALL=$DIST_LIB_ROOT"/"$LIBRARY_PROJECT_NAME"-*.tgz"
+DOCS_ROOT_DIR="./docs"
 
 #####################################
 
@@ -40,3 +42,10 @@ sudo cp $ROOT_README $DEMO_APP_ASSETS_DIR
 sudo yarn build --project=$DEMO_APP_PROJECT_NAME
 
 ##############################
+
+### Github pages stuff ###
+
+# Copy contents of dist/hammerhead-ui-app to docs directory
+sudo cp -a $DEMO_APP_DIST_DIR $DOCS_ROOT_DIR
+
+##########################
