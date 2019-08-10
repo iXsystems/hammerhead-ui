@@ -29,7 +29,7 @@ sudo npm pack $DIST_LIB_ROOT
 sudo mv ./hammerhead-ui-*.tgz $DIST_LIB_ROOT
 
 # Publish the library to npm
-sudo npm publish $DIST_LIB_TARBALL --dry-run
+sudo npm publish $DIST_LIB_TARBALL
 
 #####################################
 
