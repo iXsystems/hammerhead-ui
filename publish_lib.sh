@@ -12,7 +12,6 @@ DIST_LIB_TARBALL=$DIST_LIB_ROOT"/"$LIBRARY_PROJECT_NAME"-*.tgz"
 
 #####################################
 
-
 ### Build/publish library routine ###
 
 # Build the library
@@ -31,7 +30,6 @@ sudo mv ./hammerhead-ui-*.tgz $DIST_LIB_ROOT
 sudo npm publish $DIST_LIB_TARBALL
 
 #####################################
-
 
 ### Build demo app routine ###
 
