@@ -11,6 +11,10 @@ body {
     margin: 0;
 }
 
+pre {
+    margin: 0 !important;
+}
+
 .bg-primary {
     background: mat-color($primary);
 }
@@ -25,4 +29,8 @@ body {
 
 .no-padding {
     padding: 0;
+}
+
+.margin-bottom-heavy {
+    margin-bottom: 24px;
 }
