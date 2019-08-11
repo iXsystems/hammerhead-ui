@@ -25,7 +25,6 @@ export class ZeroStateComponent implements OnInit, OnChanges {
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
-        console.log({ changes })
         if (changes.actionPosition) {
             this.updateFlexLayout();
         }
