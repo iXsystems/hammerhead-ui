@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ButtonPosition } from '../../interfaces';
 
 @Component({
@@ -6,7 +6,7 @@ import { ButtonPosition } from '../../interfaces';
     templateUrl: './zero-state.component.html',
     styleUrls: ['./zero-state.component.scss']
 })
-export class ZeroStateComponent implements OnInit {
+export class ZeroStateComponent implements OnInit, OnChanges {
     public static readonly DEFAULT_MESSAGE = 'No data available';
     public static readonly DEFAULT_ACTION_TEXT = 'Configure';
     public static readonly DEFAULT_ACTION_POSITION = 'below';
@@ -21,6 +21,17 @@ export class ZeroStateComponent implements OnInit {
     public flexLayout: 'row' | 'column' = 'column';
 
     public ngOnInit(): void {
+        this.updateFlexLayout();
+    }
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        console.log({ changes })
+        if (changes.actionPosition) {
+            this.updateFlexLayout();
+        }
+    }
+
+    private updateFlexLayout(): void {
         this.flexLayout = this.actionPosition === 'above' || this.actionPosition === 'below' ? 'column' : 'row';
     }
 }

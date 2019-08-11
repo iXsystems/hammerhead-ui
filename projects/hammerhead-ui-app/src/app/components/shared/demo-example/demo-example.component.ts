@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { DemoComponent } from '../demo/demo.component';
 
 @Component({
     selector: 'app-demo-example',
@@ -6,8 +7,6 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['./demo-example.component.scss']
 })
 export class DemoExampleComponent {
-    private static readonly URL_REPO_ROOT = 'https://raw.githubusercontent.com/iXsystems/hammerhead-ui/master/';
-
     @Input() public description: string;
 
     private tsSource: string;
@@ -15,7 +14,7 @@ export class DemoExampleComponent {
         return this.tsSource;
     }
     @Input() public set tsSourceUrl(url: string) {
-        this.tsSource = DemoExampleComponent.URL_REPO_ROOT + url;
+        this.tsSource = DemoComponent.URL_REPO_ROOT + url;
     }
 
     private templateSource: string;
@@ -23,6 +22,6 @@ export class DemoExampleComponent {
         return this.templateSource;
     }
     @Input() public set templateSourceUrl(url: string) {
-        this.templateSource = DemoExampleComponent.URL_REPO_ROOT + url;
+        this.templateSource = DemoComponent.URL_REPO_ROOT + url;
     }
 }

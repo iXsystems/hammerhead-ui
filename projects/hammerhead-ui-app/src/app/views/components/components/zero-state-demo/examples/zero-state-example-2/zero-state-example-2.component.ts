@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { ButtonPosition } from 'hammerhead-ui/hammerhead-ui';
+import { ButtonPosition } from 'hammerhead-ui';
 
 @Component({
     selector: 'app-zero-state-example-2',

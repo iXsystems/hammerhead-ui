@@ -1,27 +1,29 @@
-<p [style.margin-bottom.px]="24">{{ description }}</p>
+<mat-card>
+    <p [style.margin-bottom.px]="24">{{ description }}</p>
 
-<mat-tab-group>
-    <mat-tab label="Example">
-        <ng-content select=".example"></ng-content>
-    </mat-tab>
+    <mat-tab-group>
+        <mat-tab label="Example">
+            <ng-content></ng-content>
+        </mat-tab>
 
-    <mat-tab label="Source">
-        <div
-            fxLayout.lt-lg="column"
-            fxLayoutAlign="start start"
-            fxLayoutGap="24px"
-            fxLayoutGap.lt-lg="12px"
-        >
-            <markdown
-                [fxFlex]="templateSourceUrl ? 'calc(50% - 12px)' : '100%'"
-                fxFlex.lt-lg="100%"
-                [src]="tsSourceUrl"
-            ></markdown>
-            <markdown
-                fxFlex="calc(50% - 12px)"
-                fxFlex.lt-lg="100%"
-                [src]="templateSourceUrl"
-            ></markdown>
-        </div>
-    </mat-tab>
-</mat-tab-group>
+        <mat-tab label="Source">
+            <div
+                fxLayout.lt-lg="column"
+                fxLayoutAlign="start start"
+                fxLayoutGap="24px"
+                fxLayoutGap.lt-lg="12px"
+            >
+                <markdown
+                    [fxFlex]="templateSourceUrl ? 'calc(50% - 12px)' : '100%'"
+                    fxFlex.lt-lg="100%"
+                    [src]="tsSourceUrl"
+                ></markdown>
+                <markdown
+                    fxFlex="calc(50% - 12px)"
+                    fxFlex.lt-lg="100%"
+                    [src]="templateSourceUrl"
+                ></markdown>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</mat-card>

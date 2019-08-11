@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatCardModule } from '@angular/material';
 import { take } from 'rxjs/operators';
 import { ZeroStateComponent } from './zero-state.component';
+import { SimpleChange } from '@angular/core';
 
 describe('ZeroStateComponent', () => {
     let fixture: ComponentFixture<ZeroStateComponent>;
@@ -116,5 +117,17 @@ describe('ZeroStateComponent', () => {
         (fixture.nativeElement.getElementsByTagName('button').item(0) as HTMLButtonElement).click();
 
         expect(wasEventEmitted).toBe(true);
+    });
+
+    it('flexLayout prop should update when actionPosition is changed', () => {
+        expect(fixture.componentInstance.flexLayout).toEqual('column');
+
+        fixture.componentInstance.actionPosition = 'before';
+        fixture.componentInstance.ngOnChanges({
+            actionPosition: new SimpleChange('below', fixture.componentInstance.actionPosition, false)
+        });
+        fixture.detectChanges();
+
+        expect(fixture.componentInstance.flexLayout).toEqual('row');
     });
 });

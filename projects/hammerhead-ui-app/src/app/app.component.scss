@@ -6,6 +6,7 @@
 
     ::ng-deep {
         mat-sidenav-container {
+            background: rgba(58, 58, 58, 0.09);
             height: calc(100% - 56px);
             margin-top: 56px;
             overflow: hidden;
