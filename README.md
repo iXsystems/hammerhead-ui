@@ -89,7 +89,40 @@ ng g c views/components/components/my-component-demo --style=scss --project=hamm
 
 Now that much of the boilerplate for your component demo has been generated, use the `zero-state-demo/` directory as your guide to creating example use-cases for your new component.
 
--   **_Don't forget to register your examples in `components-view.module.ts`!_**
+-   **_Don't forget to register your examples in `projects/hammerhead-ui-app/src/app/views/components/components-view.module.ts`!_**
+
+#### Register your new demo
+
+Register your new demo in `projects/hammerhead-ui-app/src/app/views/components/components-view.module.ts` by adding your new component to the `COMPONENT_DEMOS` array. After this step, your component demo will be registered in the side-nav navigation list.
+
+```ts
+export const COMPONENT_DEMOS = [
+    {
+        id: 'zero-state',
+        name: 'Zero State'
+    },
+    {
+        id: 'my-component',
+        name: 'My Component'
+    }
+];
+```
+
+Finally, register your demo with with the app's `Router` in `projects/hammerhead-ui-app/src/app/views/components/components-view.routes.ts`.
+
+```ts
+export const ROUTES_COMPONENTS_VIEW: Routes = [
+    /* ... */
+    {
+        path: 'zero-state',
+        component: ZeroStateDemoComponent
+    },
+    {
+        path: 'my-component',
+        component: MyComponentDemoComponent
+    }
+];
+```
 
 #### Serve the demo app to see your examples in the browser
 
