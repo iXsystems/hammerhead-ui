@@ -15,6 +15,10 @@ pre {
     margin: 0 !important;
 }
 
+markdown hr {
+    margin: 48px 0 32px;
+}
+
 .bg-primary {
     background: mat-color($primary);
 }

@@ -4,14 +4,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatCardModule } from '@angular/material';
 import { ZeroStateComponent } from './components/zero-state/zero-state.component';
 
-const COMPONENTS = [ZeroStateComponent];
-const DIRECTIVES = [];
-const SERVICES = [];
 const IMPORTS = [CommonModule, FlexLayoutModule, MatButtonModule, MatCardModule];
 
 @NgModule({
-    declarations: [...COMPONENTS],
+    declarations: [ZeroStateComponent],
     imports: IMPORTS,
-    exports: [...COMPONENTS]
+    exports: [ZeroStateComponent]
 })
 export class HammerheadUiModule {}
