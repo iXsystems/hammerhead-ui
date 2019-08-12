@@ -7,6 +7,7 @@ export interface DataTableConfig {
     data?: any[];
     dataAsync?: () => Observable<any>;
     dataAsyncMapper?: (elements: any[]) => any[];
+    hasGlobalFilter?: boolean;
 }
 
 export interface DataTableColumnConfig {

@@ -38,7 +38,41 @@ var DataTableSource = /** @class */ (function (_super) {
     function DataTableSource(DATA) {
         var _this = _super.call(this) || this;
         _this.DATA = DATA;
+        _this.filterString = new rxjs__WEBPACK_IMPORTED_MODULE_6__["BehaviorSubject"]('');
         _this.data = new rxjs__WEBPACK_IMPORTED_MODULE_6__["BehaviorSubject"](_this.DATA);
+        _this.filteredData = Object(rxjs__WEBPACK_IMPORTED_MODULE_6__["combineLatest"])(_this.data, _this.filterString.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["debounceTime"])(400))).pipe(
+        /* Algorithm that searches an object's values for a matching string */
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_5__["__read"])(_a, 2), d = _b[0], filter = _b[1];
+            return filter && typeof filter === 'string' && filter.trim().length > 0
+                ? d.filter((/**
+                 * @param {?} dEl
+                 * @return {?}
+                 */
+                function (dEl) {
+                    return Object.keys(dEl || {})
+                        .map((/**
+                     * @param {?} key
+                     * @return {?}
+                     */
+                    function (key) { return dEl[key]; }))
+                        .filter((/**
+                     * @param {?} dElement
+                     * @return {?}
+                     */
+                    function (dElement) {
+                        return dElement
+                            .toString()
+                            .toLowerCase()
+                            .indexOf(filter) > 0;
+                    })).length > 0;
+                }))
+                : d;
+        })));
         return _this;
     }
     /**
@@ -48,7 +82,7 @@ var DataTableSource = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        return this.data;
+        return this.filteredData;
     };
     /**
      * @return {?}
@@ -100,6 +134,19 @@ var DataTableComponent = /** @class */ (function () {
                 }
             });
         });
+    };
+    /**
+     * @param {?} filterString
+     * @return {?}
+     */
+    DataTableComponent.prototype.applyFilter = /**
+     * @param {?} filterString
+     * @return {?}
+     */
+    function (filterString) {
+        if (this.data) {
+            this.data.filterString.next(filterString);
+        }
     };
     /**
      * @param {?} columnProperty
@@ -217,7 +264,7 @@ var DataTableComponent = /** @class */ (function () {
     DataTableComponent.decorators = [
         { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"], args: [{
                     selector: 'hh-data-table',
-                    template: "<ng-container *ngIf=\"data; else loading;\">\n    <cdk-table [dataSource]=\"data\">\n        <ng-container\n            *ngFor=\"let column of cols\"\n            [cdkColumnDef]=\"column\"\n        >\n            <cdk-header-cell\n                [fxFlex]=\"getColumnWidth(column) || '100%'\"\n                *cdkHeaderCellDef\n            >\n                <p>{{ column | uppercase }}</p>\n            </cdk-header-cell>\n            <cdk-cell\n                [fxFlex]=\"getColumnWidth(column) || '100%'\"\n                *cdkCellDef=\"let row\"\n            >\n                <ng-container *ngIf=\"column !== 'actions'; else actions;\">{{ row[column] }}</ng-container>\n                <ng-template #actions>\n                    <div\n                        fxLayoutAlign=\"start center\"\n                        fxLayoutGap=\"16px\"\n                    >\n                        <ng-container *ngFor=\"let action of config.rowActions\">\n                            <mat-icon\n                                *ngIf=\"action.isIcon; else actionButton;\"\n                                [color]=\"action.actionColor || 'primary'\"\n                                (click)=\"action.onClick(row, $event)\"\n                                class=\"cursor-pointer\"\n                            >\n                                {{ action.icon || 'edit' }}\n                            </mat-icon>\n                            <ng-template #actionButton>\n                                <button\n                                    mat-flat-button\n                                    [color]=\"action.actionColor || 'primary'\"\n                                    (click)=\"action.onClick(row, $event)\"\n                                >\n                                    {{ action.actionText | titlecase }}\n                                </button>\n                            </ng-template>\n                        </ng-container>\n                    </div>\n                </ng-template>\n            </cdk-cell>\n        </ng-container>\n\n        <cdk-header-row\n            fxLayoutAlign=\"start center\"\n            fxLayoutGap=\"16px\"\n            *cdkHeaderRowDef=\"cols\"\n        ></cdk-header-row>\n        <cdk-row\n            fxLayoutAlign=\"start center\"\n            fxLayoutGap=\"16px\"\n            *cdkRowDef=\"let row; columns: cols;\"\n        ></cdk-row>\n    </cdk-table>\n</ng-container>\n\n<ng-template #loading>\n    <mat-progress-bar\n        mode=\"indeterminate\"\n        class=\"margin-bottom-heavy\"\n    ></mat-progress-bar>\n    <div fxLayoutAlign=\"center center\">\n        <hh-zero-state\n            message=\"Please wait...\"\n            [style.min-width.px]=\"320\"\n        ></hh-zero-state>\n    </div>\n</ng-template>\n",
+                    template: "<ng-container *ngIf=\"data; else loading;\">\n    <mat-form-field\n        *ngIf=\"config.hasGlobalFilter\"\n        [style.width]=\"'100%'\"\n    >\n        <input\n            matInput\n            (keyup)=\"applyFilter($event.target.value)\"\n            placeholder=\"Filter\"\n        >\n    </mat-form-field>\n\n    <cdk-table [dataSource]=\"data\">\n        <ng-container\n            *ngFor=\"let column of cols\"\n            [cdkColumnDef]=\"column\"\n        >\n            <cdk-header-cell\n                [fxFlex]=\"getColumnWidth(column) || '100%'\"\n                *cdkHeaderCellDef\n            >\n                <p>{{ column | uppercase }}</p>\n            </cdk-header-cell>\n            <cdk-cell\n                [fxFlex]=\"getColumnWidth(column) || '100%'\"\n                *cdkCellDef=\"let row\"\n            >\n                <ng-container *ngIf=\"column !== 'actions'; else actions;\">{{ row[column] }}</ng-container>\n                <ng-template #actions>\n                    <div\n                        fxLayoutAlign=\"start center\"\n                        fxLayoutGap=\"16px\"\n                    >\n                        <ng-container *ngFor=\"let action of config.rowActions\">\n                            <mat-icon\n                                *ngIf=\"action.isIcon; else actionButton;\"\n                                [color]=\"action.actionColor || 'primary'\"\n                                (click)=\"action.onClick(row, $event)\"\n                                class=\"cursor-pointer\"\n                            >\n                                {{ action.icon || 'edit' }}\n                            </mat-icon>\n                            <ng-template #actionButton>\n                                <button\n                                    mat-flat-button\n                                    [color]=\"action.actionColor || 'primary'\"\n                                    (click)=\"action.onClick(row, $event)\"\n                                >\n                                    {{ action.actionText | titlecase }}\n                                </button>\n                            </ng-template>\n                        </ng-container>\n                    </div>\n                </ng-template>\n            </cdk-cell>\n        </ng-container>\n\n        <cdk-header-row\n            fxLayoutAlign=\"start center\"\n            fxLayoutGap=\"16px\"\n            *cdkHeaderRowDef=\"cols\"\n        ></cdk-header-row>\n        <cdk-row\n            fxLayoutAlign=\"start center\"\n            fxLayoutGap=\"16px\"\n            *cdkRowDef=\"let row; columns: cols;\"\n        ></cdk-row>\n    </cdk-table>\n</ng-container>\n\n<ng-template #loading>\n    <mat-progress-bar\n        mode=\"indeterminate\"\n        class=\"margin-bottom-heavy\"\n    ></mat-progress-bar>\n    <div fxLayoutAlign=\"center center\">\n        <hh-zero-state\n            message=\"Please wait...\"\n            [style.min-width.px]=\"320\"\n        ></hh-zero-state>\n    </div>\n</ng-template>\n",
                     styles: [":host{display:block;margin:16px}:host cdk-table{width:100%}:host cdk-table cdk-row{border-bottom:1px solid rgba(58,58,58,.18);padding:8px 0}:host cdk-table cdk-row:hover{border-bottom:1px solid rgba(58,58,58,.66)}:host cdk-table cdk-row mat-icon.cursor-pointer{cursor:pointer!important}:host cdk-table cdk-row mat-icon.cursor-pointer:active{opacity:.5}:host cdk-table cdk-header-row{border-bottom:1px solid rgba(58,58,58,.33);padding:12px 0}:host cdk-table cdk-header-row p{font-size:12px;font-weight:700;margin:0}"]
                 }] }
     ];
@@ -304,7 +351,9 @@ var IMPORTS = [
     _angular_flex_layout__WEBPACK_IMPORTED_MODULE_3__["FlexLayoutModule"],
     _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatButtonModule"],
     _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatCardModule"],
+    _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatFormFieldModule"],
     _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatIconModule"],
+    _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatInputModule"],
     _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatProgressBarModule"]
 ];
 var HammerheadUiModule = /** @class */ (function () {
@@ -399,7 +448,7 @@ module.exports = "<p>components-overview works!</p>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-demo\n    title=\"Data Table\"\n    description=\"Displays tabular data.\"\n    tsSourceUrl=\"projects/hammerhead-ui/src/lib/components/data-table/data-table.component.ts\"\n    templateSourceUrl=\"projects/hammerhead-ui/src/lib/components/data-table/data-table.component.html\"\n>\n    <app-demo-example\n        class=\"margin-bottom-heavy\"\n        description=\"Simple table\"\n        tsSourceUrl=\"projects/hammerhead-ui-app/src/app/views/components/components/data-table-demo/examples/data-table-example-a/data-table-example-a.component.ts\"\n    >\n        <app-data-table-example-a></app-data-table-example-a>\n    </app-demo-example>\n\n    <app-demo-example\n        class=\"margin-bottom-heavy\"\n        description=\"Simple table with async data\"\n        tsSourceUrl=\"projects/hammerhead-ui-app/src/app/views/components/components/data-table-demo/examples/data-table-example-b/data-table-example-b.component.ts\"\n    >\n        <app-data-table-example-b></app-data-table-example-b>\n    </app-demo-example>\n\n    <app-demo-example\n        class=\"margin-bottom-heavy\"\n        description=\"Simple table with custom column widths\"\n        tsSourceUrl=\"projects/hammerhead-ui-app/src/app/views/components/components/data-table-demo/examples/data-table-example-c/data-table-example-c.component.ts\"\n    >\n        <app-data-table-example-c></app-data-table-example-c>\n    </app-demo-example>\n\n    <app-demo-example\n        description=\"Custom column widths and icon action buttons\"\n        tsSourceUrl=\"projects/hammerhead-ui-app/src/app/views/components/components/data-table-demo/examples/data-table-example-d/data-table-example-d.component.ts\"\n    >\n        <app-data-table-example-d></app-data-table-example-d>\n    </app-demo-example>\n</app-demo>\n"
+module.exports = "<app-demo\n    title=\"Data Table\"\n    description=\"Displays tabular data.\"\n    tsSourceUrl=\"projects/hammerhead-ui/src/lib/components/data-table/data-table.component.ts\"\n    templateSourceUrl=\"projects/hammerhead-ui/src/lib/components/data-table/data-table.component.html\"\n>\n    <app-demo-example\n        class=\"margin-bottom-heavy\"\n        description=\"Simple table\"\n        tsSourceUrl=\"projects/hammerhead-ui-app/src/app/views/components/components/data-table-demo/examples/data-table-example-a/data-table-example-a.component.ts\"\n    >\n        <app-data-table-example-a></app-data-table-example-a>\n    </app-demo-example>\n\n    <app-demo-example\n        class=\"margin-bottom-heavy\"\n        description=\"Simple table with async data\"\n        tsSourceUrl=\"projects/hammerhead-ui-app/src/app/views/components/components/data-table-demo/examples/data-table-example-b/data-table-example-b.component.ts\"\n    >\n        <app-data-table-example-b></app-data-table-example-b>\n    </app-demo-example>\n\n    <app-demo-example\n        class=\"margin-bottom-heavy\"\n        description=\"Simple table with custom column widths\"\n        tsSourceUrl=\"projects/hammerhead-ui-app/src/app/views/components/components/data-table-demo/examples/data-table-example-c/data-table-example-c.component.ts\"\n    >\n        <app-data-table-example-c></app-data-table-example-c>\n    </app-demo-example>\n\n    <app-demo-example\n        description=\"Custom column widths and icon action buttons\"\n        tsSourceUrl=\"projects/hammerhead-ui-app/src/app/views/components/components/data-table-demo/examples/data-table-example-d/data-table-example-d.component.ts\"\n    >\n        <app-data-table-example-d></app-data-table-example-d>\n    </app-demo-example>\n\n    <app-demo-example\n        description=\"Table with global filter\"\n        tsSourceUrl=\"projects/hammerhead-ui-app/src/app/views/components/components/data-table-demo/examples/data-table-example-e/data-table-example-e.component.ts\"\n    >\n        <app-data-table-example-e></app-data-table-example-e>\n    </app-demo-example>\n</app-demo>\n"
 
 /***/ }),
 
@@ -949,9 +998,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_data_table_demo_examples_data_table_example_b_data_table_example_b_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/data-table-demo/examples/data-table-example-b/data-table-example-b.component */ "./src/app/views/components/components/data-table-demo/examples/data-table-example-b/data-table-example-b.component.ts");
 /* harmony import */ var _components_data_table_demo_examples_data_table_example_c_data_table_example_c_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/data-table-demo/examples/data-table-example-c/data-table-example-c.component */ "./src/app/views/components/components/data-table-demo/examples/data-table-example-c/data-table-example-c.component.ts");
 /* harmony import */ var _components_data_table_demo_examples_data_table_example_d_data_table_example_d_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/data-table-demo/examples/data-table-example-d/data-table-example-d.component */ "./src/app/views/components/components/data-table-demo/examples/data-table-example-d/data-table-example-d.component.ts");
-/* harmony import */ var _components_zero_state_demo_examples_zero_state_example_1_zero_state_example_1_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component */ "./src/app/views/components/components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component.ts");
-/* harmony import */ var _components_zero_state_demo_examples_zero_state_example_2_zero_state_example_2_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component */ "./src/app/views/components/components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component.ts");
-/* harmony import */ var _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/zero-state-demo/zero-state-demo.component */ "./src/app/views/components/components/zero-state-demo/zero-state-demo.component.ts");
+/* harmony import */ var _components_data_table_demo_examples_data_table_example_e_data_table_example_e_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/data-table-demo/examples/data-table-example-e/data-table-example-e.component */ "./src/app/views/components/components/data-table-demo/examples/data-table-example-e/data-table-example-e.component.ts");
+/* harmony import */ var _components_zero_state_demo_examples_zero_state_example_1_zero_state_example_1_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component */ "./src/app/views/components/components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component.ts");
+/* harmony import */ var _components_zero_state_demo_examples_zero_state_example_2_zero_state_example_2_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component */ "./src/app/views/components/components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component.ts");
+/* harmony import */ var _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/zero-state-demo/zero-state-demo.component */ "./src/app/views/components/components/zero-state-demo/zero-state-demo.component.ts");
+
 
 
 
@@ -989,9 +1040,10 @@ var ComponentsViewModule = /** @class */ (function () {
                 _components_data_table_demo_examples_data_table_example_b_data_table_example_b_component__WEBPACK_IMPORTED_MODULE_8__["DataTableExampleBComponent"],
                 _components_data_table_demo_examples_data_table_example_c_data_table_example_c_component__WEBPACK_IMPORTED_MODULE_9__["DataTableExampleCComponent"],
                 _components_data_table_demo_examples_data_table_example_d_data_table_example_d_component__WEBPACK_IMPORTED_MODULE_10__["DataTableExampleDComponent"],
-                _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_13__["ZeroStateDemoComponent"],
-                _components_zero_state_demo_examples_zero_state_example_1_zero_state_example_1_component__WEBPACK_IMPORTED_MODULE_11__["ZeroStateExample1Component"],
-                _components_zero_state_demo_examples_zero_state_example_2_zero_state_example_2_component__WEBPACK_IMPORTED_MODULE_12__["ZeroStateExample2Component"]
+                _components_data_table_demo_examples_data_table_example_e_data_table_example_e_component__WEBPACK_IMPORTED_MODULE_11__["DataTableExampleEComponent"],
+                _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_14__["ZeroStateDemoComponent"],
+                _components_zero_state_demo_examples_zero_state_example_1_zero_state_example_1_component__WEBPACK_IMPORTED_MODULE_12__["ZeroStateExample1Component"],
+                _components_zero_state_demo_examples_zero_state_example_2_zero_state_example_2_component__WEBPACK_IMPORTED_MODULE_13__["ZeroStateExample2Component"]
             ]
         })
     ], ComponentsViewModule);
@@ -1328,22 +1380,29 @@ var DUMMY_TABLE_DATA = {
 };
 var DataTableExampleDComponent = /** @class */ (function () {
     function DataTableExampleDComponent(snackBar) {
+        var _this = this;
         this.snackBar = snackBar;
         this.config = {
             columns: [{ property: 'id', width: '112px' }, { property: 'token' }],
             data: DUMMY_TABLE_DATA.tokens,
             rowActions: [
                 { id: 'edit', isIcon: true, icon: 'edit', onClick: this.onEdit.bind(this) },
-                { id: 'delete', isIcon: true, icon: 'delete', actionColor: 'warn', onClick: this.onDelete.bind(this) }
+                {
+                    id: 'delete',
+                    isIcon: true,
+                    icon: 'delete',
+                    actionColor: 'warn',
+                    /* An arrow function works just as well as <method>.bind(this) */
+                    onClick: function (token) {
+                        _this.snackBar.open("Are you sure you want to delete " + token.id + "?", 'DO IT', { duration: 3000 });
+                    }
+                }
             ],
             rowActionsWidth: '112px'
         };
     }
     DataTableExampleDComponent.prototype.onEdit = function (token) {
         this.snackBar.open("You want to edit token " + token.id + ".", undefined, { duration: 3000 });
-    };
-    DataTableExampleDComponent.prototype.onDelete = function (token) {
-        this.snackBar.open("Are you sure you want to delete " + token.id + "?", 'DO IT', { duration: 3000 });
     };
     DataTableExampleDComponent.ctorParameters = function () { return [
         { type: _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBar"] }
@@ -1355,6 +1414,74 @@ var DataTableExampleDComponent = /** @class */ (function () {
         })
     ], DataTableExampleDComponent);
     return DataTableExampleDComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/views/components/components/data-table-demo/examples/data-table-example-e/data-table-example-e.component.ts":
+/*!*****************************************************************************************************************************!*\
+  !*** ./src/app/views/components/components/data-table-demo/examples/data-table-example-e/data-table-example-e.component.ts ***!
+  \*****************************************************************************************************************************/
+/*! exports provided: DataTableExampleEComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataTableExampleEComponent", function() { return DataTableExampleEComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
+
+
+
+var DUMMY_TABLE_DATA = {
+    tokens: [
+        { id: 'token-1', token: 'oQvACZi7yyNbzKEQ7H9t' },
+        { id: 'token-2', token: 'oQvACZi7yyNbzKEQ7H9u' },
+        { id: 'token-3', token: 'oQvACZi7yyNbzKEQ7H9v' },
+        { id: 'token-4', token: 'oQvACZi7yyNbzKEQ7H9w' },
+        { id: 'token-5', token: 'oQvACZi7yyNbzKEQ7H9x' }
+    ]
+};
+var DataTableExampleEComponent = /** @class */ (function () {
+    function DataTableExampleEComponent(snackBar) {
+        var _this = this;
+        this.snackBar = snackBar;
+        this.config = {
+            columns: [{ property: 'id', width: '112px' }, { property: 'token' }],
+            data: DUMMY_TABLE_DATA.tokens,
+            rowActions: [
+                { id: 'edit', isIcon: true, icon: 'edit', onClick: this.onEdit.bind(this) },
+                {
+                    id: 'delete',
+                    isIcon: true,
+                    icon: 'delete',
+                    actionColor: 'warn',
+                    /* An arrow function works just as well as <method>.bind(this) */
+                    onClick: function (token) {
+                        _this.snackBar.open("Are you sure you want to delete " + token.id + "?", 'DO IT', { duration: 3000 });
+                    }
+                }
+            ],
+            rowActionsWidth: '112px',
+            hasGlobalFilter: true
+        };
+    }
+    DataTableExampleEComponent.prototype.onEdit = function (token) {
+        this.snackBar.open("You want to edit token " + token.id + ".", undefined, { duration: 3000 });
+    };
+    DataTableExampleEComponent.ctorParameters = function () { return [
+        { type: _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBar"] }
+    ]; };
+    DataTableExampleEComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-data-table-example-e',
+            template: '<hh-data-table [config]="config"></hh-data-table>'
+        })
+    ], DataTableExampleEComponent);
+    return DataTableExampleEComponent;
 }());
 
 

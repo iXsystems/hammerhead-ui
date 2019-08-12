@@ -8,6 +8,7 @@ import { DataTableExampleAComponent } from './components/data-table-demo/example
 import { DataTableExampleBComponent } from './components/data-table-demo/examples/data-table-example-b/data-table-example-b.component';
 import { DataTableExampleCComponent } from './components/data-table-demo/examples/data-table-example-c/data-table-example-c.component';
 import { DataTableExampleDComponent } from './components/data-table-demo/examples/data-table-example-d/data-table-example-d.component';
+import { DataTableExampleEComponent } from './components/data-table-demo/examples/data-table-example-e/data-table-example-e.component';
 import { ZeroStateExample1Component } from './components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component';
 import { ZeroStateExample2Component } from './components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component';
 import { ZeroStateDemoComponent } from './components/zero-state-demo/zero-state-demo.component';
@@ -32,6 +33,7 @@ export const COMPONENT_DEMOS = [
         DataTableExampleBComponent,
         DataTableExampleCComponent,
         DataTableExampleDComponent,
+        DataTableExampleEComponent,
         ZeroStateDemoComponent,
         ZeroStateExample1Component,
         ZeroStateExample2Component

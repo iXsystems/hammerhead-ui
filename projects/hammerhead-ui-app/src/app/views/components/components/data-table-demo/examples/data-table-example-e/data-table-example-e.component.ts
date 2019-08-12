@@ -14,10 +14,10 @@ const DUMMY_TABLE_DATA: { tokens: SystemToken[] } = {
 };
 
 @Component({
-    selector: 'app-data-table-example-d',
+    selector: 'app-data-table-example-e',
     template: '<hh-data-table [config]="config"></hh-data-table>'
 })
-export class DataTableExampleDComponent {
+export class DataTableExampleEComponent {
     public readonly config: DataTableConfig = {
         columns: [{ property: 'id', width: '112px' }, { property: 'token' }],
         data: DUMMY_TABLE_DATA.tokens,
@@ -34,7 +34,8 @@ export class DataTableExampleDComponent {
                 }
             }
         ],
-        rowActionsWidth: '112px'
+        rowActionsWidth: '112px',
+        hasGlobalFilter: true
     };
 
     constructor(private snackBar: MatSnackBar) {}

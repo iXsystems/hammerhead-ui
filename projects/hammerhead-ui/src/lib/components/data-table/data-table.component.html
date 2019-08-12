@@ -1,4 +1,15 @@
 <ng-container *ngIf="data; else loading;">
+    <mat-form-field
+        *ngIf="config.hasGlobalFilter"
+        [style.width]="'100%'"
+    >
+        <input
+            matInput
+            (keyup)="applyFilter($event.target.value)"
+            placeholder="Filter"
+        >
+    </mat-form-field>
+
     <cdk-table [dataSource]="data">
         <ng-container
             *ngFor="let column of cols"

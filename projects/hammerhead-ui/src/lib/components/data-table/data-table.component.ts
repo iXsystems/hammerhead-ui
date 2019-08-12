@@ -1,18 +1,39 @@
 import { DataSource } from '@angular/cdk/table';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { debounceTime, map, take } from 'rxjs/operators';
 import { DataTableConfig } from '../../interfaces';
 
 class DataTableSource extends DataSource<any> {
+    public filterString = new BehaviorSubject<string>('');
+
     public data = new BehaviorSubject<any[]>(this.DATA);
+    private filteredData = combineLatest(this.data, this.filterString.pipe(debounceTime(400))).pipe(
+        /* Algorithm that searches an object's values for a matching string */
+        map(([d, filter]) =>
+            filter && typeof filter === 'string' && filter.trim().length > 0
+                ? d.filter(
+                      dEl =>
+                          Object.keys(dEl || {})
+                              .map(key => dEl[key])
+                              .filter(
+                                  dElement =>
+                                      dElement
+                                          .toString()
+                                          .toLowerCase()
+                                          .indexOf(filter) > 0
+                              ).length > 0
+                  )
+                : d
+        )
+    );
 
     constructor(private readonly DATA: any[]) {
         super();
     }
 
     public connect(): Observable<any[]> {
-        return this.data;
+        return this.filteredData;
     }
 
     public disconnect(): void {
@@ -37,6 +58,12 @@ export class DataTableComponent implements OnInit, OnChanges {
 
     public async ngOnChanges() {
         await this.updateTable();
+    }
+
+    public applyFilter(filterString: string): void {
+        if (this.data) {
+            this.data.filterString.next(filterString);
+        }
     }
 
     public getColumnWidth(columnProperty: string): string | undefined {
