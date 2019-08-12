@@ -66,7 +66,7 @@ class DataTableSource extends _angular_cdk_table__WEBPACK_IMPORTED_MODULE_0__["D
             dElement => dElement
                 .toString()
                 .toLowerCase()
-                .indexOf(filter) > 0)).length > 0))
+                .indexOf(filter) > -1)).length > 0))
             : d)));
     }
     /**

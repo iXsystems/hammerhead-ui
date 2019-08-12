@@ -68,7 +68,7 @@ var DataTableSource = /** @class */ (function (_super) {
                         return dElement
                             .toString()
                             .toLowerCase()
-                            .indexOf(filter) > 0;
+                            .indexOf(filter) > -1;
                     })).length > 0;
                 }))
                 : d;
