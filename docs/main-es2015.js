@@ -687,7 +687,7 @@ SharedComponentsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
         declarations: COMPONENTS,
         imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_flex_layout__WEBPACK_IMPORTED_MODULE_3__["FlexLayoutModule"], hammerhead_ui__WEBPACK_IMPORTED_MODULE_5__["HammerheadUiModule"], ngx_markdown__WEBPACK_IMPORTED_MODULE_8__["MarkdownModule"].forChild(), ...MATERIAL_MODULES],
-        exports: [_angular_flex_layout__WEBPACK_IMPORTED_MODULE_3__["FlexLayoutModule"], hammerhead_ui__WEBPACK_IMPORTED_MODULE_5__["HammerheadUiModule"], ...COMPONENTS, ...MATERIAL_MODULES]
+        exports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_flex_layout__WEBPACK_IMPORTED_MODULE_3__["FlexLayoutModule"], hammerhead_ui__WEBPACK_IMPORTED_MODULE_5__["HammerheadUiModule"], ...COMPONENTS, ...MATERIAL_MODULES]
     })
 ], SharedComponentsModule);
 
@@ -812,7 +812,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_components_overview_components_overview_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/components-overview/components-overview.component */ "./src/app/views/components/components/components-overview/components-overview.component.ts");
 /* harmony import */ var _components_data_table_demo_data_table_demo_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/data-table-demo/data-table-demo.component */ "./src/app/views/components/components/data-table-demo/data-table-demo.component.ts");
 /* harmony import */ var _components_data_table_demo_examples_data_table_example_a_data_table_example_a_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/data-table-demo/examples/data-table-example-a/data-table-example-a.component */ "./src/app/views/components/components/data-table-demo/examples/data-table-example-a/data-table-example-a.component.ts");
-/* harmony import */ var _components_data_table_demo_examples_data_table_example_b_data_table_example_b_componen__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/data-table-demo/examples/data-table-example-b/data-table-example-b.componen */ "./src/app/views/components/components/data-table-demo/examples/data-table-example-b/data-table-example-b.componen.ts");
+/* harmony import */ var _components_data_table_demo_examples_data_table_example_b_data_table_example_b_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/data-table-demo/examples/data-table-example-b/data-table-example-b.component */ "./src/app/views/components/components/data-table-demo/examples/data-table-example-b/data-table-example-b.component.ts");
 /* harmony import */ var _components_zero_state_demo_examples_zero_state_example_1_zero_state_example_1_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component */ "./src/app/views/components/components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component.ts");
 /* harmony import */ var _components_zero_state_demo_examples_zero_state_example_2_zero_state_example_2_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component */ "./src/app/views/components/components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component.ts");
 /* harmony import */ var _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/zero-state-demo/zero-state-demo.component */ "./src/app/views/components/components/zero-state-demo/zero-state-demo.component.ts");
@@ -847,7 +847,7 @@ ComponentsViewModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _components_components_overview_components_overview_component__WEBPACK_IMPORTED_MODULE_5__["ComponentsOverviewComponent"],
             _components_data_table_demo_data_table_demo_component__WEBPACK_IMPORTED_MODULE_6__["DataTableDemoComponent"],
             _components_data_table_demo_examples_data_table_example_a_data_table_example_a_component__WEBPACK_IMPORTED_MODULE_7__["DataTableExampleAComponent"],
-            _components_data_table_demo_examples_data_table_example_b_data_table_example_b_componen__WEBPACK_IMPORTED_MODULE_8__["DataTableExampleBComponent"],
+            _components_data_table_demo_examples_data_table_example_b_data_table_example_b_component__WEBPACK_IMPORTED_MODULE_8__["DataTableExampleBComponent"],
             _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_11__["ZeroStateDemoComponent"],
             _components_zero_state_demo_examples_zero_state_example_1_zero_state_example_1_component__WEBPACK_IMPORTED_MODULE_9__["ZeroStateExample1Component"],
             _components_zero_state_demo_examples_zero_state_example_2_zero_state_example_2_component__WEBPACK_IMPORTED_MODULE_10__["ZeroStateExample2Component"]
@@ -1028,10 +1028,10 @@ DataTableExampleAComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/views/components/components/data-table-demo/examples/data-table-example-b/data-table-example-b.componen.ts":
-/*!****************************************************************************************************************************!*\
-  !*** ./src/app/views/components/components/data-table-demo/examples/data-table-example-b/data-table-example-b.componen.ts ***!
-  \****************************************************************************************************************************/
+/***/ "./src/app/views/components/components/data-table-demo/examples/data-table-example-b/data-table-example-b.component.ts":
+/*!*****************************************************************************************************************************!*\
+  !*** ./src/app/views/components/components/data-table-demo/examples/data-table-example-b/data-table-example-b.component.ts ***!
+  \*****************************************************************************************************************************/
 /*! exports provided: DataTableExampleBComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1066,9 +1066,14 @@ let DataTableExampleBComponent = class DataTableExampleBComponent {
             rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }],
             rowActionsWidth: '112px'
         };
+        this.isRefreshing = false;
     }
     onEdit(token) {
         this.snackBar.open(`You want to edit token ${token.id}.`, undefined, { duration: 3000 });
+    }
+    onRefresh() {
+        this.isRefreshing = true;
+        setTimeout(() => (this.isRefreshing = false), 0);
     }
 };
 DataTableExampleBComponent.ctorParameters = () => [
@@ -1077,7 +1082,17 @@ DataTableExampleBComponent.ctorParameters = () => [
 DataTableExampleBComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-data-table-example-b',
-        template: '<hh-data-table [config]="config"></hh-data-table>'
+        template: `
+        <div fxLayoutAlign="center center" [style.padding.px]="12">
+            <button mat-flat-button color="primary" (click)="onRefresh()">
+                <div fxLayoutAlign="center center" fxLayoutGap="6px">
+                    <mat-icon>refresh</mat-icon>
+                    <span>Refresh</span>
+                </div>
+            </button>
+        </div>
+        <hh-data-table *ngIf="!isRefreshing" [config]="config"></hh-data-table>
+    `
     })
 ], DataTableExampleBComponent);
 

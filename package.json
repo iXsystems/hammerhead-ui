@@ -10,6 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "copy_readme_to_assets": "cp ./README.md ./projects/hammerhead-ui-app/src/assets",
+    "recompile_docs": "bash ./recompile_docs.sh",
     "publish_lib": "bash ./publish_lib.sh"
   },
   "private": false,

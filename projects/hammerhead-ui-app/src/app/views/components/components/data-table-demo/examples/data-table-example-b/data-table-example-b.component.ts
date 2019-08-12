@@ -17,7 +17,17 @@ const DUMMY_TABLE_DATA: { tokens: SystemToken[] } = {
 
 @Component({
     selector: 'app-data-table-example-b',
-    template: '<hh-data-table [config]="config"></hh-data-table>'
+    template: `
+        <div fxLayoutAlign="center center" [style.padding.px]="12">
+            <button mat-flat-button color="primary" (click)="onRefresh()">
+                <div fxLayoutAlign="center center" fxLayoutGap="6px">
+                    <mat-icon>refresh</mat-icon>
+                    <span>Refresh</span>
+                </div>
+            </button>
+        </div>
+        <hh-data-table *ngIf="!isRefreshing" [config]="config"></hh-data-table>
+    `
 })
 export class DataTableExampleBComponent {
     public readonly config: DataTableConfig = {
@@ -31,9 +41,16 @@ export class DataTableExampleBComponent {
         rowActionsWidth: '112px'
     };
 
+    public isRefreshing = false;
+
     constructor(private snackBar: MatSnackBar) {}
 
     public onEdit(token: SystemToken): void {
         this.snackBar.open(`You want to edit token ${token.id}.`, undefined, { duration: 3000 });
+    }
+
+    public onRefresh(): void {
+        this.isRefreshing = true;
+        setTimeout(() => (this.isRefreshing = false), 0);
     }
 }

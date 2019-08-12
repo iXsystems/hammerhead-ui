@@ -14,7 +14,7 @@ DOCS_ROOT_DIR="./docs"
 
 #####################################
 
-### Build/publish library routine ###
+### Build library routine ###
 
 # Build the library
 sudo yarn build --project=$LIBRARY_PROJECT_NAME
@@ -22,16 +22,7 @@ sudo yarn build --project=$LIBRARY_PROJECT_NAME
 # Copy root README to root of library package directory
 sudo cp $ROOT_README $DIST_LIB_ROOT
 
-# Generate tarball of library package directory
-sudo npm pack $DIST_LIB_ROOT
-
-# Move the library tarball to root of the library package directory
-sudo mv ./hammerhead-ui-*.tgz $DIST_LIB_ROOT
-
-# Publish the library to npm
-sudo npm publish $DIST_LIB_TARBALL
-
-#####################################
+#############################
 
 ### Build demo app routine ###
 
@@ -44,6 +35,9 @@ sudo yarn build --project=$DEMO_APP_PROJECT_NAME --base-href .
 ##############################
 
 ### Github pages stuff ###
+
+# Nuke the docs directory
+sudo rimraf $DOCS_ROOT_DIR
 
 # Copy contents of dist/hammerhead-ui-app to docs directory
 sudo cp -a $DEMO_APP_DIST_DIR $DOCS_ROOT_DIR

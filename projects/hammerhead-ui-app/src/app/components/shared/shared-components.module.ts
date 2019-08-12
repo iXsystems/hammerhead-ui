@@ -36,6 +36,6 @@ const MATERIAL_MODULES = [
 @NgModule({
     declarations: COMPONENTS,
     imports: [CommonModule, FlexLayoutModule, HammerheadUiModule, MarkdownModule.forChild(), ...MATERIAL_MODULES],
-    exports: [FlexLayoutModule, HammerheadUiModule, ...COMPONENTS, ...MATERIAL_MODULES]
+    exports: [CommonModule, FlexLayoutModule, HammerheadUiModule, ...COMPONENTS, ...MATERIAL_MODULES]
 })
 export class SharedComponentsModule {}
