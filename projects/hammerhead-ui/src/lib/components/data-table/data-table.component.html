@@ -23,7 +23,7 @@
                         <ng-container *ngFor="let action of config.rowActions">
                             <button
                                 mat-flat-button
-                                color="primary"
+                                [color]="action.actionColor || 'primary'"
                                 (click)="action.onClick(row, $event)"
                             >
                                 {{ action.actionText | titlecase }}

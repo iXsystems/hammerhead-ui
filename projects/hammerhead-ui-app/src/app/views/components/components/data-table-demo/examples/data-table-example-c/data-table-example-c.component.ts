@@ -14,19 +14,27 @@ const DUMMY_TABLE_DATA: { tokens: SystemToken[] } = {
 };
 
 @Component({
-    selector: 'app-data-table-example-a',
+    selector: 'app-data-table-example-c',
     template: '<hh-data-table [config]="config"></hh-data-table>'
 })
-export class DataTableExampleAComponent {
+export class DataTableExampleCComponent {
     public readonly config: DataTableConfig = {
-        columns: [{ property: 'id' }, { property: 'token' }],
+        columns: [{ property: 'id', width: '112px' }, { property: 'token' }],
         data: DUMMY_TABLE_DATA.tokens,
-        rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }]
+        rowActions: [
+            { id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) },
+            { id: 'delete', actionText: 'Delete', actionColor: 'warn', onClick: this.onDelete.bind(this) }
+        ],
+        rowActionsWidth: '224px'
     };
 
     constructor(private snackBar: MatSnackBar) {}
 
     public onEdit(token: SystemToken): void {
         this.snackBar.open(`You want to edit token ${token.id}.`, undefined, { duration: 3000 });
+    }
+
+    public onDelete(token: SystemToken): void {
+        this.snackBar.open(`Are you sure you want to delete ${token.id}?`, 'DO IT', { duration: 3000 });
     }
 }

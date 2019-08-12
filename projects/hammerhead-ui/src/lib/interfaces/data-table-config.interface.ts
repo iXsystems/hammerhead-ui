@@ -20,6 +20,7 @@ export interface DataTableColumnConfig {
 export interface DataTableAction {
     id: string;
     onClick: (row: any, event: MouseEvent) => Observable<any> | void;
+    actionColor?: 'primary' | 'accent' | 'warn';
     actionText?: string;
     isIcon?: boolean;
     icon?: string;

@@ -31,14 +31,13 @@ const DUMMY_TABLE_DATA: { tokens: SystemToken[] } = {
 })
 export class DataTableExampleBComponent {
     public readonly config: DataTableConfig = {
-        columns: [{ property: 'id', width: '112px' }, { property: 'token' }],
+        columns: [{ property: 'id' }, { property: 'token' }],
         dataAsync: () =>
             interval(2000).pipe(
                 take(1),
                 map(() => DUMMY_TABLE_DATA.tokens)
             ),
-        rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }],
-        rowActionsWidth: '112px'
+        rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }]
     };
 
     public isRefreshing = false;
