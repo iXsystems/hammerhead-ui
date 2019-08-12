@@ -1,0 +1,48 @@
+<mat-card>
+    <cdk-table [dataSource]="data">
+        <ng-container
+            *ngFor="let column of cols"
+            [cdkColumnDef]="column"
+        >
+            <cdk-header-cell
+                [fxFlex]="getColumnWidth(column) || '100%'"
+                *cdkHeaderCellDef
+            >
+                <p>{{ column | uppercase }}</p>
+            </cdk-header-cell>
+            <cdk-cell
+                [fxFlex]="getColumnWidth(column) || '100%'"
+                *cdkCellDef="let row"
+            >
+                <ng-container *ngIf="column !== 'actions'; else actions;">{{ row[column] }}</ng-container>
+                <ng-template #actions>
+                    <div
+                        fxLayoutAlign="start center"
+                        fxLayoutGap="16px"
+                    >
+                        <ng-container *ngFor="let action of config.rowActions">
+                            <button
+                                mat-flat-button
+                                color="primary"
+                                (click)="action.onClick(row, $event)"
+                            >
+                                {{ action.actionText | titlecase }}
+                            </button>
+                        </ng-container>
+                    </div>
+                </ng-template>
+            </cdk-cell>
+        </ng-container>
+
+        <cdk-header-row
+            fxLayoutAlign="start center"
+            fxLayoutGap="16px"
+            *cdkHeaderRowDef="cols"
+        ></cdk-header-row>
+        <cdk-row
+            fxLayoutAlign="start center"
+            fxLayoutGap="16px"
+            *cdkRowDef="let row; columns: cols;"
+        ></cdk-row>
+    </cdk-table>
+</mat-card>
