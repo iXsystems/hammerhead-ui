@@ -12,6 +12,14 @@
             &:hover {
                 border-bottom: 1px solid rgba(58, 58, 58, 0.66);
             }
+
+            mat-icon.cursor-pointer {
+                cursor: pointer !important;
+
+                &:active {
+                    opacity: 0.5;
+                }
+            }
         }
 
         cdk-header-row {

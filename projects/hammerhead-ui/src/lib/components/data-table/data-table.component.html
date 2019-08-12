@@ -21,13 +21,23 @@
                         fxLayoutGap="16px"
                     >
                         <ng-container *ngFor="let action of config.rowActions">
-                            <button
-                                mat-flat-button
+                            <mat-icon
+                                *ngIf="action.isIcon; else actionButton;"
                                 [color]="action.actionColor || 'primary'"
                                 (click)="action.onClick(row, $event)"
+                                class="cursor-pointer"
                             >
-                                {{ action.actionText | titlecase }}
-                            </button>
+                                {{ action.icon || 'edit' }}
+                            </mat-icon>
+                            <ng-template #actionButton>
+                                <button
+                                    mat-flat-button
+                                    [color]="action.actionColor || 'primary'"
+                                    (click)="action.onClick(row, $event)"
+                                >
+                                    {{ action.actionText | titlecase }}
+                                </button>
+                            </ng-template>
                         </ng-container>
                     </div>
                 </ng-template>
