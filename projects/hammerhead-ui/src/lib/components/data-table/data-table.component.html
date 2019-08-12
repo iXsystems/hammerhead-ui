@@ -1,4 +1,4 @@
-<mat-card>
+<ng-container *ngIf="data; else loading;">
     <cdk-table [dataSource]="data">
         <ng-container
             *ngFor="let column of cols"
@@ -45,4 +45,17 @@
             *cdkRowDef="let row; columns: cols;"
         ></cdk-row>
     </cdk-table>
-</mat-card>
+</ng-container>
+
+<ng-template #loading>
+    <mat-progress-bar
+        mode="indeterminate"
+        class="margin-bottom-heavy"
+    ></mat-progress-bar>
+    <div fxLayoutAlign="center center">
+        <hh-zero-state
+            message="Please wait..."
+            [style.min-width.px]="320"
+        ></hh-zero-state>
+    </div>
+</ng-template>
