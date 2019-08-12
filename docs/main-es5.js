@@ -4,18 +4,25 @@
 /*!***********************************************************************************!*\
   !*** /home/aaron/Desktop/hammerhead-ui/dist/hammerhead-ui/fesm5/hammerhead-ui.js ***!
   \***********************************************************************************/
-/*! exports provided: HammerheadUiModule, ɵa */
+/*! exports provided: HammerheadUiModule, ɵa, ɵb */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HammerheadUiModule", function() { return HammerheadUiModule; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵa", function() { return ZeroStateComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵb", function() { return DataTableComponent; });
+/* harmony import */ var _angular_cdk_table__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/cdk/table */ "../../node_modules/@angular/cdk/esm5/table.es5.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "../../node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_flex_layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/flex-layout */ "../../node_modules/@angular/flex-layout/esm5/flex-layout.es5.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
+
+
+
 
 
 
@@ -26,12 +33,210 @@ __webpack_require__.r(__webpack_exports__);
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var DataTableSource = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_5__["__extends"])(DataTableSource, _super);
+    function DataTableSource(DATA) {
+        var _this = _super.call(this) || this;
+        _this.DATA = DATA;
+        _this.data = new rxjs__WEBPACK_IMPORTED_MODULE_6__["BehaviorSubject"](_this.DATA);
+        return _this;
+    }
+    /**
+     * @return {?}
+     */
+    DataTableSource.prototype.connect = /**
+     * @return {?}
+     */
+    function () {
+        return this.data;
+    };
+    /**
+     * @return {?}
+     */
+    DataTableSource.prototype.disconnect = /**
+     * @return {?}
+     */
+    function () {
+        this.data.complete();
+    };
+    return DataTableSource;
+}(_angular_cdk_table__WEBPACK_IMPORTED_MODULE_0__["DataSource"]));
+var DataTableComponent = /** @class */ (function () {
+    function DataTableComponent() {
+        this.cols = [];
+    }
+    /**
+     * @return {?}
+     */
+    DataTableComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_5__["__awaiter"])(this, void 0, void 0, function () {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_5__["__generator"])(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.updateTable()];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /**
+     * @return {?}
+     */
+    DataTableComponent.prototype.ngOnChanges = /**
+     * @return {?}
+     */
+    function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_5__["__awaiter"])(this, void 0, void 0, function () {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_5__["__generator"])(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.updateTable()];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /**
+     * @param {?} columnProperty
+     * @return {?}
+     */
+    DataTableComponent.prototype.getColumnWidth = /**
+     * @param {?} columnProperty
+     * @return {?}
+     */
+    function (columnProperty) {
+        if (columnProperty === 'actions') {
+            return this.config.rowActionsWidth;
+        }
+        /** @type {?} */
+        var column = this.config.columns.find((/**
+         * @param {?} col
+         * @return {?}
+         */
+        function (col) { return col.property === columnProperty; }));
+        return column ? column.width : undefined;
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    DataTableComponent.prototype.buildColumns = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (this.config.rowActions && Array.isArray(this.config.rowActions) && this.config.rowActions.length > 0) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_5__["__spread"])(this.config.columns.map((/**
+             * @param {?} column
+             * @return {?}
+             */
+            function (column) { return column.property; })), ['actions']);
+        }
+        return this.config.columns.map((/**
+         * @param {?} column
+         * @return {?}
+         */
+        function (column) { return column.property; }));
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    DataTableComponent.prototype.updateDataSync = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        return new DataTableSource(this.config.data);
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    DataTableComponent.prototype.updateDataAsync = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_5__["__awaiter"])(this, void 0, void 0, function () {
+            var _a;
+            var _this = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_5__["__generator"])(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = DataTableSource.bind;
+                        return [4 /*yield*/, this.config
+                                .dataAsync()
+                                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])((/**
+                             * @param {?} data
+                             * @return {?}
+                             */
+                            function (data) { return (_this.config.dataAsyncMapper ? _this.config.dataAsyncMapper(data) : data); })))
+                                .toPromise()];
+                    case 1: return [2 /*return*/, new (_a.apply(DataTableSource, [void 0, _b.sent()]))()];
+                }
+            });
+        });
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    DataTableComponent.prototype.updateTable = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_5__["__awaiter"])(this, void 0, void 0, function () {
+            var _a, _b;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_5__["__generator"])(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        this.cols = this.buildColumns();
+                        _a = this;
+                        if (!this.config.dataAsync) return [3 /*break*/, 2];
+                        return [4 /*yield*/, this.updateDataAsync()];
+                    case 1:
+                        _b = _c.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        _b = this.updateDataSync();
+                        _c.label = 3;
+                    case 3:
+                        _a.data = _b;
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    DataTableComponent.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"], args: [{
+                    selector: 'hh-data-table',
+                    template: "<ng-container *ngIf=\"data; else loading;\">\n    <cdk-table [dataSource]=\"data\">\n        <ng-container\n            *ngFor=\"let column of cols\"\n            [cdkColumnDef]=\"column\"\n        >\n            <cdk-header-cell\n                [fxFlex]=\"getColumnWidth(column) || '100%'\"\n                *cdkHeaderCellDef\n            >\n                <p>{{ column | uppercase }}</p>\n            </cdk-header-cell>\n            <cdk-cell\n                [fxFlex]=\"getColumnWidth(column) || '100%'\"\n                *cdkCellDef=\"let row\"\n            >\n                <ng-container *ngIf=\"column !== 'actions'; else actions;\">{{ row[column] }}</ng-container>\n                <ng-template #actions>\n                    <div\n                        fxLayoutAlign=\"start center\"\n                        fxLayoutGap=\"16px\"\n                    >\n                        <ng-container *ngFor=\"let action of config.rowActions\">\n                            <button\n                                mat-flat-button\n                                color=\"primary\"\n                                (click)=\"action.onClick(row, $event)\"\n                            >\n                                {{ action.actionText | titlecase }}\n                            </button>\n                        </ng-container>\n                    </div>\n                </ng-template>\n            </cdk-cell>\n        </ng-container>\n\n        <cdk-header-row\n            fxLayoutAlign=\"start center\"\n            fxLayoutGap=\"16px\"\n            *cdkHeaderRowDef=\"cols\"\n        ></cdk-header-row>\n        <cdk-row\n            fxLayoutAlign=\"start center\"\n            fxLayoutGap=\"16px\"\n            *cdkRowDef=\"let row; columns: cols;\"\n        ></cdk-row>\n    </cdk-table>\n</ng-container>\n\n<ng-template #loading>\n    <mat-progress-bar\n        mode=\"indeterminate\"\n        class=\"margin-bottom-heavy\"\n    ></mat-progress-bar>\n    <div fxLayoutAlign=\"center center\">\n        <hh-zero-state\n            message=\"Please wait...\"\n            [style.min-width.px]=\"320\"\n        ></hh-zero-state>\n    </div>\n</ng-template>\n",
+                    styles: [":host{display:block;margin:16px}:host cdk-table{width:100%}:host cdk-table cdk-row{border-bottom:1px solid rgba(58,58,58,.18);padding:8px 0}:host cdk-table cdk-row:hover{border-bottom:1px solid rgba(58,58,58,.66)}:host cdk-table cdk-header-row{border-bottom:1px solid rgba(58,58,58,.33);padding:12px 0}:host cdk-table cdk-header-row p{font-size:12px;font-weight:700;margin:0}"]
+                }] }
+    ];
+    DataTableComponent.propDecorators = {
+        config: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"] }]
+    };
+    return DataTableComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var ZeroStateComponent = /** @class */ (function () {
     function ZeroStateComponent() {
-        this.message = 'No data available';
+        this.message = ZeroStateComponent.DEFAULT_MESSAGE;
         this.hasAction = false;
-        this.actionText = 'Configure';
-        this.actionPosition = 'below';
+        this.actionText = ZeroStateComponent.DEFAULT_ACTION_TEXT;
+        this.actionPosition = ZeroStateComponent.DEFAULT_ACTION_POSITION;
         this.doAction = new _angular_core__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"]();
         this.flexLayout = 'column';
     }
@@ -42,8 +247,35 @@ var ZeroStateComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
+        this.updateFlexLayout();
+    };
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    ZeroStateComponent.prototype.ngOnChanges = /**
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
+        if (changes.actionPosition) {
+            this.updateFlexLayout();
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ZeroStateComponent.prototype.updateFlexLayout = /**
+     * @private
+     * @return {?}
+     */
+    function () {
         this.flexLayout = this.actionPosition === 'above' || this.actionPosition === 'below' ? 'column' : 'row';
     };
+    ZeroStateComponent.DEFAULT_MESSAGE = 'No data available';
+    ZeroStateComponent.DEFAULT_ACTION_TEXT = 'Configure';
+    ZeroStateComponent.DEFAULT_ACTION_POSITION = 'below';
     ZeroStateComponent.decorators = [
         { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"], args: [{
                     selector: 'hh-zero-state',
@@ -66,17 +298,15 @@ var ZeroStateComponent = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-var COMPONENTS = [ZeroStateComponent];
-/** @type {?} */
-var IMPORTS = [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_flex_layout__WEBPACK_IMPORTED_MODULE_3__["FlexLayoutModule"], _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatButtonModule"], _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatCardModule"]];
+var IMPORTS = [_angular_cdk_table__WEBPACK_IMPORTED_MODULE_0__["CdkTableModule"], _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_flex_layout__WEBPACK_IMPORTED_MODULE_3__["FlexLayoutModule"], _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatButtonModule"], _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatCardModule"], _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatProgressBarModule"]];
 var HammerheadUiModule = /** @class */ (function () {
     function HammerheadUiModule() {
     }
     HammerheadUiModule.decorators = [
         { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"], args: [{
-                    declarations: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])(COMPONENTS),
+                    declarations: [ZeroStateComponent, DataTableComponent],
                     imports: IMPORTS,
-                    exports: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])(COMPONENTS)
+                    exports: [ZeroStateComponent, DataTableComponent]
                 },] }
     ];
     return HammerheadUiModule;
@@ -106,7 +336,7 @@ module.exports = "<app-top-nav\n    class=\"mat-elevation-z4\"\n    (menuToggle)
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p [style.margin-bottom.px]=\"24\">{{ description }}</p>\n<ng-content select=\".example\"></ng-content>\n"
+module.exports = "<mat-card>\n    <p [style.margin-bottom.px]=\"24\">{{ description }}</p>\n\n    <mat-tab-group>\n        <mat-tab label=\"Example\">\n            <ng-content></ng-content>\n        </mat-tab>\n\n        <mat-tab label=\"Source\">\n            <div\n                fxLayout.lt-lg=\"column\"\n                fxLayoutAlign=\"start start\"\n                fxLayoutGap=\"24px\"\n                fxLayoutGap.lt-lg=\"12px\"\n            >\n                <markdown\n                    [fxFlex]=\"templateSourceUrl ? 'calc(50% - 12px)' : '100%'\"\n                    fxFlex.lt-lg=\"100%\"\n                    [src]=\"tsSourceUrl\"\n                ></markdown>\n                <markdown\n                    fxFlex=\"calc(50% - 12px)\"\n                    fxFlex.lt-lg=\"100%\"\n                    [src]=\"templateSourceUrl\"\n                ></markdown>\n            </div>\n        </mat-tab>\n    </mat-tab-group>\n</mat-card>\n"
 
 /***/ }),
 
@@ -117,7 +347,7 @@ module.exports = "<p [style.margin-bottom.px]=\"24\">{{ description }}</p>\n<ng-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"bg-primary demo-header\">\n    <p class=\"no-margin\">{{ title }}</p>\n</div>\n\n<p class=\"no-margin\">\n    {{ description }}\n</p>\n\n<ng-content select=\".examples\"></ng-content>\n"
+module.exports = "<div class=\"bg-primary demo-header\">\n    <p class=\"no-margin\">{{ title }}</p>\n</div>\n\n<p class=\"no-margin-top margin-bottom-heavy\">{{ description }}</p>\n\n<mat-tab-group (selectedTabChange)=\"onTabSelection()\">\n    <mat-tab>\n        <ng-template mat-tab-label>\n            <div\n                fxLayoutAlign=\"center center\"\n                fxLayoutGap=\"6px\"\n            >\n                <mat-icon>line_style</mat-icon>\n                <p class=\"no-margin-top no-margin-bottom\">Examples</p>\n            </div>\n        </ng-template>\n        <ng-content></ng-content>\n    </mat-tab>\n    <mat-tab>\n        <ng-template mat-tab-label>\n            <div\n                fxLayoutAlign=\"center center\"\n                fxLayoutGap=\"6px\"\n            >\n                <mat-icon>code</mat-icon>\n                <p class=\"no-margin-top no-margin-bottom\">Source</p>\n            </div>\n        </ng-template>\n        <div\n            fxLayout.lt-lg=\"column\"\n            fxLayoutAlign=\"start start\"\n            fxLayoutGap=\"24px\"\n            fxLayoutGap.lt-lg=\"12px\"\n        >\n            <markdown\n                [fxFlex]=\"templateSourceUrl ? 'calc(50% - 12px)' : '100%'\"\n                fxFlex.lt-lg=\"100%\"\n                [src]=\"tsSourceUrl\"\n            ></markdown>\n            <markdown\n                fxFlex=\"calc(50% - 12px)\"\n                fxFlex.lt-lg=\"100%\"\n                [src]=\"templateSourceUrl\"\n            ></markdown>\n        </div>\n    </mat-tab>\n</mat-tab-group>\n"
 
 /***/ }),
 
@@ -154,6 +384,28 @@ module.exports = "<p>components-overview works!</p>\n"
 
 /***/ }),
 
+/***/ "../../node_modules/raw-loader/index.js!./src/app/views/components/components/data-table-demo/data-table-demo.component.html":
+/*!******************************************************************************************************************************************************!*\
+  !*** /home/aaron/Desktop/hammerhead-ui/node_modules/raw-loader!./src/app/views/components/components/data-table-demo/data-table-demo.component.html ***!
+  \******************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<app-demo\n    title=\"Data Table\"\n    description=\"Displays tabular data.\"\n    tsSourceUrl=\"projects/hammerhead-ui/src/lib/components/data-table/data-table.component.ts\"\n    templateSourceUrl=\"projects/hammerhead-ui/src/lib/components/data-table/data-table.component.html\"\n>\n    <app-demo-example\n        class=\"margin-bottom-heavy\"\n        description=\"Simple table\"\n        tsSourceUrl=\"projects/hammerhead-ui-app/src/app/views/components/components/data-table-demo/examples/data-table-example-a/data-table-example-a.component.ts\"\n    >\n        <app-data-table-example-a></app-data-table-example-a>\n    </app-demo-example>\n\n    <app-demo-example\n        description=\"Simple table with async data\"\n        tsSourceUrl=\"projects/hammerhead-ui-app/src/app/views/components/components/data-table-demo/examples/data-table-example-b/data-table-example-b.component.ts\"\n    >\n        <app-data-table-example-b></app-data-table-example-b>\n    </app-demo-example>\n</app-demo>\n"
+
+/***/ }),
+
+/***/ "../../node_modules/raw-loader/index.js!./src/app/views/components/components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component.html":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** /home/aaron/Desktop/hammerhead-ui/node_modules/raw-loader!./src/app/views/components/components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component.html ***!
+  \*****************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div\n    class=\"example\"\n    fxLayout=\"row wrap\"\n    fxLayoutAlign=\"space-between center\"\n    fxLayoutGap=\"24px\"\n>\n    <hh-zero-state\n        message=\"Default action button position is below.\"\n        [hasAction]=\"true\"\n        actionText=\"Confirm\"\n        (doAction)=\"onAction('below')\"\n    ></hh-zero-state>\n    <hh-zero-state\n        message=\"Action button in 'above' position\"\n        [hasAction]=\"true\"\n        actionText=\"Confirm\"\n        actionPosition=\"above\"\n        (doAction)=\"onAction('above')\"\n    ></hh-zero-state>\n    <hh-zero-state\n        message=\"Action button in 'before' position\"\n        [hasAction]=\"true\"\n        actionText=\"Confirm\"\n        actionPosition=\"before\"\n        (doAction)=\"onAction('before')\"\n    ></hh-zero-state>\n    <hh-zero-state\n        message=\"Action button in 'after' position\"\n        [hasAction]=\"true\"\n        actionText=\"Confirm\"\n        actionPosition=\"after\"\n        (doAction)=\"onAction('after')\"\n    ></hh-zero-state>\n</div>\n"
+
+/***/ }),
+
 /***/ "../../node_modules/raw-loader/index.js!./src/app/views/components/components/zero-state-demo/zero-state-demo.component.html":
 /*!******************************************************************************************************************************************************!*\
   !*** /home/aaron/Desktop/hammerhead-ui/node_modules/raw-loader!./src/app/views/components/components/zero-state-demo/zero-state-demo.component.html ***!
@@ -161,7 +413,7 @@ module.exports = "<p>components-overview works!</p>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-demo\n    title=\"Zero State\"\n    description=\"Displays a message and optional action button when no data is available.\"\n>\n    <section class=\"examples\">\n        <app-demo-example description=\"Simple message, no action button\">\n            <hh-zero-state\n                class=\"example\"\n                message=\"No data available\"\n            ></hh-zero-state>\n        </app-demo-example>\n\n        <app-demo-example description=\"Message with action button\">\n            <div\n                class=\"example\"\n                fxLayout=\"row wrap\"\n                fxLayoutAlign=\"space-between center\"\n                fxLayoutGap=\"24px\"\n            >\n                <hh-zero-state\n                    message=\"Default action button position is below.\"\n                    [hasAction]=\"true\"\n                    actionText=\"Confirm\"\n                    (doAction)=\"onAction('below')\"\n                ></hh-zero-state>\n                <hh-zero-state\n                    message=\"Action button in 'above' position\"\n                    [hasAction]=\"true\"\n                    actionText=\"Confirm\"\n                    actionPosition=\"above\"\n                    (doAction)=\"onAction('above')\"\n                ></hh-zero-state>\n                <hh-zero-state\n                    message=\"Action button in 'before' position\"\n                    [hasAction]=\"true\"\n                    actionText=\"Confirm\"\n                    actionPosition=\"before\"\n                    (doAction)=\"onAction('before')\"\n                ></hh-zero-state>\n                <hh-zero-state\n                    message=\"Action button in 'after' position\"\n                    [hasAction]=\"true\"\n                    actionText=\"Confirm\"\n                    actionPosition=\"after\"\n                    (doAction)=\"onAction('after')\"\n                ></hh-zero-state>\n            </div>\n        </app-demo-example>\n    </section>\n</app-demo>\n"
+module.exports = "<app-demo\n    title=\"Zero State\"\n    description=\"Displays a message and optional action button when no data is available.\"\n    tsSourceUrl=\"projects/hammerhead-ui/src/lib/components/zero-state/zero-state.component.ts\"\n    templateSourceUrl=\"projects/hammerhead-ui/src/lib/components/zero-state/zero-state.component.html\"\n>\n        <app-demo-example\n            class=\"margin-bottom-heavy\"\n            description=\"Simple message, no action button\"\n            tsSourceUrl=\"projects/hammerhead-ui-app/src/app/views/components/components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component.ts\"\n        >\n            <app-zero-state-example-1></app-zero-state-example-1>\n        </app-demo-example>\n\n        <app-demo-example\n            description=\"Message with action button\"\n            tsSourceUrl=\"projects/hammerhead-ui-app/src/app/views/components/components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component.ts\"\n            templateSourceUrl=\"projects/hammerhead-ui-app/src/app/views/components/components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component.html\"\n        >\n            <app-zero-state-example-2></app-zero-state-example-2>\n        </app-demo-example>\n</app-demo>\n"
 
 /***/ }),
 
@@ -206,7 +458,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ":host {\n  display: block;\n  height: 100%;\n  overflow: hidden;\n  position: relative;\n}\n:host ::ng-deep mat-sidenav-container {\n  height: calc(100% - 56px);\n  margin-top: 56px;\n  overflow: hidden;\n}\n:host ::ng-deep mat-sidenav-container mat-sidenav {\n  width: 312px;\n}\n:host ::ng-deep mat-sidenav-container mat-sidenav-content {\n  box-sizing: border-box;\n  padding: 24px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2Fhcm9uL0Rlc2t0b3AvaGFtbWVyaGVhZC11aS9wcm9qZWN0cy9oYW1tZXJoZWFkLXVpLWFwcC9zcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyIsInByb2plY3RzL2hhbW1lcmhlYWQtdWktYXBwL3NyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksY0FBQTtFQUNBLFlBQUE7RUFDQSxnQkFBQTtFQUNBLGtCQUFBO0FDQ0o7QURFUTtFQUNJLHlCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxnQkFBQTtBQ0FaO0FERVk7RUFDSSxZQUFBO0FDQWhCO0FER1k7RUFDSSxzQkFBQTtFQUNBLGFBQUE7QUNEaEIiLCJmaWxlIjoicHJvamVjdHMvaGFtbWVyaGVhZC11aS1hcHAvc3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgaGVpZ2h0OiAxMDAlO1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuXG4gICAgOjpuZy1kZWVwIHtcbiAgICAgICAgbWF0LXNpZGVuYXYtY29udGFpbmVyIHtcbiAgICAgICAgICAgIGhlaWdodDogY2FsYygxMDAlIC0gNTZweCk7XG4gICAgICAgICAgICBtYXJnaW4tdG9wOiA1NnB4O1xuICAgICAgICAgICAgb3ZlcmZsb3c6IGhpZGRlbjtcblxuICAgICAgICAgICAgbWF0LXNpZGVuYXYge1xuICAgICAgICAgICAgICAgIHdpZHRoOiAzMTJweDtcbiAgICAgICAgICAgIH1cblxuICAgICAgICAgICAgbWF0LXNpZGVuYXYtY29udGVudCB7XG4gICAgICAgICAgICAgICAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgICAgICAgICAgICAgICBwYWRkaW5nOiAyNHB4O1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufSIsIjpob3N0IHtcbiAgZGlzcGxheTogYmxvY2s7XG4gIGhlaWdodDogMTAwJTtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuOmhvc3QgOjpuZy1kZWVwIG1hdC1zaWRlbmF2LWNvbnRhaW5lciB7XG4gIGhlaWdodDogY2FsYygxMDAlIC0gNTZweCk7XG4gIG1hcmdpbi10b3A6IDU2cHg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG59XG46aG9zdCA6Om5nLWRlZXAgbWF0LXNpZGVuYXYtY29udGFpbmVyIG1hdC1zaWRlbmF2IHtcbiAgd2lkdGg6IDMxMnB4O1xufVxuOmhvc3QgOjpuZy1kZWVwIG1hdC1zaWRlbmF2LWNvbnRhaW5lciBtYXQtc2lkZW5hdi1jb250ZW50IHtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgcGFkZGluZzogMjRweDtcbn0iXX0= */"
+module.exports = ":host {\n  display: block;\n  height: 100%;\n  overflow: hidden;\n  position: relative;\n}\n:host ::ng-deep mat-sidenav-container {\n  background: rgba(58, 58, 58, 0.09);\n  height: calc(100% - 56px);\n  margin-top: 56px;\n  overflow: hidden;\n}\n:host ::ng-deep mat-sidenav-container mat-sidenav {\n  width: 312px;\n}\n:host ::ng-deep mat-sidenav-container mat-sidenav-content {\n  box-sizing: border-box;\n  padding: 24px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2Fhcm9uL0Rlc2t0b3AvaGFtbWVyaGVhZC11aS9wcm9qZWN0cy9oYW1tZXJoZWFkLXVpLWFwcC9zcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyIsInByb2plY3RzL2hhbW1lcmhlYWQtdWktYXBwL3NyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksY0FBQTtFQUNBLFlBQUE7RUFDQSxnQkFBQTtFQUNBLGtCQUFBO0FDQ0o7QURFUTtFQUNJLGtDQUFBO0VBQ0EseUJBQUE7RUFDQSxnQkFBQTtFQUNBLGdCQUFBO0FDQVo7QURFWTtFQUNJLFlBQUE7QUNBaEI7QURHWTtFQUNJLHNCQUFBO0VBQ0EsYUFBQTtBQ0RoQiIsImZpbGUiOiJwcm9qZWN0cy9oYW1tZXJoZWFkLXVpLWFwcC9zcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG5cbiAgICA6Om5nLWRlZXAge1xuICAgICAgICBtYXQtc2lkZW5hdi1jb250YWluZXIge1xuICAgICAgICAgICAgYmFja2dyb3VuZDogcmdiYSg1OCwgNTgsIDU4LCAwLjA5KTtcbiAgICAgICAgICAgIGhlaWdodDogY2FsYygxMDAlIC0gNTZweCk7XG4gICAgICAgICAgICBtYXJnaW4tdG9wOiA1NnB4O1xuICAgICAgICAgICAgb3ZlcmZsb3c6IGhpZGRlbjtcblxuICAgICAgICAgICAgbWF0LXNpZGVuYXYge1xuICAgICAgICAgICAgICAgIHdpZHRoOiAzMTJweDtcbiAgICAgICAgICAgIH1cblxuICAgICAgICAgICAgbWF0LXNpZGVuYXYtY29udGVudCB7XG4gICAgICAgICAgICAgICAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgICAgICAgICAgICAgICBwYWRkaW5nOiAyNHB4O1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufVxuIiwiOmhvc3Qge1xuICBkaXNwbGF5OiBibG9jaztcbiAgaGVpZ2h0OiAxMDAlO1xuICBvdmVyZmxvdzogaGlkZGVuO1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG46aG9zdCA6Om5nLWRlZXAgbWF0LXNpZGVuYXYtY29udGFpbmVyIHtcbiAgYmFja2dyb3VuZDogcmdiYSg1OCwgNTgsIDU4LCAwLjA5KTtcbiAgaGVpZ2h0OiBjYWxjKDEwMCUgLSA1NnB4KTtcbiAgbWFyZ2luLXRvcDogNTZweDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbn1cbjpob3N0IDo6bmctZGVlcCBtYXQtc2lkZW5hdi1jb250YWluZXIgbWF0LXNpZGVuYXYge1xuICB3aWR0aDogMzEycHg7XG59XG46aG9zdCA6Om5nLWRlZXAgbWF0LXNpZGVuYXYtY29udGFpbmVyIG1hdC1zaWRlbmF2LWNvbnRlbnQge1xuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICBwYWRkaW5nOiAyNHB4O1xufSJdfQ== */"
 
 /***/ }),
 
@@ -379,14 +631,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DemoExampleComponent", function() { return DemoExampleComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _demo_demo_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../demo/demo.component */ "./src/app/components/shared/demo/demo.component.ts");
+
 
 
 var DemoExampleComponent = /** @class */ (function () {
     function DemoExampleComponent() {
     }
+    Object.defineProperty(DemoExampleComponent.prototype, "tsSourceUrl", {
+        get: function () {
+            return this.tsSource;
+        },
+        set: function (url) {
+            this.tsSource = _demo_demo_component__WEBPACK_IMPORTED_MODULE_2__["DemoComponent"].URL_REPO_ROOT + url;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DemoExampleComponent.prototype, "templateSourceUrl", {
+        get: function () {
+            return this.templateSource;
+        },
+        set: function (url) {
+            this.templateSource = _demo_demo_component__WEBPACK_IMPORTED_MODULE_2__["DemoComponent"].URL_REPO_ROOT + url;
+        },
+        enumerable: true,
+        configurable: true
+    });
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
     ], DemoExampleComponent.prototype, "description", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+    ], DemoExampleComponent.prototype, "tsSourceUrl", null);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+    ], DemoExampleComponent.prototype, "templateSourceUrl", null);
     DemoExampleComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-demo-example',
@@ -408,7 +688,7 @@ var DemoExampleComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ":host {\n  box-sizing: border-box;\n  display: block;\n  padding-top: 72px;\n  position: relative;\n}\n:host .demo-header {\n  box-sizing: border-box;\n  color: white;\n  height: 72px;\n  left: -24px;\n  padding: 24px;\n  position: absolute;\n  top: -24px;\n  width: calc(100% + 48px);\n}\n:host .demo-header p {\n  font-size: 20px;\n  line-height: 24px;\n}\n:host ::ng-deep app-demo-example:first-of-type {\n  margin: 32px 0 48px;\n}\n:host ::ng-deep app-demo-example {\n  margin-bottom: 48px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2Fhcm9uL0Rlc2t0b3AvaGFtbWVyaGVhZC11aS9wcm9qZWN0cy9oYW1tZXJoZWFkLXVpLWFwcC9zcmMvYXBwL2NvbXBvbmVudHMvc2hhcmVkL2RlbW8vZGVtby5jb21wb25lbnQuc2NzcyIsInByb2plY3RzL2hhbW1lcmhlYWQtdWktYXBwL3NyYy9hcHAvY29tcG9uZW50cy9zaGFyZWQvZGVtby9kZW1vLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksc0JBQUE7RUFDQSxjQUFBO0VBQ0EsaUJBQUE7RUFDQSxrQkFBQTtBQ0NKO0FEQ0k7RUFDSSxzQkFBQTtFQUNBLFlBQUE7RUFDQSxZQUFBO0VBQ0EsV0FBQTtFQUNBLGFBQUE7RUFDQSxrQkFBQTtFQUNBLFVBQUE7RUFDQSx3QkFBQTtBQ0NSO0FEQ1E7RUFDSSxlQUFBO0VBQ0EsaUJBQUE7QUNDWjtBRElRO0VBQ0ksbUJBQUE7QUNGWjtBREtRO0VBQ0ksbUJBQUE7QUNIWiIsImZpbGUiOiJwcm9qZWN0cy9oYW1tZXJoZWFkLXVpLWFwcC9zcmMvYXBwL2NvbXBvbmVudHMvc2hhcmVkL2RlbW8vZGVtby5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIHBhZGRpbmctdG9wOiA3MnB4O1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcblxuICAgIC5kZW1vLWhlYWRlciB7XG4gICAgICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gICAgICAgIGNvbG9yOiB3aGl0ZTtcbiAgICAgICAgaGVpZ2h0OiA3MnB4O1xuICAgICAgICBsZWZ0OiAtMjRweDtcbiAgICAgICAgcGFkZGluZzogMjRweDtcbiAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgICB0b3A6IC0yNHB4O1xuICAgICAgICB3aWR0aDogY2FsYygxMDAlICsgNDhweCk7XG5cbiAgICAgICAgcCB7XG4gICAgICAgICAgICBmb250LXNpemU6IDIwcHg7XG4gICAgICAgICAgICBsaW5lLWhlaWdodDogMjRweDtcbiAgICAgICAgfVxuICAgIH1cblxuICAgIDo6bmctZGVlcCB7XG4gICAgICAgIGFwcC1kZW1vLWV4YW1wbGU6Zmlyc3Qtb2YtdHlwZSB7XG4gICAgICAgICAgICBtYXJnaW46IDMycHggMCA0OHB4O1xuICAgICAgICB9XG5cbiAgICAgICAgYXBwLWRlbW8tZXhhbXBsZSB7XG4gICAgICAgICAgICBtYXJnaW4tYm90dG9tOiA0OHB4O1xuICAgICAgICB9XG4gICAgfVxufVxuIiwiOmhvc3Qge1xuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICBkaXNwbGF5OiBibG9jaztcbiAgcGFkZGluZy10b3A6IDcycHg7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cbjpob3N0IC5kZW1vLWhlYWRlciB7XG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgaGVpZ2h0OiA3MnB4O1xuICBsZWZ0OiAtMjRweDtcbiAgcGFkZGluZzogMjRweDtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IC0yNHB4O1xuICB3aWR0aDogY2FsYygxMDAlICsgNDhweCk7XG59XG46aG9zdCAuZGVtby1oZWFkZXIgcCB7XG4gIGZvbnQtc2l6ZTogMjBweDtcbiAgbGluZS1oZWlnaHQ6IDI0cHg7XG59XG46aG9zdCA6Om5nLWRlZXAgYXBwLWRlbW8tZXhhbXBsZTpmaXJzdC1vZi10eXBlIHtcbiAgbWFyZ2luOiAzMnB4IDAgNDhweDtcbn1cbjpob3N0IDo6bmctZGVlcCBhcHAtZGVtby1leGFtcGxlIHtcbiAgbWFyZ2luLWJvdHRvbTogNDhweDtcbn0iXX0= */"
+module.exports = ":host {\n  box-sizing: border-box;\n  display: block;\n  padding-top: 72px;\n  position: relative;\n}\n:host .demo-header {\n  box-sizing: border-box;\n  color: white;\n  height: 72px;\n  left: -24px;\n  padding: 24px;\n  position: absolute;\n  top: -24px;\n  width: calc(100% + 48px);\n}\n:host .demo-header p {\n  font-size: 20px;\n  line-height: 24px;\n}\n:host ::ng-deep app-demo-example:first-of-type {\n  margin: 32px 0 48px;\n}\n:host ::ng-deep app-demo-example {\n  margin-bottom: 48px;\n}\n:host ::ng-deep .mat-tab-body {\n  padding: 8px 16px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2Fhcm9uL0Rlc2t0b3AvaGFtbWVyaGVhZC11aS9wcm9qZWN0cy9oYW1tZXJoZWFkLXVpLWFwcC9zcmMvYXBwL2NvbXBvbmVudHMvc2hhcmVkL2RlbW8vZGVtby5jb21wb25lbnQuc2NzcyIsInByb2plY3RzL2hhbW1lcmhlYWQtdWktYXBwL3NyYy9hcHAvY29tcG9uZW50cy9zaGFyZWQvZGVtby9kZW1vLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksc0JBQUE7RUFDQSxjQUFBO0VBQ0EsaUJBQUE7RUFDQSxrQkFBQTtBQ0NKO0FEQ0k7RUFDSSxzQkFBQTtFQUNBLFlBQUE7RUFDQSxZQUFBO0VBQ0EsV0FBQTtFQUNBLGFBQUE7RUFDQSxrQkFBQTtFQUNBLFVBQUE7RUFDQSx3QkFBQTtBQ0NSO0FEQ1E7RUFDSSxlQUFBO0VBQ0EsaUJBQUE7QUNDWjtBRElRO0VBQ0ksbUJBQUE7QUNGWjtBREtRO0VBQ0ksbUJBQUE7QUNIWjtBRE1RO0VBQ0ksaUJBQUE7QUNKWiIsImZpbGUiOiJwcm9qZWN0cy9oYW1tZXJoZWFkLXVpLWFwcC9zcmMvYXBwL2NvbXBvbmVudHMvc2hhcmVkL2RlbW8vZGVtby5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIHBhZGRpbmctdG9wOiA3MnB4O1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcblxuICAgIC5kZW1vLWhlYWRlciB7XG4gICAgICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gICAgICAgIGNvbG9yOiB3aGl0ZTtcbiAgICAgICAgaGVpZ2h0OiA3MnB4O1xuICAgICAgICBsZWZ0OiAtMjRweDtcbiAgICAgICAgcGFkZGluZzogMjRweDtcbiAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgICB0b3A6IC0yNHB4O1xuICAgICAgICB3aWR0aDogY2FsYygxMDAlICsgNDhweCk7XG5cbiAgICAgICAgcCB7XG4gICAgICAgICAgICBmb250LXNpemU6IDIwcHg7XG4gICAgICAgICAgICBsaW5lLWhlaWdodDogMjRweDtcbiAgICAgICAgfVxuICAgIH1cblxuICAgIDo6bmctZGVlcCB7XG4gICAgICAgIGFwcC1kZW1vLWV4YW1wbGU6Zmlyc3Qtb2YtdHlwZSB7XG4gICAgICAgICAgICBtYXJnaW46IDMycHggMCA0OHB4O1xuICAgICAgICB9XG5cbiAgICAgICAgYXBwLWRlbW8tZXhhbXBsZSB7XG4gICAgICAgICAgICBtYXJnaW4tYm90dG9tOiA0OHB4O1xuICAgICAgICB9XG5cbiAgICAgICAgLm1hdC10YWItYm9keSB7XG4gICAgICAgICAgICBwYWRkaW5nOiA4cHggMTZweDtcbiAgICAgICAgfVxuICAgIH1cbn1cbiIsIjpob3N0IHtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgZGlzcGxheTogYmxvY2s7XG4gIHBhZGRpbmctdG9wOiA3MnB4O1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG46aG9zdCAuZGVtby1oZWFkZXIge1xuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICBjb2xvcjogd2hpdGU7XG4gIGhlaWdodDogNzJweDtcbiAgbGVmdDogLTI0cHg7XG4gIHBhZGRpbmc6IDI0cHg7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAtMjRweDtcbiAgd2lkdGg6IGNhbGMoMTAwJSArIDQ4cHgpO1xufVxuOmhvc3QgLmRlbW8taGVhZGVyIHAge1xuICBmb250LXNpemU6IDIwcHg7XG4gIGxpbmUtaGVpZ2h0OiAyNHB4O1xufVxuOmhvc3QgOjpuZy1kZWVwIGFwcC1kZW1vLWV4YW1wbGU6Zmlyc3Qtb2YtdHlwZSB7XG4gIG1hcmdpbjogMzJweCAwIDQ4cHg7XG59XG46aG9zdCA6Om5nLWRlZXAgYXBwLWRlbW8tZXhhbXBsZSB7XG4gIG1hcmdpbi1ib3R0b206IDQ4cHg7XG59XG46aG9zdCA6Om5nLWRlZXAgLm1hdC10YWItYm9keSB7XG4gIHBhZGRpbmc6IDhweCAxNnB4O1xufSJdfQ== */"
 
 /***/ }),
 
@@ -429,13 +709,45 @@ __webpack_require__.r(__webpack_exports__);
 var DemoComponent = /** @class */ (function () {
     function DemoComponent() {
     }
+    DemoComponent_1 = DemoComponent;
+    Object.defineProperty(DemoComponent.prototype, "tsSourceUrl", {
+        get: function () {
+            return this.tsSource;
+        },
+        set: function (url) {
+            this.tsSource = DemoComponent_1.URL_REPO_ROOT + url;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DemoComponent.prototype, "templateSourceUrl", {
+        get: function () {
+            return this.templateSource;
+        },
+        set: function (url) {
+            this.templateSource = DemoComponent_1.URL_REPO_ROOT + url;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DemoComponent.prototype.onTabSelection = function () {
+        window.dispatchEvent(new Event('resize'));
+    };
+    var DemoComponent_1;
+    DemoComponent.URL_REPO_ROOT = 'https://raw.githubusercontent.com/iXsystems/hammerhead-ui/master/';
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
     ], DemoComponent.prototype, "title", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
     ], DemoComponent.prototype, "description", void 0);
-    DemoComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+    ], DemoComponent.prototype, "tsSourceUrl", null);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+    ], DemoComponent.prototype, "templateSourceUrl", null);
+    DemoComponent = DemoComponent_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-demo',
             template: __webpack_require__(/*! raw-loader!./demo.component.html */ "../../node_modules/raw-loader/index.js!./src/app/components/shared/demo/demo.component.html"),
@@ -467,6 +779,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var hammerhead_ui__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! hammerhead-ui */ "../../dist/hammerhead-ui/fesm5/hammerhead-ui.js");
 /* harmony import */ var _demo_example_demo_example_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./demo-example/demo-example.component */ "./src/app/components/shared/demo-example/demo-example.component.ts");
 /* harmony import */ var _demo_demo_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./demo/demo.component */ "./src/app/components/shared/demo/demo.component.ts");
+/* harmony import */ var ngx_markdown__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-markdown */ "../../node_modules/ngx-markdown/fesm5/ngx-markdown.js");
+
 
 
 
@@ -485,6 +799,7 @@ var MATERIAL_MODULES = [
     _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatListModule"],
     _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatSidenavModule"],
     _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatSnackBarModule"],
+    _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatTabsModule"],
     _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatToolbarModule"]
 ];
 var SharedComponentsModule = /** @class */ (function () {
@@ -493,7 +808,7 @@ var SharedComponentsModule = /** @class */ (function () {
     SharedComponentsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: COMPONENTS,
-            imports: tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"]([_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_flex_layout__WEBPACK_IMPORTED_MODULE_3__["FlexLayoutModule"], hammerhead_ui__WEBPACK_IMPORTED_MODULE_5__["HammerheadUiModule"]], MATERIAL_MODULES),
+            imports: tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"]([_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_flex_layout__WEBPACK_IMPORTED_MODULE_3__["FlexLayoutModule"], hammerhead_ui__WEBPACK_IMPORTED_MODULE_5__["HammerheadUiModule"], ngx_markdown__WEBPACK_IMPORTED_MODULE_8__["MarkdownModule"].forChild()], MATERIAL_MODULES),
             exports: tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"]([_angular_flex_layout__WEBPACK_IMPORTED_MODULE_3__["FlexLayoutModule"], hammerhead_ui__WEBPACK_IMPORTED_MODULE_5__["HammerheadUiModule"]], COMPONENTS, MATERIAL_MODULES)
         })
     ], SharedComponentsModule);
@@ -621,7 +936,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_shared_shared_components_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/shared/shared-components.module */ "./src/app/components/shared/shared-components.module.ts");
 /* harmony import */ var _components_view_routes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components-view.routes */ "./src/app/views/components/components-view.routes.ts");
 /* harmony import */ var _components_components_overview_components_overview_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/components-overview/components-overview.component */ "./src/app/views/components/components/components-overview/components-overview.component.ts");
-/* harmony import */ var _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/zero-state-demo/zero-state-demo.component */ "./src/app/views/components/components/zero-state-demo/zero-state-demo.component.ts");
+/* harmony import */ var _components_data_table_demo_data_table_demo_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/data-table-demo/data-table-demo.component */ "./src/app/views/components/components/data-table-demo/data-table-demo.component.ts");
+/* harmony import */ var _components_data_table_demo_examples_data_table_example_a_data_table_example_a_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/data-table-demo/examples/data-table-example-a/data-table-example-a.component */ "./src/app/views/components/components/data-table-demo/examples/data-table-example-a/data-table-example-a.component.ts");
+/* harmony import */ var _components_data_table_demo_examples_data_table_example_b_data_table_example_b_componen__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/data-table-demo/examples/data-table-example-b/data-table-example-b.componen */ "./src/app/views/components/components/data-table-demo/examples/data-table-example-b/data-table-example-b.componen.ts");
+/* harmony import */ var _components_zero_state_demo_examples_zero_state_example_1_zero_state_example_1_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component */ "./src/app/views/components/components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component.ts");
+/* harmony import */ var _components_zero_state_demo_examples_zero_state_example_2_zero_state_example_2_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component */ "./src/app/views/components/components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component.ts");
+/* harmony import */ var _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/zero-state-demo/zero-state-demo.component */ "./src/app/views/components/components/zero-state-demo/zero-state-demo.component.ts");
+
+
+
+
+
 
 
 
@@ -630,6 +955,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var COMPONENT_DEMOS = [
+    {
+        id: 'data-table',
+        name: 'Data Table'
+    },
     {
         id: 'zero-state',
         name: 'Zero State'
@@ -641,7 +970,15 @@ var ComponentsViewModule = /** @class */ (function () {
     ComponentsViewModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(_components_view_routes__WEBPACK_IMPORTED_MODULE_4__["ROUTES_COMPONENTS_VIEW"]), _components_shared_shared_components_module__WEBPACK_IMPORTED_MODULE_3__["SharedComponentsModule"]],
-            declarations: [_components_components_overview_components_overview_component__WEBPACK_IMPORTED_MODULE_5__["ComponentsOverviewComponent"], _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_6__["ZeroStateDemoComponent"]]
+            declarations: [
+                _components_components_overview_components_overview_component__WEBPACK_IMPORTED_MODULE_5__["ComponentsOverviewComponent"],
+                _components_data_table_demo_data_table_demo_component__WEBPACK_IMPORTED_MODULE_6__["DataTableDemoComponent"],
+                _components_data_table_demo_examples_data_table_example_a_data_table_example_a_component__WEBPACK_IMPORTED_MODULE_7__["DataTableExampleAComponent"],
+                _components_data_table_demo_examples_data_table_example_b_data_table_example_b_componen__WEBPACK_IMPORTED_MODULE_8__["DataTableExampleBComponent"],
+                _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_11__["ZeroStateDemoComponent"],
+                _components_zero_state_demo_examples_zero_state_example_1_zero_state_example_1_component__WEBPACK_IMPORTED_MODULE_9__["ZeroStateExample1Component"],
+                _components_zero_state_demo_examples_zero_state_example_2_zero_state_example_2_component__WEBPACK_IMPORTED_MODULE_10__["ZeroStateExample2Component"]
+            ]
         })
     ], ComponentsViewModule);
     return ComponentsViewModule;
@@ -662,7 +999,9 @@ var ComponentsViewModule = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ROUTES_COMPONENTS_VIEW", function() { return ROUTES_COMPONENTS_VIEW; });
 /* harmony import */ var _components_components_overview_components_overview_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/components-overview/components-overview.component */ "./src/app/views/components/components/components-overview/components-overview.component.ts");
-/* harmony import */ var _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/zero-state-demo/zero-state-demo.component */ "./src/app/views/components/components/zero-state-demo/zero-state-demo.component.ts");
+/* harmony import */ var _components_data_table_demo_data_table_demo_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/data-table-demo/data-table-demo.component */ "./src/app/views/components/components/data-table-demo/data-table-demo.component.ts");
+/* harmony import */ var _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/zero-state-demo/zero-state-demo.component */ "./src/app/views/components/components/zero-state-demo/zero-state-demo.component.ts");
+
 
 
 var ROUTES_COMPONENTS_VIEW = [
@@ -673,7 +1012,11 @@ var ROUTES_COMPONENTS_VIEW = [
     },
     {
         path: 'zero-state',
-        component: _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_1__["ZeroStateDemoComponent"]
+        component: _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_2__["ZeroStateDemoComponent"]
+    },
+    {
+        path: 'data-table',
+        component: _components_data_table_demo_data_table_demo_component__WEBPACK_IMPORTED_MODULE_1__["DataTableDemoComponent"]
     }
 ];
 
@@ -724,6 +1067,231 @@ var ComponentsOverviewComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/views/components/components/data-table-demo/data-table-demo.component.scss":
+/*!********************************************************************************************!*\
+  !*** ./src/app/views/components/components/data-table-demo/data-table-demo.component.scss ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwcm9qZWN0cy9oYW1tZXJoZWFkLXVpLWFwcC9zcmMvYXBwL3ZpZXdzL2NvbXBvbmVudHMvY29tcG9uZW50cy9kYXRhLXRhYmxlLWRlbW8vZGF0YS10YWJsZS1kZW1vLmNvbXBvbmVudC5zY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/views/components/components/data-table-demo/data-table-demo.component.ts":
+/*!******************************************************************************************!*\
+  !*** ./src/app/views/components/components/data-table-demo/data-table-demo.component.ts ***!
+  \******************************************************************************************/
+/*! exports provided: DataTableDemoComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataTableDemoComponent", function() { return DataTableDemoComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+
+
+var DataTableDemoComponent = /** @class */ (function () {
+    function DataTableDemoComponent() {
+    }
+    DataTableDemoComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-data-table-demo',
+            template: __webpack_require__(/*! raw-loader!./data-table-demo.component.html */ "../../node_modules/raw-loader/index.js!./src/app/views/components/components/data-table-demo/data-table-demo.component.html"),
+            styles: [__webpack_require__(/*! ./data-table-demo.component.scss */ "./src/app/views/components/components/data-table-demo/data-table-demo.component.scss")]
+        })
+    ], DataTableDemoComponent);
+    return DataTableDemoComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/views/components/components/data-table-demo/examples/data-table-example-a/data-table-example-a.component.ts":
+/*!*****************************************************************************************************************************!*\
+  !*** ./src/app/views/components/components/data-table-demo/examples/data-table-example-a/data-table-example-a.component.ts ***!
+  \*****************************************************************************************************************************/
+/*! exports provided: DataTableExampleAComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataTableExampleAComponent", function() { return DataTableExampleAComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
+
+
+
+var DUMMY_TABLE_DATA = {
+    tokens: [
+        { id: 'token-1', token: 'oQvACZi7yyNbzKEQ7H9t' },
+        { id: 'token-2', token: 'oQvACZi7yyNbzKEQ7H9u' },
+        { id: 'token-3', token: 'oQvACZi7yyNbzKEQ7H9v' },
+        { id: 'token-4', token: 'oQvACZi7yyNbzKEQ7H9w' },
+        { id: 'token-5', token: 'oQvACZi7yyNbzKEQ7H9x' }
+    ]
+};
+var DataTableExampleAComponent = /** @class */ (function () {
+    function DataTableExampleAComponent(snackBar) {
+        this.snackBar = snackBar;
+        this.config = {
+            columns: [{ property: 'id', width: '112px' }, { property: 'token' }],
+            data: DUMMY_TABLE_DATA.tokens,
+            rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }],
+            rowActionsWidth: '112px'
+        };
+    }
+    DataTableExampleAComponent.prototype.onEdit = function (token) {
+        this.snackBar.open("You want to edit token " + token.id + ".", undefined, { duration: 3000 });
+    };
+    DataTableExampleAComponent.ctorParameters = function () { return [
+        { type: _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBar"] }
+    ]; };
+    DataTableExampleAComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-data-table-example-a',
+            template: '<hh-data-table [config]="config"></hh-data-table>'
+        })
+    ], DataTableExampleAComponent);
+    return DataTableExampleAComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/views/components/components/data-table-demo/examples/data-table-example-b/data-table-example-b.componen.ts":
+/*!****************************************************************************************************************************!*\
+  !*** ./src/app/views/components/components/data-table-demo/examples/data-table-example-b/data-table-example-b.componen.ts ***!
+  \****************************************************************************************************************************/
+/*! exports provided: DataTableExampleBComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataTableExampleBComponent", function() { return DataTableExampleBComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
+
+
+
+
+
+var DUMMY_TABLE_DATA = {
+    tokens: [
+        { id: 'token-1', token: 'oQvACZi7yyNbzKEQ7H9t' },
+        { id: 'token-2', token: 'oQvACZi7yyNbzKEQ7H9u' },
+        { id: 'token-3', token: 'oQvACZi7yyNbzKEQ7H9v' },
+        { id: 'token-4', token: 'oQvACZi7yyNbzKEQ7H9w' },
+        { id: 'token-5', token: 'oQvACZi7yyNbzKEQ7H9x' }
+    ]
+};
+var DataTableExampleBComponent = /** @class */ (function () {
+    function DataTableExampleBComponent(snackBar) {
+        this.snackBar = snackBar;
+        this.config = {
+            columns: [{ property: 'id', width: '112px' }, { property: 'token' }],
+            dataAsync: function () {
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["interval"])(2000).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function () { return DUMMY_TABLE_DATA.tokens; }));
+            },
+            rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }],
+            rowActionsWidth: '112px'
+        };
+    }
+    DataTableExampleBComponent.prototype.onEdit = function (token) {
+        this.snackBar.open("You want to edit token " + token.id + ".", undefined, { duration: 3000 });
+    };
+    DataTableExampleBComponent.ctorParameters = function () { return [
+        { type: _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBar"] }
+    ]; };
+    DataTableExampleBComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-data-table-example-b',
+            template: '<hh-data-table [config]="config"></hh-data-table>'
+        })
+    ], DataTableExampleBComponent);
+    return DataTableExampleBComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/views/components/components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component.ts":
+/*!*****************************************************************************************************************************!*\
+  !*** ./src/app/views/components/components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component.ts ***!
+  \*****************************************************************************************************************************/
+/*! exports provided: ZeroStateExample1Component */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ZeroStateExample1Component", function() { return ZeroStateExample1Component; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+
+
+var ZeroStateExample1Component = /** @class */ (function () {
+    function ZeroStateExample1Component() {
+    }
+    ZeroStateExample1Component = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-zero-state-example-1',
+            template: "\n        <hh-zero-state message=\"No data available\" [style.max-width.px]=\"320\"></hh-zero-state>\n    "
+        })
+    ], ZeroStateExample1Component);
+    return ZeroStateExample1Component;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/views/components/components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component.ts":
+/*!*****************************************************************************************************************************!*\
+  !*** ./src/app/views/components/components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component.ts ***!
+  \*****************************************************************************************************************************/
+/*! exports provided: ZeroStateExample2Component */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ZeroStateExample2Component", function() { return ZeroStateExample2Component; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
+
+
+
+var ZeroStateExample2Component = /** @class */ (function () {
+    function ZeroStateExample2Component(snackBar) {
+        this.snackBar = snackBar;
+    }
+    ZeroStateExample2Component.prototype.onAction = function (buttonPosition) {
+        this.snackBar.open("You clicked the action button of the " + buttonPosition.toUpperCase() + " zero-state component.", undefined, { duration: 2000 });
+    };
+    ZeroStateExample2Component.ctorParameters = function () { return [
+        { type: _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBar"] }
+    ]; };
+    ZeroStateExample2Component = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-zero-state-example-2',
+            template: __webpack_require__(/*! raw-loader!./zero-state-example-2.component.html */ "../../node_modules/raw-loader/index.js!./src/app/views/components/components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component.html")
+        })
+    ], ZeroStateExample2Component);
+    return ZeroStateExample2Component;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/views/components/components/zero-state-demo/zero-state-demo.component.scss":
 /*!********************************************************************************************!*\
   !*** ./src/app/views/components/components/zero-state-demo/zero-state-demo.component.scss ***!
@@ -747,20 +1315,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ZeroStateDemoComponent", function() { return ZeroStateDemoComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
-
 
 
 var ZeroStateDemoComponent = /** @class */ (function () {
-    function ZeroStateDemoComponent(snackBar) {
-        this.snackBar = snackBar;
+    function ZeroStateDemoComponent() {
     }
-    ZeroStateDemoComponent.prototype.onAction = function (buttonPosition) {
-        this.snackBar.open("You clicked the action button of the " + buttonPosition.toUpperCase() + " zero-state component.", undefined, { duration: 2000 });
-    };
-    ZeroStateDemoComponent.ctorParameters = function () { return [
-        { type: _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBar"] }
-    ]; };
     ZeroStateDemoComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-zero-state-demo',
