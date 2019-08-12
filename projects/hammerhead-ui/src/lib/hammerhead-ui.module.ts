@@ -6,7 +6,7 @@ import { MatButtonModule, MatCardModule } from '@angular/material';
 import { DataTableComponent } from './components/data-table/data-table.component';
 import { ZeroStateComponent } from './components/zero-state/zero-state.component';
 
-const IMPORTS = [CommonModule, FlexLayoutModule, MatButtonModule, MatCardModule, CdkTableModule];
+const IMPORTS = [CdkTableModule, CommonModule, FlexLayoutModule, MatButtonModule, MatCardModule];
 
 @NgModule({
     declarations: [ZeroStateComponent, DataTableComponent],

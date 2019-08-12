@@ -1,0 +1,28 @@
+:host {
+    display: block;
+    margin: 16px;
+
+    cdk-table {
+        width: 100%;
+
+        cdk-row {
+            border-bottom: 1px solid rgba(58, 58, 58, 0.18);
+            padding: 8px 0;
+
+            &:hover {
+                border-bottom: 1px solid rgba(58, 58, 58, 0.42);
+            }
+        }
+
+        cdk-header-row {
+            border-bottom: 1px solid rgba(58, 58, 58, 0.33);
+            padding: 12px 0;
+
+            p {
+                font-size: 12px;
+                font-weight: 700;
+                margin: 0;
+            }
+        }
+    }
+}

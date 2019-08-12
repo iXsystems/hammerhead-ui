@@ -15,7 +15,9 @@ class DataTableSource extends DataSource<any> {
         return this.data;
     }
 
-    public disconnect(): void {}
+    public disconnect(): void {
+        this.data.complete();
+    }
 }
 
 @Component({
@@ -37,7 +39,19 @@ export class DataTableComponent implements OnInit, OnChanges {
         await this.updateTable();
     }
 
+    public getColumnWidth(columnProperty: string): string | undefined {
+        if (columnProperty === 'actions') {
+            return this.config.rowActionsWidth;
+        }
+
+        const column = this.config.columns.find(col => col.property === columnProperty);
+        return column ? column.width : undefined;
+    }
+
     private buildColumns(): string[] {
+        if (this.config.rowActions && Array.isArray(this.config.rowActions) && this.config.rowActions.length > 0) {
+            return [...this.config.columns.map(column => column.property), 'actions'];
+        }
         return this.config.columns.map(column => column.property);
     }
 

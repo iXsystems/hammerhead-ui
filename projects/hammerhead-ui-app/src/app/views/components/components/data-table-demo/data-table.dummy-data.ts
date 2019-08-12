@@ -1,4 +1,9 @@
-export const DUMMY_TABLE_DATA = {
+export interface SystemToken {
+    id: string;
+    token: string;
+}
+
+export const DUMMY_TABLE_DATA: { tokens: SystemToken[] } = {
     tokens: [
         { id: 'token-1', token: 'oQvACZi7yyNbzKEQ7H9t' },
         { id: 'token-2', token: 'oQvACZi7yyNbzKEQ7H9u' },
