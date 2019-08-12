@@ -1,0 +1,33 @@
+<table
+    cdk-table
+    [dataSource]="data"
+>
+    <ng-container
+        *ngFor="let column of cols"
+        [cdkColumnDef]="column"
+    >
+        <th
+            cdk-header-cell
+            *cdkHeaderCellDef
+        >
+            {{ column | titlecase }}
+        </th>
+        <td
+            cdk-cell
+            *cdkCellDef="let row"
+        >
+            {{ row[column] }}
+        </td>
+    </ng-container>
+
+    <tbody>
+        <tr
+            cdk-header-row
+            *cdkHeaderRowDef="cols"
+        ></tr>
+        <tr
+            cdk-row
+            *cdkRowDef="let row; columns: cols;"
+        ></tr>
+    </tbody>
+</table>
