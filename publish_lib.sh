@@ -45,6 +45,9 @@ sudo yarn build --project=$DEMO_APP_PROJECT_NAME --base-href .
 
 ### Github pages stuff ###
 
+# Nuke the docs directory
+sudo rimraf $DOCS_ROOT_DIR
+
 # Copy contents of dist/hammerhead-ui-app to docs directory
 sudo cp -a $DEMO_APP_DIST_DIR $DOCS_ROOT_DIR
 

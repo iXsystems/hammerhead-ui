@@ -35,7 +35,6 @@ A list of the library's peer dependencies can be found in its [`package.json` fi
 ```json
 {
     "name": "hammerhead-ui",
-    "version": "0.0.1-beta",
     "peerDependencies": {
         "@angular/animations": "8.1.1",
         "@angular/cdk": "8.0.2",

@@ -862,9 +862,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_data_table_demo_examples_data_table_example_c_data_table_example_c_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/data-table-demo/examples/data-table-example-c/data-table-example-c.component */ "./src/app/views/components/components/data-table-demo/examples/data-table-example-c/data-table-example-c.component.ts");
 /* harmony import */ var _components_data_table_demo_examples_data_table_example_d_data_table_example_d_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/data-table-demo/examples/data-table-example-d/data-table-example-d.component */ "./src/app/views/components/components/data-table-demo/examples/data-table-example-d/data-table-example-d.component.ts");
 /* harmony import */ var _components_data_table_demo_examples_data_table_example_e_data_table_example_e_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/data-table-demo/examples/data-table-example-e/data-table-example-e.component */ "./src/app/views/components/components/data-table-demo/examples/data-table-example-e/data-table-example-e.component.ts");
-/* harmony import */ var _components_zero_state_demo_examples_zero_state_example_1_zero_state_example_1_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component */ "./src/app/views/components/components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component.ts");
-/* harmony import */ var _components_zero_state_demo_examples_zero_state_example_2_zero_state_example_2_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component */ "./src/app/views/components/components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component.ts");
-/* harmony import */ var _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/zero-state-demo/zero-state-demo.component */ "./src/app/views/components/components/zero-state-demo/zero-state-demo.component.ts");
+/* harmony import */ var _components_data_table_demo_examples_data_table_example_f_data_table_example_f_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/data-table-demo/examples/data-table-example-f/data-table-example-f.component */ "./src/app/views/components/components/data-table-demo/examples/data-table-example-f/data-table-example-f.component.ts");
+/* harmony import */ var _components_zero_state_demo_examples_zero_state_example_1_zero_state_example_1_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component */ "./src/app/views/components/components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component.ts");
+/* harmony import */ var _components_zero_state_demo_examples_zero_state_example_2_zero_state_example_2_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component */ "./src/app/views/components/components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component.ts");
+/* harmony import */ var _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/zero-state-demo/zero-state-demo.component */ "./src/app/views/components/components/zero-state-demo/zero-state-demo.component.ts");
+
 
 
 
@@ -903,9 +905,10 @@ ComponentsViewModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _components_data_table_demo_examples_data_table_example_c_data_table_example_c_component__WEBPACK_IMPORTED_MODULE_9__["DataTableExampleCComponent"],
             _components_data_table_demo_examples_data_table_example_d_data_table_example_d_component__WEBPACK_IMPORTED_MODULE_10__["DataTableExampleDComponent"],
             _components_data_table_demo_examples_data_table_example_e_data_table_example_e_component__WEBPACK_IMPORTED_MODULE_11__["DataTableExampleEComponent"],
-            _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_14__["ZeroStateDemoComponent"],
-            _components_zero_state_demo_examples_zero_state_example_1_zero_state_example_1_component__WEBPACK_IMPORTED_MODULE_12__["ZeroStateExample1Component"],
-            _components_zero_state_demo_examples_zero_state_example_2_zero_state_example_2_component__WEBPACK_IMPORTED_MODULE_13__["ZeroStateExample2Component"]
+            _components_data_table_demo_examples_data_table_example_f_data_table_example_f_component__WEBPACK_IMPORTED_MODULE_12__["DataTableExampleFComponent"],
+            _components_zero_state_demo_zero_state_demo_component__WEBPACK_IMPORTED_MODULE_15__["ZeroStateDemoComponent"],
+            _components_zero_state_demo_examples_zero_state_example_1_zero_state_example_1_component__WEBPACK_IMPORTED_MODULE_13__["ZeroStateExample1Component"],
+            _components_zero_state_demo_examples_zero_state_example_2_zero_state_example_2_component__WEBPACK_IMPORTED_MODULE_14__["ZeroStateExample2Component"]
         ]
     })
 ], ComponentsViewModule);
@@ -1338,6 +1341,49 @@ DataTableExampleEComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: '<hh-data-table [config]="config"></hh-data-table>'
     })
 ], DataTableExampleEComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/views/components/components/data-table-demo/examples/data-table-example-f/data-table-example-f.component.ts":
+/*!*****************************************************************************************************************************!*\
+  !*** ./src/app/views/components/components/data-table-demo/examples/data-table-example-f/data-table-example-f.component.ts ***!
+  \*****************************************************************************************************************************/
+/*! exports provided: DataTableExampleFComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataTableExampleFComponent", function() { return DataTableExampleFComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm2015/material.js");
+
+
+
+let DataTableExampleFComponent = class DataTableExampleFComponent {
+    constructor(snackBar) {
+        this.snackBar = snackBar;
+        this.config = {
+            columns: [{ property: 'id' }, { property: 'token' }],
+            data: [],
+            rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }]
+        };
+    }
+    onEdit(token) {
+        this.snackBar.open(`You want to edit token ${token.id}.`, undefined, { duration: 3000 });
+    }
+};
+DataTableExampleFComponent.ctorParameters = () => [
+    { type: _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBar"] }
+];
+DataTableExampleFComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-data-table-example-f',
+        template: '<hh-data-table [config]="config"></hh-data-table>'
+    })
+], DataTableExampleFComponent);
 
 
 
