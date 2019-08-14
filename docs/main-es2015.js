@@ -17,10 +17,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_flex_layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/flex-layout */ "../../node_modules/@angular/flex-layout/esm2015/flex-layout.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm2015/material.js");
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm2015/operators/index.js");
-
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm2015/operators/index.js");
 
 
 
@@ -40,11 +38,11 @@ class DataTableSource extends _angular_cdk_table__WEBPACK_IMPORTED_MODULE_0__["D
     constructor(DATA) {
         super();
         this.DATA = DATA;
-        this.filterString = new rxjs__WEBPACK_IMPORTED_MODULE_6__["BehaviorSubject"]('');
-        this.data = new rxjs__WEBPACK_IMPORTED_MODULE_6__["BehaviorSubject"](this.DATA);
-        this.filteredData = Object(rxjs__WEBPACK_IMPORTED_MODULE_6__["combineLatest"])(this.data, this.filterString.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["debounceTime"])(400))).pipe(
+        this.DATA_SOURCE_DESTROYED$ = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"]();
+        this.filterString = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"]('');
+        this.filteredData = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["combineLatest"])(this.DATA, this.filterString.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["debounceTime"])(400))).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["takeUntil"])(this.DATA_SOURCE_DESTROYED$), 
         /* Algorithm that searches an object's values for a matching string */
-        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])((/**
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])((/**
          * @param {?} __0
          * @return {?}
          */
@@ -67,7 +65,7 @@ class DataTableSource extends _angular_cdk_table__WEBPACK_IMPORTED_MODULE_0__["D
                 .toString()
                 .toLowerCase()
                 .indexOf(filter) > -1)).length > 0))
-            : d)));
+            : d)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["shareReplay"])(1));
     }
     /**
      * @return {?}
@@ -79,7 +77,7 @@ class DataTableSource extends _angular_cdk_table__WEBPACK_IMPORTED_MODULE_0__["D
      * @return {?}
      */
     disconnect() {
-        this.data.complete();
+        this.DATA_SOURCE_DESTROYED$.next();
     }
 }
 class DataTableComponent {
@@ -90,17 +88,13 @@ class DataTableComponent {
      * @return {?}
      */
     ngOnInit() {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_5__["__awaiter"])(this, void 0, void 0, function* () {
-            yield this.updateTable();
-        });
+        this.updateTable();
     }
     /**
      * @return {?}
      */
     ngOnChanges() {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_5__["__awaiter"])(this, void 0, void 0, function* () {
-            yield this.updateTable();
-        });
+        this.updateTable();
     }
     /**
      * @param {?} filterString
@@ -149,40 +143,22 @@ class DataTableComponent {
      * @private
      * @return {?}
      */
-    updateDataSync() {
+    updateData() {
         return new DataTableSource(this.config.data);
     }
     /**
      * @private
      * @return {?}
      */
-    updateDataAsync() {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_5__["__awaiter"])(this, void 0, void 0, function* () {
-            return new DataTableSource(yield this.config
-                .dataAsync()
-                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])((/**
-             * @param {?} data
-             * @return {?}
-             */
-            data => (this.config.dataAsyncMapper ? this.config.dataAsyncMapper(data) : data))))
-                .toPromise());
-        });
-    }
-    /**
-     * @private
-     * @return {?}
-     */
     updateTable() {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_5__["__awaiter"])(this, void 0, void 0, function* () {
-            this.cols = this.buildColumns();
-            this.data = this.config.dataAsync ? yield this.updateDataAsync() : this.updateDataSync();
-        });
+        this.cols = this.buildColumns();
+        this.data = this.updateData();
     }
 }
 DataTableComponent.decorators = [
     { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"], args: [{
                 selector: 'hh-data-table',
-                template: "<ng-container *ngIf=\"data; else loading;\">\n    <mat-form-field\n        *ngIf=\"config.hasGlobalFilter\"\n        [style.width]=\"'100%'\"\n    >\n        <input\n            matInput\n            (keyup)=\"applyFilter($event.target.value)\"\n            placeholder=\"Filter\"\n        >\n    </mat-form-field>\n\n    <cdk-table [dataSource]=\"data\">\n        <ng-container\n            *ngFor=\"let column of cols\"\n            [cdkColumnDef]=\"column\"\n        >\n            <cdk-header-cell\n                [fxFlex]=\"getColumnWidth(column) || '100%'\"\n                *cdkHeaderCellDef\n            >\n                <p>{{ column | uppercase }}</p>\n            </cdk-header-cell>\n            <cdk-cell\n                [fxFlex]=\"getColumnWidth(column) || '100%'\"\n                *cdkCellDef=\"let row\"\n            >\n                <ng-container *ngIf=\"column !== 'actions'; else actions;\">{{ row[column] }}</ng-container>\n                <ng-template #actions>\n                    <div\n                        fxLayoutAlign=\"start center\"\n                        fxLayoutGap=\"16px\"\n                    >\n                        <ng-container *ngFor=\"let action of config.rowActions\">\n                            <mat-icon\n                                *ngIf=\"action.isIcon; else actionButton;\"\n                                [color]=\"action.actionColor || 'primary'\"\n                                (click)=\"action.onClick(row, $event)\"\n                                class=\"cursor-pointer\"\n                            >\n                                {{ action.icon || 'edit' }}\n                            </mat-icon>\n                            <ng-template #actionButton>\n                                <button\n                                    mat-flat-button\n                                    [color]=\"action.actionColor || 'primary'\"\n                                    (click)=\"action.onClick(row, $event)\"\n                                >\n                                    {{ action.actionText | titlecase }}\n                                </button>\n                            </ng-template>\n                        </ng-container>\n                    </div>\n                </ng-template>\n            </cdk-cell>\n        </ng-container>\n\n        <cdk-header-row\n            fxLayoutAlign=\"start center\"\n            fxLayoutGap=\"16px\"\n            *cdkHeaderRowDef=\"cols\"\n        ></cdk-header-row>\n        <cdk-row\n            fxLayoutAlign=\"start center\"\n            fxLayoutGap=\"16px\"\n            *cdkRowDef=\"let row; columns: cols;\"\n        ></cdk-row>\n    </cdk-table>\n</ng-container>\n\n<ng-template #loading>\n    <mat-progress-bar\n        mode=\"indeterminate\"\n        class=\"margin-bottom-heavy\"\n    ></mat-progress-bar>\n    <div fxLayoutAlign=\"center center\">\n        <hh-zero-state\n            message=\"Please wait...\"\n            [style.min-width.px]=\"320\"\n        ></hh-zero-state>\n    </div>\n</ng-template>\n",
+                template: "<ng-container *ngIf=\"data.connect() | async; else loading;\">\n    <mat-form-field\n        *ngIf=\"config.hasGlobalFilter\"\n        [style.width]=\"'100%'\"\n    >\n        <input\n            matInput\n            (keyup)=\"applyFilter($event.target.value)\"\n            placeholder=\"Filter\"\n        >\n    </mat-form-field>\n\n    <cdk-table [dataSource]=\"data\">\n        <ng-container\n            *ngFor=\"let column of cols\"\n            [cdkColumnDef]=\"column\"\n        >\n            <cdk-header-cell\n                [fxFlex]=\"getColumnWidth(column) || '100%'\"\n                *cdkHeaderCellDef\n            >\n                <p>{{ column | uppercase }}</p>\n            </cdk-header-cell>\n            <cdk-cell\n                [fxFlex]=\"getColumnWidth(column) || '100%'\"\n                *cdkCellDef=\"let row\"\n            >\n                <ng-container *ngIf=\"column !== 'actions'; else actions;\">{{ row[column] }}</ng-container>\n                <ng-template #actions>\n                    <div\n                        fxLayoutAlign=\"start center\"\n                        fxLayoutGap=\"16px\"\n                    >\n                        <ng-container *ngFor=\"let action of config.rowActions\">\n                            <mat-icon\n                                *ngIf=\"action.isIcon; else actionButton;\"\n                                [color]=\"action.actionColor || 'primary'\"\n                                (click)=\"action.onClick(row, $event)\"\n                                class=\"cursor-pointer\"\n                            >\n                                {{ action.icon || 'edit' }}\n                            </mat-icon>\n                            <ng-template #actionButton>\n                                <button\n                                    mat-flat-button\n                                    [color]=\"action.actionColor || 'primary'\"\n                                    (click)=\"action.onClick(row, $event)\"\n                                >\n                                    {{ action.actionText | titlecase }}\n                                </button>\n                            </ng-template>\n                        </ng-container>\n                    </div>\n                </ng-template>\n            </cdk-cell>\n        </ng-container>\n\n        <cdk-header-row\n            fxLayoutAlign=\"start center\"\n            fxLayoutGap=\"16px\"\n            *cdkHeaderRowDef=\"cols\"\n        ></cdk-header-row>\n        <cdk-row\n            fxLayoutAlign=\"start center\"\n            fxLayoutGap=\"16px\"\n            *cdkRowDef=\"let row; columns: cols;\"\n        ></cdk-row>\n    </cdk-table>\n</ng-container>\n\n<ng-template #loading>\n    <mat-progress-bar\n        mode=\"indeterminate\"\n        class=\"margin-bottom-heavy\"\n    ></mat-progress-bar>\n    <div fxLayoutAlign=\"center center\">\n        <hh-zero-state\n            message=\"Please wait...\"\n            [style.min-width.px]=\"320\"\n        ></hh-zero-state>\n    </div>\n</ng-template>\n",
                 styles: [":host{display:block;margin:16px}:host cdk-table{width:100%}:host cdk-table cdk-row{border-bottom:1px solid rgba(58,58,58,.18);padding:8px 0}:host cdk-table cdk-row:hover{border-bottom:1px solid rgba(58,58,58,.66)}:host cdk-table cdk-row mat-icon.cursor-pointer{cursor:pointer!important}:host cdk-table cdk-row mat-icon.cursor-pointer:active{opacity:.5}:host cdk-table cdk-header-row{border-bottom:1px solid rgba(58,58,58,.33);padding:12px 0}:host cdk-table cdk-header-row p{font-size:12px;font-weight:700;margin:0}"]
             }] }
 ];
@@ -1046,6 +1022,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm2015/index.js");
+
 
 
 
@@ -1063,7 +1041,7 @@ let DataTableExampleAComponent = class DataTableExampleAComponent {
         this.snackBar = snackBar;
         this.config = {
             columns: [{ property: 'id' }, { property: 'token' }],
-            data: DUMMY_TABLE_DATA.tokens,
+            data: Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(DUMMY_TABLE_DATA.tokens),
             rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }]
         };
     }
@@ -1117,12 +1095,14 @@ const DUMMY_TABLE_DATA = {
 let DataTableExampleBComponent = class DataTableExampleBComponent {
     constructor(snackBar) {
         this.snackBar = snackBar;
+        this.DATA = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](DUMMY_TABLE_DATA.tokens);
         this.config = {
             columns: [{ property: 'id' }, { property: 'token' }],
-            dataAsync: () => Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["interval"])(2000).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(() => DUMMY_TABLE_DATA.tokens)),
+            data: this.DATA.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["debounceTime"])(2000)),
             rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }]
         };
         this.isRefreshing = false;
+        setTimeout(() => this.DATA.next([...DUMMY_TABLE_DATA.tokens, { id: 'new-token-6', token: '<token>' }]), 6000);
     }
     onEdit(token) {
         this.snackBar.open(`You want to edit token ${token.id}.`, undefined, { duration: 3000 });
@@ -1169,6 +1149,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm2015/index.js");
+
 
 
 
@@ -1186,7 +1168,7 @@ let DataTableExampleCComponent = class DataTableExampleCComponent {
         this.snackBar = snackBar;
         this.config = {
             columns: [{ property: 'id', width: '112px' }, { property: 'token' }],
-            data: DUMMY_TABLE_DATA.tokens,
+            data: Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(DUMMY_TABLE_DATA.tokens),
             rowActions: [
                 { id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) },
                 { id: 'delete', actionText: 'Delete', actionColor: 'warn', onClick: this.onDelete.bind(this) }
@@ -1228,6 +1210,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm2015/index.js");
+
 
 
 
@@ -1245,7 +1229,7 @@ let DataTableExampleDComponent = class DataTableExampleDComponent {
         this.snackBar = snackBar;
         this.config = {
             columns: [{ property: 'id', width: '112px' }, { property: 'token' }],
-            data: DUMMY_TABLE_DATA.tokens,
+            data: Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(DUMMY_TABLE_DATA.tokens),
             rowActions: [
                 { id: 'edit', isIcon: true, icon: 'edit', onClick: this.onEdit.bind(this) },
                 {
@@ -1293,6 +1277,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm2015/index.js");
+
 
 
 
@@ -1310,7 +1296,7 @@ let DataTableExampleEComponent = class DataTableExampleEComponent {
         this.snackBar = snackBar;
         this.config = {
             columns: [{ property: 'id', width: '112px' }, { property: 'token' }],
-            data: DUMMY_TABLE_DATA.tokens,
+            data: Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(DUMMY_TABLE_DATA.tokens),
             rowActions: [
                 { id: 'edit', isIcon: true, icon: 'edit', onClick: this.onEdit.bind(this) },
                 {
@@ -1359,6 +1345,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../../node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm2015/index.js");
+
 
 
 
@@ -1367,7 +1355,7 @@ let DataTableExampleFComponent = class DataTableExampleFComponent {
         this.snackBar = snackBar;
         this.config = {
             columns: [{ property: 'id' }, { property: 'token' }],
-            data: [],
+            data: Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])([]),
             rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }]
         };
     }

@@ -1,12 +1,10 @@
 import { Observable } from 'rxjs';
 
-export interface DataTableConfig {
+export interface DataTableConfig<T = any> {
     columns: DataTableColumnConfig[];
-    rowActions?: DataTableAction[];
+    rowActions?: DataTableAction<T>[];
     rowActionsWidth?: string;
-    data?: any[];
-    dataAsync?: () => Observable<any>;
-    dataAsyncMapper?: (elements: any[]) => any[];
+    data?: Observable<T[]>;
     hasGlobalFilter?: boolean;
 }
 
@@ -18,12 +16,12 @@ export interface DataTableColumnConfig {
     name?: string; // Title-cased 'property' by default
 }
 
-export interface DataTableAction {
+export interface DataTableAction<T> {
     id: string;
-    onClick: (row: any, event: MouseEvent) => Observable<any> | void;
+    onClick: (row: T, event: MouseEvent) => Observable<T> | void;
     actionColor?: 'primary' | 'accent' | 'warn';
     actionText?: string;
     isIcon?: boolean;
     icon?: string;
-    isActionVisible?: (row: any) => boolean;
+    isActionVisible?: (row: T) => boolean;
 }

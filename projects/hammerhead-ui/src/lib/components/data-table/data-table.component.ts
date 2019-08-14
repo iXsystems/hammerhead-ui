@@ -1,14 +1,16 @@
 import { DataSource } from '@angular/cdk/table';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, map, take } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { debounceTime, map, shareReplay, takeUntil } from 'rxjs/operators';
 import { DataTableConfig } from '../../interfaces';
 
 class DataTableSource extends DataSource<any> {
+    private readonly DATA_SOURCE_DESTROYED$ = new Subject<void>();
+
     public filterString = new BehaviorSubject<string>('');
 
-    public data = new BehaviorSubject<any[]>(this.DATA);
-    private filteredData = combineLatest(this.data, this.filterString.pipe(debounceTime(400))).pipe(
+    private filteredData = combineLatest(this.DATA, this.filterString.pipe(debounceTime(400))).pipe(
+        takeUntil(this.DATA_SOURCE_DESTROYED$),
         /* Algorithm that searches an object's values for a matching string */
         map(([d, filter]) =>
             filter && typeof filter === 'string' && filter.trim().length > 0
@@ -25,10 +27,11 @@ class DataTableSource extends DataSource<any> {
                               ).length > 0
                   )
                 : d
-        )
+        ),
+        shareReplay(1)
     );
 
-    constructor(private readonly DATA: any[]) {
+    constructor(private readonly DATA: Observable<any[]>) {
         super();
     }
 
@@ -37,7 +40,7 @@ class DataTableSource extends DataSource<any> {
     }
 
     public disconnect(): void {
-        this.data.complete();
+        this.DATA_SOURCE_DESTROYED$.next();
     }
 }
 
@@ -52,12 +55,12 @@ export class DataTableComponent implements OnInit, OnChanges {
     public cols: string[] = [];
     public data: DataTableSource;
 
-    public async ngOnInit() {
-        await this.updateTable();
+    public ngOnInit() {
+        this.updateTable();
     }
 
-    public async ngOnChanges() {
-        await this.updateTable();
+    public ngOnChanges() {
+        this.updateTable();
     }
 
     public applyFilter(filterString: string): void {
@@ -82,24 +85,12 @@ export class DataTableComponent implements OnInit, OnChanges {
         return this.config.columns.map(column => column.property);
     }
 
-    private updateDataSync(): DataTableSource {
+    private updateData(): DataTableSource {
         return new DataTableSource(this.config.data);
     }
 
-    private async updateDataAsync(): Promise<DataTableSource> {
-        return new DataTableSource(
-            await this.config
-                .dataAsync()
-                .pipe(
-                    take(1),
-                    map(data => (this.config.dataAsyncMapper ? this.config.dataAsyncMapper(data) : data))
-                )
-                .toPromise()
-        );
-    }
-
-    private async updateTable() {
+    private updateTable() {
         this.cols = this.buildColumns();
-        this.data = this.config.dataAsync ? await this.updateDataAsync() : this.updateDataSync();
+        this.data = this.updateData();
     }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { DataTableConfig } from 'projects/hammerhead-ui/src/public-api';
+import { of } from 'rxjs';
 import { SystemToken } from '../../data-table.dummy-data';
 
 const DUMMY_TABLE_DATA: { tokens: SystemToken[] } = {
@@ -20,7 +21,7 @@ const DUMMY_TABLE_DATA: { tokens: SystemToken[] } = {
 export class DataTableExampleAComponent {
     public readonly config: DataTableConfig = {
         columns: [{ property: 'id' }, { property: 'token' }],
-        data: DUMMY_TABLE_DATA.tokens,
+        data: of(DUMMY_TABLE_DATA.tokens),
         rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }]
     };
 

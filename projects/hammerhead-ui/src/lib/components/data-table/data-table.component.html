@@ -1,4 +1,4 @@
-<ng-container *ngIf="data; else loading;">
+<ng-container *ngIf="data.connect() | async; else loading;">
     <mat-form-field
         *ngIf="config.hasGlobalFilter"
         [style.width]="'100%'"

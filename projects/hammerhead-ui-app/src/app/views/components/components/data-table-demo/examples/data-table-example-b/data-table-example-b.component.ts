@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { DataTableConfig } from 'projects/hammerhead-ui/src/public-api';
-import { interval } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, interval } from 'rxjs';
+import { debounceTime, skip, filter } from 'rxjs/operators';
 import { SystemToken } from '../../data-table.dummy-data';
 
 const DUMMY_TABLE_DATA: { tokens: SystemToken[] } = {
@@ -30,19 +30,19 @@ const DUMMY_TABLE_DATA: { tokens: SystemToken[] } = {
     `
 })
 export class DataTableExampleBComponent {
-    public readonly config: DataTableConfig = {
+    private readonly DATA = new BehaviorSubject<SystemToken[]>(DUMMY_TABLE_DATA.tokens);
+
+    public readonly config: DataTableConfig<SystemToken> = {
         columns: [{ property: 'id' }, { property: 'token' }],
-        dataAsync: () =>
-            interval(2000).pipe(
-                take(1),
-                map(() => DUMMY_TABLE_DATA.tokens)
-            ),
+        data: this.DATA.pipe(debounceTime(2000)),
         rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }]
     };
 
     public isRefreshing = false;
 
-    constructor(private snackBar: MatSnackBar) {}
+    constructor(private snackBar: MatSnackBar) {
+        setTimeout(() => this.DATA.next([...DUMMY_TABLE_DATA.tokens, { id: 'new-token-6', token: '<token>' }]), 6000);
+    }
 
     public onEdit(token: SystemToken): void {
         this.snackBar.open(`You want to edit token ${token.id}.`, undefined, { duration: 3000 });

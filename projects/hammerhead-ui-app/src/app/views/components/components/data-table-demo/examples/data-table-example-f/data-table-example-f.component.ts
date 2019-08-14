@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { DataTableConfig } from 'projects/hammerhead-ui/src/public-api';
+import { of } from 'rxjs';
 import { SystemToken } from '../../data-table.dummy-data';
 
 @Component({
@@ -10,7 +11,7 @@ import { SystemToken } from '../../data-table.dummy-data';
 export class DataTableExampleFComponent {
     public readonly config: DataTableConfig = {
         columns: [{ property: 'id' }, { property: 'token' }],
-        data: [],
+        data: of([]),
         rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }]
     };
 
