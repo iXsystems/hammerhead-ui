@@ -30,7 +30,7 @@ sudo cp $ROOT_README $DIST_LIB_ROOT
 sudo cp $ROOT_README $DEMO_APP_ASSETS_DIR
 
 # Build the demo app
-sudo yarn build --project=$DEMO_APP_PROJECT_NAME --base-href .
+sudo yarn build --project=$DEMO_APP_PROJECT_NAME --base-href . --prod --aot
 
 ##############################
 
