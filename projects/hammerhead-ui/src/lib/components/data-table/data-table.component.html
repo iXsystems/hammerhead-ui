@@ -19,13 +19,19 @@
                 [fxFlex]="getColumnWidth(column) || '100%'"
                 *cdkHeaderCellDef
             >
-                <p>{{ column | uppercase }}</p>
+                <ng-container *ngTemplateOutlet="headerTemplate || defaultHeaderTemplate; context: { $implicit: getColumn(column) };"></ng-container>
+                <ng-template #defaultHeaderTemplate>
+                    <p>{{ column | uppercase }}</p>
+                </ng-template>
             </cdk-header-cell>
             <cdk-cell
                 [fxFlex]="getColumnWidth(column) || '100%'"
                 *cdkCellDef="let row"
             >
-                <ng-container *ngIf="column !== 'actions'; else actions;">{{ row[column] }}</ng-container>
+                <ng-container *ngIf="column !== 'actions'; else actions;">
+                    <ng-container *ngTemplateOutlet="cellTemplate || defaultCellTemplate; context: { $implicit: { col: getColumn(column), row: row } };"></ng-container>
+                    <ng-template #defaultCellTemplate>{{ row[column] }}</ng-template>
+                </ng-container>
                 <ng-template #actions>
                     <div
                         fxLayoutAlign="start center"

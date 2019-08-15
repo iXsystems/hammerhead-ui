@@ -1,8 +1,8 @@
 import { DataSource } from '@angular/cdk/table';
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, TemplateRef } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { debounceTime, map, shareReplay, takeUntil } from 'rxjs/operators';
-import { DataTableConfig } from '../../interfaces';
+import { DataTableConfig, DataTableColumnConfig } from '../../interfaces';
 
 class DataTableSource extends DataSource<any> {
     private readonly DATA_SOURCE_DESTROYED$ = new Subject<void>();
@@ -51,6 +51,8 @@ class DataTableSource extends DataSource<any> {
 })
 export class DataTableComponent implements OnInit, OnChanges {
     @Input() public config: DataTableConfig;
+    @Input() public headerTemplate: TemplateRef<any>;
+    @Input() public cellTemplate: TemplateRef<any>;
 
     public cols: string[] = [];
     public data: DataTableSource;
@@ -67,6 +69,10 @@ export class DataTableComponent implements OnInit, OnChanges {
         if (this.data) {
             this.data.filterString.next(filterString);
         }
+    }
+
+    public getColumn(columnName: string): DataTableColumnConfig {
+        return this.config.columns.find(col => col.property === columnName);
     }
 
     public getColumnWidth(columnProperty: string): string | undefined {
