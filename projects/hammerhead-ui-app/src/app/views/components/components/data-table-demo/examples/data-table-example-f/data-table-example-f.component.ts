@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
 import { DataTableConfig } from 'projects/hammerhead-ui/src/public-api';
 import { of } from 'rxjs';
 import { SystemToken } from '../../data-table.dummy-data';
@@ -35,10 +34,4 @@ export class DataTableExampleFComponent {
         columns: [{ property: 'id' }, { property: 'token' }],
         data: of(DUMMY_TABLE_DATA.tokens)
     };
-
-    constructor(private snackBar: MatSnackBar) {}
-
-    public onEdit(token: SystemToken): void {
-        this.snackBar.open(`You want to edit token ${token.id}.`, undefined, { duration: 3000 });
-    }
 }

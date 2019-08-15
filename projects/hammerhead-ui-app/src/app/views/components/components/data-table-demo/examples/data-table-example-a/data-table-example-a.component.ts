@@ -19,7 +19,7 @@ const DUMMY_TABLE_DATA: { tokens: SystemToken[] } = {
     template: '<hh-data-table [config]="config"></hh-data-table>'
 })
 export class DataTableExampleAComponent {
-    public readonly config: DataTableConfig = {
+    public readonly config: DataTableConfig<SystemToken> = {
         columns: [{ property: 'id' }, { property: 'token' }],
         data: of(DUMMY_TABLE_DATA.tokens),
         rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }]
