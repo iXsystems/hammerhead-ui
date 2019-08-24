@@ -6,6 +6,7 @@ export interface DataTableConfig<T = any> {
     rowActionsWidth?: string;
     data?: Observable<T[]>;
     hasGlobalFilter?: boolean;
+    zeroStateMessage?: string;
 }
 
 export interface DataTableColumnConfig {

@@ -10,7 +10,10 @@
         >
     </mat-form-field>
 
-    <cdk-table [dataSource]="data">
+    <cdk-table
+        [class.invisible]="(data.connect() | async)?.length === 0"
+        [dataSource]="data"
+    >
         <ng-container
             *ngFor="let column of cols"
             [cdkColumnDef]="column"
@@ -72,6 +75,17 @@
             *cdkRowDef="let row; columns: cols;"
         ></cdk-row>
     </cdk-table>
+
+    <ng-container *ngTemplateOutlet="zeroStateTemplate || zeroStateDefault"></ng-container>
+    <ng-template #zeroStateDefault>
+        <div fxLayoutAlign="center center">
+            <hh-zero-state
+                *ngIf="(data.connect() | async)?.length === 0"
+                [message]="config?.zeroStateMessage || 'No results found'"
+                [style.width.px]="320"
+            ></hh-zero-state>
+        </div>
+    </ng-template>
 </ng-container>
 
 <ng-template #loading>
