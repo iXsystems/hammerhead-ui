@@ -22,10 +22,21 @@
                 [fxFlex]="getColumnWidth(column) || '100%'"
                 *cdkHeaderCellDef
             >
-                <ng-container *ngTemplateOutlet="headerTemplate || defaultHeaderTemplate; context: { $implicit: getColumn(column) };"></ng-container>
-                <ng-template #defaultHeaderTemplate>
-                    <p>{{ column | uppercase }}</p>
-                </ng-template>
+                <span
+                    (click)="toggleSort(getColumn(column))"
+                    [class.cursor-pointer]="getColumn(column)?.isSortable"
+                    fxLayoutAlign="start center"
+                    fxLayoutGap="8px"
+                >
+                    <span>
+                        <ng-container *ngTemplateOutlet="headerTemplate || defaultHeaderTemplate; context: { $implicit: getColumn(column) };"></ng-container>
+                    </span>
+                    <ng-template #defaultHeaderTemplate>
+                        <p>{{ column | uppercase }}</p>
+                    </ng-template>
+                    <mat-icon *ngIf="data?.sortColumn?.property === column && data?.sortDirection === 'ascending'">keyboard_arrow_up</mat-icon>
+                    <mat-icon *ngIf="data?.sortColumn?.property === column && data?.sortDirection === 'descending'">keyboard_arrow_down</mat-icon>
+                </span>
             </cdk-header-cell>
             <cdk-cell
                 [fxFlex]="getColumnWidth(column) || '100%'"

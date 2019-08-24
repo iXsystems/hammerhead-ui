@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, TemplateRef } from '@angular/core';
-import { DataTableColumnConfig, DataTableConfig } from '../../interfaces';
+import { DataTableColumnConfig, DataTableConfig, DataTableSortConfig } from '../../interfaces';
 import { DataTableSource } from './data-table-source.class';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'hh-data-table',
@@ -26,7 +27,7 @@ export class DataTableComponent implements OnInit, OnChanges {
 
     public applyFilter(filterString: string): void {
         if (this.data) {
-            this.data.filterString.next(filterString);
+            this.data.filterString$.next(filterString);
         }
     }
 
@@ -41,6 +42,14 @@ export class DataTableComponent implements OnInit, OnChanges {
 
         const column = this.config.columns.find(col => col.property === columnProperty);
         return column ? column.width : undefined;
+    }
+
+    public toggleSort(column: DataTableColumnConfig): void {
+        if (!column.isSortable) {
+            return;
+        }
+
+        this.data.sortColumn$.next(column);
     }
 
     private buildColumns(): string[] {

@@ -26,3 +26,8 @@ export interface DataTableAction<T> {
     icon?: string;
     isActionVisible?: (row: T) => boolean;
 }
+
+export interface DataTableSortConfig {
+    column: DataTableColumnConfig;
+    direction: 'ascending' | 'descending';
+}
