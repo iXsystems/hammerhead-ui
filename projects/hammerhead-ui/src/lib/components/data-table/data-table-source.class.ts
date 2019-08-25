@@ -11,28 +11,36 @@ export class DataTableSource<T = any> extends DataSource<T> {
     public sortColumn$ = new BehaviorSubject<DataTableColumnConfig>(this.sortColumn);
     public sortDirection: 'ascending' | 'descending' = 'ascending';
 
-    private filteredData = combineLatest(this.DATA, this.filterString$.pipe(debounceTime(500)), this.sortColumn$).pipe(
+    private filteredData = combineLatest(
+        this.DATA,
+        this.filterString$.pipe(debounceTime(500)),
+        this.sortColumn$.pipe(
+            tap(column => {
+                if (column === null) {
+                    return;
+                }
+                if (
+                    this.sortColumn &&
+                    this.sortColumn.property === column.property &&
+                    this.sortDirection === 'ascending'
+                ) {
+                    this.sortDirection = 'descending';
+                } else if (
+                    this.sortColumn &&
+                    this.sortColumn.property === column.property &&
+                    this.sortDirection === 'descending'
+                ) {
+                    this.sortColumn = null;
+                    this.sortDirection = 'ascending';
+                } else if (this.sortColumn === null || this.sortColumn.property !== column.property) {
+                    this.sortColumn = column;
+                    this.sortDirection = 'ascending';
+                    return;
+                }
+            })
+        )
+    ).pipe(
         takeUntil(this.DATA_SOURCE_DESTROYED$),
-        /* Keep track of sort column/direction */
-        tap(([_, __, column]) => {
-            if (column === null) {
-                return;
-            }
-            if (this.sortColumn && this.sortColumn.property === column.property && this.sortDirection === 'ascending') {
-                this.sortDirection = 'descending';
-            } else if (
-                this.sortColumn &&
-                this.sortColumn.property === column.property &&
-                this.sortDirection === 'descending'
-            ) {
-                this.sortColumn = null;
-                this.sortDirection = 'ascending';
-            } else if (this.sortColumn === null || this.sortColumn.property !== column.property) {
-                this.sortColumn = column;
-                this.sortDirection = 'ascending';
-                return;
-            }
-        }),
         /* Filtering step */
         map(([d, filter]) =>
             filter && typeof filter === 'string' && filter.trim().length > 0
