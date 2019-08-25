@@ -2,40 +2,81 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { DataTableConfig } from 'projects/hammerhead-ui/src/public-api';
 import { of } from 'rxjs';
-import { SystemToken } from '../../data-table.dummy-data';
-
-const DUMMY_TABLE_DATA: { tokens: SystemToken[] } = {
-    tokens: [
-        { id: 'token-1', token: 'oQvACZi7yyNbzKEQ7H9t' },
-        { id: 'token-2', token: 'oQvACZi7yyNbzKEQ7H9u' },
-        { id: 'token-3', token: 'oQvACZi7yyNbzKEQ7H9v' },
-        { id: 'token-4', token: 'oQvACZi7yyNbzKEQ7H9w' },
-        { id: 'token-5', token: 'oQvACZi7yyNbzKEQ7H9x' }
-    ]
-};
 
 @Component({
     selector: 'app-data-table-example-h',
     template: `
         <hh-data-table [config]="config" [detailsTemplate]="details">
             <ng-template #details let-data>
-                <h3>Details</h3>
-                <p>{{ data | json }}</p>
+                <div [style.min-height.px]="296">
+                    <h3>Details</h3>
+                    <p>{{ data | json }}</p>
+                </div>
             </ng-template>
         </hh-data-table>
     `
 })
 export class DataTableExampleHComponent {
-    public readonly config: DataTableConfig<SystemToken> = {
-        columns: [{ property: 'id', isSortable: true }, { property: 'token', isSortable: true }],
-        data: of(DUMMY_TABLE_DATA.tokens),
+    public readonly config: DataTableConfig = {
+        columns: [
+            { property: 'name', isSortable: true },
+            { property: 'age', isSortable: true, width: '112px' },
+            { property: 'company', isSortable: true },
+            { property: 'email', isSortable: true }
+        ],
+        data: of(DUMMY_TABLE_DATA),
         rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }],
-        isMasterDetail: true
+        rowActionsWidth: '112px',
+        isMasterDetail: true,
+        hasGlobalFilter: true
     };
 
     constructor(private snackBar: MatSnackBar) {}
 
-    public onEdit(token: SystemToken): void {
-        this.snackBar.open(`You want to edit token ${token.id}.`, undefined, { duration: 3000 });
+    public onEdit(person: any): void {
+        this.snackBar.open(`You want to edit ${person.name}.`, undefined, { duration: 3000 });
     }
 }
+
+const DUMMY_TABLE_DATA = [
+    {
+        age: 23,
+        name: 'Shields Cameron',
+        gender: 'male',
+        company: 'EXIAND',
+        email: 'shieldscameron@exiand.com',
+        phone: '+1 (804) 400-2621'
+    },
+    {
+        age: 39,
+        name: 'Johns Conley',
+        gender: 'male',
+        company: 'ISONUS',
+        email: 'johnsconley@isonus.com',
+        phone: '+1 (891) 557-3906'
+    },
+    {
+        age: 27,
+        name: 'Ayers Reeves',
+        gender: 'male',
+        company: 'CUIZINE',
+        email: 'ayersreeves@cuizine.com',
+        phone: '+1 (943) 483-2547'
+    },
+    {
+        age: 23,
+        name: 'Wynn Briggs',
+        gender: 'male',
+        company: 'MIRACULA',
+        email: 'wynnbriggs@miracula.com',
+        phone: '+1 (980) 556-3858'
+    },
+    {
+        age: 25,
+        name: 'Leon Mayo',
+        gender: 'male',
+        company: 'ENERVATE',
+        email: 'leonmayo@enervate.com',
+        phone: '+1 (963) 569-2753'
+    }
+];

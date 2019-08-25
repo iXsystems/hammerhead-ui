@@ -14,14 +14,14 @@ Use your favorite package manager to add `hammerhead-ui` to your project.
 yarn add hammerhead-ui
 ```
 
-Then, add `HammerheadUiModule` to a module in your Angular project.
+Then, add one or more Hammerhead UI modules to your Angular project.
 
 ```ts
 import { NgModule } from '@angular/core';
-import { HammerheadUiModule } from 'hammerhead-ui';
+import { DataTableModule } from 'hammerhead-ui';
 
 @NgModule({
-    imports: [HammerheadUiModule]
+    imports: [DataTableModule]
 })
 export class AppModule {}
 ```

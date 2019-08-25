@@ -10,100 +10,122 @@
         >
     </mat-form-field>
 
-    <cdk-table
-        [class.invisible]="(data.connect() | async)?.length === 0 || details"
-        [dataSource]="data"
+    <!-- Master/detail container -->
+    <section
+        class="wrapper__master-detail"
+        fxLayoutAlign="start start"
+        [@masterDetailSlide]="{ value: masterDetailState }"
     >
-        <ng-container
-            *ngFor="let column of cols"
-            [cdkColumnDef]="column"
-        >
-            <cdk-header-cell
-                [fxFlex]="getColumnWidth(column) || '100%'"
-                *cdkHeaderCellDef
+        <div fxFlex="50%">
+            <cdk-table
+                [class.invisible]="(data.connect() | async)?.length === 0 || details"
+                [dataSource]="data"
             >
-                <span
-                    (click)="toggleSort(getColumn(column))"
-                    [class.cursor-pointer]="getColumn(column)?.isSortable"
-                    fxLayoutAlign="start center"
-                    fxLayoutGap="8px"
+                <ng-container
+                    *ngFor="let column of cols"
+                    [cdkColumnDef]="column"
                 >
-                    <span>
-                        <ng-container *ngTemplateOutlet="headerTemplate || defaultHeaderTemplate; context: { $implicit: getColumn(column) };"></ng-container>
-                    </span>
-                    <ng-template #defaultHeaderTemplate>
-                        <p>{{ column | uppercase }}</p>
-                    </ng-template>
-                    <mat-icon *ngIf="data?.sortColumn?.property === column && data?.sortDirection === 'ascending'">keyboard_arrow_up</mat-icon>
-                    <mat-icon *ngIf="data?.sortColumn?.property === column && data?.sortDirection === 'descending'">keyboard_arrow_down</mat-icon>
-                </span>
-            </cdk-header-cell>
-            <cdk-cell
-                [fxFlex]="getColumnWidth(column) || '100%'"
-                *cdkCellDef="let row"
-            >
-                <ng-container *ngIf="column !== 'actions' && column !== 'details'">
-                    <ng-container *ngTemplateOutlet="cellTemplate || defaultCellTemplate; context: { $implicit: { col: getColumn(column), row: row } };"></ng-container>
-                    <ng-template #defaultCellTemplate>{{ row[column] }}</ng-template>
-                </ng-container>
-                <ng-container *ngIf="column === 'actions'">
-                    <div
-                        fxLayoutAlign="start center"
-                        fxLayoutGap="16px"
+                    <cdk-header-cell
+                        [fxFlex]="getColumnWidth(column) || '100%'"
+                        *cdkHeaderCellDef
                     >
-                        <ng-container *ngFor="let action of config.rowActions">
-                            <mat-icon
-                                *ngIf="action.isIcon; else actionButton;"
-                                [color]="action.actionColor || 'primary'"
-                                (click)="action.onClick(row, $event)"
-                                class="cursor-pointer"
-                            >
-                                {{ action.icon || 'edit' }}
-                            </mat-icon>
-                            <ng-template #actionButton>
-                                <button
-                                    mat-flat-button
-                                    [color]="action.actionColor || 'primary'"
-                                    (click)="action.onClick(row, $event)"
-                                >
-                                    {{ action.actionText | titlecase }}
-                                </button>
+                        <span
+                            *ngIf="column !== 'details'"
+                            (click)="toggleSort(getColumn(column))"
+                            [class.cursor-pointer]="getColumn(column)?.isSortable"
+                            fxLayoutAlign="start center"
+                            fxLayoutGap="8px"
+                        >
+                            <span>
+                                <ng-container *ngTemplateOutlet="headerTemplate || defaultHeaderTemplate; context: { $implicit: getColumn(column) };"></ng-container>
+                            </span>
+                            <ng-template #defaultHeaderTemplate>
+                                <p>{{ column | uppercase }}</p>
                             </ng-template>
-                        </ng-container>
-                    </div>
-                </ng-container>
-                <ng-container *ngIf="column === 'details'">
-                    <mat-icon
-                        class="cursor-pointer"
-                        (click)="onViewDetails(row)"
-                        [style.width]="'100%'"
+                            <mat-icon *ngIf="data?.sortColumn?.property === column && data?.sortDirection === 'ascending'">keyboard_arrow_up</mat-icon>
+                            <mat-icon *ngIf="data?.sortColumn?.property === column && data?.sortDirection === 'descending'">keyboard_arrow_down</mat-icon>
+                        </span>
+                    </cdk-header-cell>
+                    <cdk-cell
+                        [fxFlex]="getColumnWidth(column) || '100%'"
+                        *cdkCellDef="let row"
                     >
-                        keyboard_arrow_right
-                    </mat-icon>
+                        <ng-container *ngIf="column === 'details'">
+                            <mat-icon
+                                class="cursor-pointer"
+                                (click)="$event.stopPropagation(); onViewDetails(row)"
+                                [style.width]="'100%'"
+                            >
+                                keyboard_arrow_right
+                            </mat-icon>
+                        </ng-container>
+                        <ng-container *ngIf="column !== 'actions' && column !== 'details'">
+                            <ng-container *ngTemplateOutlet="cellTemplate || defaultCellTemplate; context: { $implicit: { col: getColumn(column), row: row } };"></ng-container>
+                            <ng-template #defaultCellTemplate>{{ row[column] }}</ng-template>
+                        </ng-container>
+                        <ng-container *ngIf="column === 'actions'">
+                            <div
+                                fxLayoutAlign="start center"
+                                fxLayoutGap="16px"
+                            >
+                                <ng-container *ngFor="let action of config.rowActions">
+                                    <mat-icon
+                                        *ngIf="action.isIcon; else actionButton;"
+                                        [color]="action.actionColor || 'primary'"
+                                        (click)="$event.stopPropagation(); action.onClick(row, $event)"
+                                        class="cursor-pointer"
+                                    >
+                                        {{ action.icon || 'edit' }}
+                                    </mat-icon>
+                                    <ng-template #actionButton>
+                                        <button
+                                            mat-flat-button
+                                            [color]="action.actionColor || 'primary'"
+                                            (click)="$event.stopPropagation(); action.onClick(row, $event)"
+                                        >
+                                            {{ action.actionText | titlecase }}
+                                        </button>
+                                    </ng-template>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </cdk-cell>
                 </ng-container>
-            </cdk-cell>
-        </ng-container>
 
-        <cdk-header-row
-            fxLayoutAlign="start center"
-            fxLayoutGap="16px"
-            *cdkHeaderRowDef="cols"
-        ></cdk-header-row>
-        <cdk-row
-            fxLayoutAlign="start center"
-            fxLayoutGap="16px"
-            *cdkRowDef="let row; columns: cols;"
-        ></cdk-row>
-    </cdk-table>
+                <cdk-header-row
+                    fxLayoutAlign="start center"
+                    fxLayoutGap="16px"
+                    *cdkHeaderRowDef="cols"
+                ></cdk-header-row>
+                <cdk-row
+                    fxLayoutAlign="start center"
+                    fxLayoutGap="16px"
+                    *cdkRowDef="let row; columns: cols;"
+                    (click)="$event.stopPropagation(); onRowSelection(row)"
+                    [class.cursor-pointer]="config?.isMasterDetail"
+                ></cdk-row>
+            </cdk-table>
 
-    <ng-container *ngIf="details">
+            <ng-container *ngTemplateOutlet="zeroStateTemplate || zeroStateDefault"></ng-container>
+            <ng-template #zeroStateDefault>
+                <div fxLayoutAlign="center center">
+                    <hh-zero-state
+                        *ngIf="(data.connect() | async)?.length === 0"
+                        [message]="config?.zeroStateMessage || 'No results found'"
+                        [style.width.px]="320"
+                    ></hh-zero-state>
+                </div>
+            </ng-template>
+        </div>
+
         <section
+            fxFlex="50%"
             fxLayoutAlign="start start"
             fxLayoutGap="16px"
         >
             <mat-icon
                 class="cursor-pointer back-arrow"
-                (click)="onQuitDetails()"
+                (click)="$event.stopPropagation(); onQuitDetails()"
             >
                 keyboard_arrow_left
             </mat-icon>
@@ -111,18 +133,7 @@
                 <ng-template *ngTemplateOutlet="detailsTemplate; context: { $implicit: details };"></ng-template>
             </span>
         </section>
-    </ng-container>
-
-    <ng-container *ngTemplateOutlet="zeroStateTemplate || zeroStateDefault"></ng-container>
-    <ng-template #zeroStateDefault>
-        <div fxLayoutAlign="center center">
-            <hh-zero-state
-                *ngIf="(data.connect() | async)?.length === 0"
-                [message]="config?.zeroStateMessage || 'No results found'"
-                [style.width.px]="320"
-            ></hh-zero-state>
-        </div>
-    </ng-template>
+    </section>
 </ng-container>
 
 <ng-template #loading>

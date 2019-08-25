@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HammerheadUiModule } from 'hammerhead-ui';
+import { MatSnackBarModule } from '@angular/material';
+import { ZeroStateModule } from 'hammerhead-ui';
 import { DemoExampleComponent } from 'projects/hammerhead-ui-app/src/app/components/shared/demo-example/demo-example.component';
 import { DemoComponent } from 'projects/hammerhead-ui-app/src/app/components/shared/demo/demo.component';
 import { ZeroStateDemoComponent } from './zero-state-demo.component';
-import { MatSnackBarModule } from '@angular/material';
 
 describe('ZeroStateDemoComponent', () => {
     let component: ZeroStateDemoComponent;
@@ -12,7 +12,7 @@ describe('ZeroStateDemoComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [DemoComponent, DemoExampleComponent, ZeroStateDemoComponent],
-            imports: [HammerheadUiModule, MatSnackBarModule]
+            imports: [ZeroStateModule, MatSnackBarModule]
         }).compileComponents();
     }));
 

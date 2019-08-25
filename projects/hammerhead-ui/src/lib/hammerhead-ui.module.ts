@@ -10,10 +10,8 @@ import {
     MatInputModule,
     MatProgressBarModule
 } from '@angular/material';
-import { DataTableComponent } from './components/data-table/data-table.component';
-import { ZeroStateComponent } from './components/zero-state/zero-state.component';
 
-const IMPORTS = [
+const SHARED_DEPENDENCIES = [
     CdkTableModule,
     CommonModule,
     FlexLayoutModule,
@@ -26,8 +24,7 @@ const IMPORTS = [
 ];
 
 @NgModule({
-    declarations: [ZeroStateComponent, DataTableComponent],
-    imports: IMPORTS,
-    exports: [ZeroStateComponent, DataTableComponent]
+    imports: SHARED_DEPENDENCIES,
+    exports: SHARED_DEPENDENCIES
 })
 export class HammerheadUiModule {}

@@ -10,13 +10,13 @@ import {
     MatListModule,
     MatSidenavModule,
     MatSnackBarModule,
-    MatToolbarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatToolbarModule
 } from '@angular/material';
-import { HammerheadUiModule } from 'hammerhead-ui';
+import { DataTableModule, ZeroStateModule } from 'hammerhead-ui';
+import { MarkdownModule } from 'ngx-markdown';
 import { DemoExampleComponent } from './demo-example/demo-example.component';
 import { DemoComponent } from './demo/demo.component';
-import { MarkdownModule } from 'ngx-markdown';
 
 const COMPONENTS = [DemoComponent, DemoExampleComponent];
 
@@ -35,7 +35,14 @@ const MATERIAL_MODULES = [
 
 @NgModule({
     declarations: COMPONENTS,
-    imports: [CommonModule, FlexLayoutModule, HammerheadUiModule, MarkdownModule.forChild(), ...MATERIAL_MODULES],
-    exports: [CommonModule, FlexLayoutModule, HammerheadUiModule, ...COMPONENTS, ...MATERIAL_MODULES]
+    imports: [
+        CommonModule,
+        DataTableModule,
+        FlexLayoutModule,
+        MarkdownModule.forChild(),
+        ...MATERIAL_MODULES,
+        ZeroStateModule
+    ],
+    exports: [CommonModule, DataTableModule, FlexLayoutModule, ZeroStateModule, ...COMPONENTS, ...MATERIAL_MODULES]
 })
 export class SharedComponentsModule {}

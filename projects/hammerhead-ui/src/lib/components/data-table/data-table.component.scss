@@ -1,6 +1,13 @@
 :host {
+    box-sizing: border-box;
     display: block;
-    margin: 16px;
+    padding: 16px;
+    overflow-x: hidden;
+    width: 100%;
+
+    .cursor-pointer {
+        cursor: pointer !important;
+    }
 
     mat-icon.back-arrow {
         font-size: 48px;
@@ -19,14 +26,6 @@
             &:hover {
                 border-bottom: 1px solid rgba(58, 58, 58, 0.66);
             }
-
-            mat-icon.cursor-pointer {
-                cursor: pointer !important;
-
-                &:active {
-                    opacity: 0.5;
-                }
-            }
         }
 
         cdk-header-row {
@@ -40,5 +39,9 @@
                 margin: 0;
             }
         }
+    }
+
+    .wrapper__master-detail {
+        width: 200%;
     }
 }
