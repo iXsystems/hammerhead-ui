@@ -15,16 +15,22 @@ const DUMMY_TABLE_DATA: { tokens: SystemToken[] } = {
 };
 
 @Component({
-    selector: 'app-data-table-example-a',
+    selector: 'app-data-table-example-h',
     template: `
-        <hh-data-table [config]="config"> </hh-data-table>
+        <hh-data-table [config]="config" [detailsTemplate]="details">
+            <ng-template #details let-data>
+                <h3>Details</h3>
+                <p>{{ data | json }}</p>
+            </ng-template>
+        </hh-data-table>
     `
 })
-export class DataTableExampleAComponent {
+export class DataTableExampleHComponent {
     public readonly config: DataTableConfig<SystemToken> = {
         columns: [{ property: 'id', isSortable: true }, { property: 'token', isSortable: true }],
         data: of(DUMMY_TABLE_DATA.tokens),
-        rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }]
+        rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }],
+        isMasterDetail: true
     };
 
     constructor(private snackBar: MatSnackBar) {}

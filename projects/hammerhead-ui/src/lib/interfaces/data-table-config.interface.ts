@@ -7,6 +7,7 @@ export interface DataTableConfig<T = any> {
     data?: Observable<T[]>;
     hasGlobalFilter?: boolean;
     zeroStateMessage?: string;
+    isMasterDetail?: boolean;
 }
 
 export interface DataTableColumnConfig {

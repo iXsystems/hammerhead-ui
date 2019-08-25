@@ -11,7 +11,7 @@
     </mat-form-field>
 
     <cdk-table
-        [class.invisible]="(data.connect() | async)?.length === 0"
+        [class.invisible]="(data.connect() | async)?.length === 0 || details"
         [dataSource]="data"
     >
         <ng-container
@@ -42,11 +42,11 @@
                 [fxFlex]="getColumnWidth(column) || '100%'"
                 *cdkCellDef="let row"
             >
-                <ng-container *ngIf="column !== 'actions'; else actions;">
+                <ng-container *ngIf="column !== 'actions' && column !== 'details'">
                     <ng-container *ngTemplateOutlet="cellTemplate || defaultCellTemplate; context: { $implicit: { col: getColumn(column), row: row } };"></ng-container>
                     <ng-template #defaultCellTemplate>{{ row[column] }}</ng-template>
                 </ng-container>
-                <ng-template #actions>
+                <ng-container *ngIf="column === 'actions'">
                     <div
                         fxLayoutAlign="start center"
                         fxLayoutGap="16px"
@@ -71,7 +71,16 @@
                             </ng-template>
                         </ng-container>
                     </div>
-                </ng-template>
+                </ng-container>
+                <ng-container *ngIf="column === 'details'">
+                    <mat-icon
+                        class="cursor-pointer"
+                        (click)="onViewDetails(row)"
+                        [style.width]="'100%'"
+                    >
+                        keyboard_arrow_right
+                    </mat-icon>
+                </ng-container>
             </cdk-cell>
         </ng-container>
 
@@ -86,6 +95,23 @@
             *cdkRowDef="let row; columns: cols;"
         ></cdk-row>
     </cdk-table>
+
+    <ng-container *ngIf="details">
+        <section
+            fxLayoutAlign="start start"
+            fxLayoutGap="16px"
+        >
+            <mat-icon
+                class="cursor-pointer back-arrow"
+                (click)="onQuitDetails()"
+            >
+                keyboard_arrow_left
+            </mat-icon>
+            <span>
+                <ng-template *ngTemplateOutlet="detailsTemplate; context: { $implicit: details };"></ng-template>
+            </span>
+        </section>
+    </ng-container>
 
     <ng-container *ngTemplateOutlet="zeroStateTemplate || zeroStateDefault"></ng-container>
     <ng-template #zeroStateDefault>
