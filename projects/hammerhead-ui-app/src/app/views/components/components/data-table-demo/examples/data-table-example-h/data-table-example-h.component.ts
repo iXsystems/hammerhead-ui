@@ -6,15 +6,24 @@ import { of } from 'rxjs';
 @Component({
     selector: 'app-data-table-example-h',
     template: `
-        <hh-data-table [config]="config" [detailsTemplate]="details">
-            <ng-template #details let-data>
-                <div [style.min-height.px]="296">
-                    <h3>Details</h3>
-                    <p>{{ data | json }}</p>
-                </div>
-            </ng-template>
-        </hh-data-table>
-    `
+        <mat-card class="mat-elevation-z4">
+            <hh-data-table [config]="config" [detailsTemplate]="details">
+                <ng-template #details let-data>
+                    <div [style.min-height.px]="296">
+                        <h3>Details</h3>
+                        <p>{{ data | json }}</p>
+                    </div>
+                </ng-template>
+            </hh-data-table>
+        </mat-card>
+    `,
+    styles: [
+        `
+            mat-card {
+                margin: 16px;
+            }
+        `
+    ]
 })
 export class DataTableExampleHComponent {
     public readonly config: DataTableConfig = {

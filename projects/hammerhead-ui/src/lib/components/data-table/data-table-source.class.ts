@@ -50,6 +50,7 @@ export class DataTableSource<T = any> extends DataSource<T> {
                               .map(key => dEl[key])
                               .filter(
                                   dElement =>
+                                      dElement &&
                                       dElement
                                           .toString()
                                           .toLowerCase()
