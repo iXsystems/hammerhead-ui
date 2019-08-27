@@ -7,12 +7,20 @@ import { of } from 'rxjs';
     selector: 'app-data-table-example-h',
     template: `
         <mat-card class="mat-elevation-z4">
-            <hh-data-table [config]="config" [detailsTemplate]="details">
+            <hh-data-table #hhTable [config]="config" [detailsTemplate]="details" [zeroStateTemplate]="zeroState">
                 <ng-template #details let-data>
                     <div [style.min-height.px]="296">
                         <h3>Details</h3>
                         <p>{{ data | json }}</p>
                     </div>
+                </ng-template>
+                <ng-template #zeroState>
+                    <hh-zero-state
+                        message="No matches found"
+                        [hasAction]="true"
+                        actionText="Clear filter"
+                        (doAction)="hhTable.clearFilters()"
+                    ></hh-zero-state>
                 </ng-template>
             </hh-data-table>
         </mat-card>

@@ -2,6 +2,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
 import {
     MatButtonModule,
     MatCardModule,
@@ -15,6 +16,7 @@ const SHARED_DEPENDENCIES = [
     CdkTableModule,
     CommonModule,
     FlexLayoutModule,
+    FormsModule,
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,

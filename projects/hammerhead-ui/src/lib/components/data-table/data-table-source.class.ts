@@ -7,13 +7,17 @@ export class DataTableSource<T = any> extends DataSource<T> {
     private readonly DATA_SOURCE_DESTROYED$ = new Subject<void>();
 
     public filterString$ = new BehaviorSubject<string>('');
+    public filterString = '';
     public sortColumn: DataTableColumnConfig = null;
     public sortColumn$ = new BehaviorSubject<DataTableColumnConfig>(this.sortColumn);
     public sortDirection: 'ascending' | 'descending' = 'ascending';
 
     private filteredData = combineLatest(
         this.DATA,
-        this.filterString$.pipe(debounceTime(500)),
+        this.filterString$.pipe(
+            debounceTime(500),
+            tap(filter => (this.filterString = filter))
+        ),
         this.sortColumn$.pipe(
             tap(column => {
                 if (column === null) {

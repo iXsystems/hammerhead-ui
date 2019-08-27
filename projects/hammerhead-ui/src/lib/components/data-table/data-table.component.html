@@ -7,6 +7,8 @@
             matInput
             (keyup)="applyFilter($event.target.value)"
             placeholder="Filter"
+            [ngModel]="data.filterString"
+            [disabled]="masterDetailState === 'details-show'"
         >
     </mat-form-field>
 
@@ -60,8 +62,13 @@
                             </mat-icon>
                         </ng-container>
                         <ng-container *ngIf="column !== 'actions' && column !== 'details'">
-                            <ng-container *ngTemplateOutlet="cellTemplate || defaultCellTemplate; context: { $implicit: { col: getColumn(column), row: row } };"></ng-container>
-                            <ng-template #defaultCellTemplate>{{ row[column] }}</ng-template>
+                            <ng-container *ngIf="!cellTemplates[column]">
+                                <ng-container *ngTemplateOutlet="cellTemplate; context: { $implicit: { col: getColumn(column), row: row } };"></ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="cellTemplates[column]">
+                                <ng-container *ngTemplateOutlet="cellTemplates[column]; context: { $implicit: { col: getColumn(column), row: row } };"></ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="!cellTemplate && !cellTemplates[column]">{{ row[column] }}</ng-container>
                         </ng-container>
                         <ng-container *ngIf="column === 'actions'">
                             <div
@@ -106,16 +113,17 @@
                 ></cdk-row>
             </cdk-table>
 
-            <ng-container *ngTemplateOutlet="zeroStateTemplate || zeroStateDefault"></ng-container>
-            <ng-template #zeroStateDefault>
-                <div fxLayoutAlign="center center">
-                    <hh-zero-state
-                        *ngIf="(data.connect() | async)?.length === 0"
-                        [message]="config?.zeroStateMessage || 'No results found'"
-                        [style.width.px]="320"
-                    ></hh-zero-state>
-                </div>
-            </ng-template>
+            <ng-container *ngIf="(data.connect() | async)?.length === 0">
+                <ng-container *ngTemplateOutlet="zeroStateTemplate || zeroStateDefault"></ng-container>
+                <ng-template #zeroStateDefault>
+                    <div fxLayoutAlign="center center">
+                        <hh-zero-state
+                            [message]="config?.zeroStateMessage || 'No results found'"
+                            [style.width.px]="320"
+                        ></hh-zero-state>
+                    </div>
+                </ng-template>
+            </ng-container>
         </div>
 
         <section

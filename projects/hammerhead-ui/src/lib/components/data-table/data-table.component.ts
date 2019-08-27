@@ -15,6 +15,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     @Input() public config: DataTableConfig;
     @Input() public headerTemplate: TemplateRef<any>;
     @Input() public cellTemplate: TemplateRef<any>;
+    @Input() public cellTemplates: { [columnProp: string]: TemplateRef<any> } = {};
     @Input() public detailsTemplate: TemplateRef<any>;
     @Input() public zeroStateTemplate: TemplateRef<any>;
 
@@ -22,6 +23,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     public data: DataTableSource;
     public details: any = null;
     public masterDetailState = MasterDetailState.MasterShow;
+    public inputFilterString = '';
 
     public ngOnInit(): void {
         this.updateTable();
@@ -34,6 +36,12 @@ export class DataTableComponent implements OnInit, OnChanges {
     public applyFilter(filterString: string): void {
         if (this.data) {
             this.data.filterString$.next(filterString);
+        }
+    }
+
+    public clearFilters(): void {
+        if (this.data) {
+            this.data.filterString$.next('');
         }
     }
 
