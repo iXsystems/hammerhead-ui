@@ -44,7 +44,7 @@
                                 <ng-container *ngTemplateOutlet="headerTemplate || defaultHeaderTemplate; context: { $implicit: getColumn(column) };"></ng-container>
                             </span>
                             <ng-template #defaultHeaderTemplate>
-                                <p>{{ (getColumn(column).name || column) | uppercase }}</p>
+                                <p>{{ (getColumn(column)?.name || column) | uppercase }}</p>
                             </ng-template>
                             <mat-icon *ngIf="data?.sortColumn?.property === column && data?.sortDirection === 'ascending'">keyboard_arrow_up</mat-icon>
                             <mat-icon *ngIf="data?.sortColumn?.property === column && data?.sortDirection === 'descending'">keyboard_arrow_down</mat-icon>

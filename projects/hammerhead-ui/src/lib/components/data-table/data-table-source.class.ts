@@ -20,7 +20,7 @@ export class DataTableSource<T = any> extends DataSource<T> {
         ),
         this.sortColumn$.pipe(
             tap(column => {
-                if (column === null) {
+                if (column === null || column.isAsync) {
                     return;
                 }
                 if (
