@@ -24,14 +24,7 @@ import { of } from 'rxjs';
                 </ng-template>
             </hh-data-table>
         </mat-card>
-    `,
-    styles: [
-        `
-            mat-card {
-                margin: 16px;
-            }
-        `
-    ]
+    `
 })
 export class DataTableExampleHComponent {
     public readonly config: DataTableConfig = {

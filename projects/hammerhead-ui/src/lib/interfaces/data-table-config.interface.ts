@@ -5,6 +5,9 @@ export interface DataTableConfig<T = any> {
     rowActions?: DataTableAction<T>[];
     rowActionsWidth?: string;
     data?: Observable<T[]>;
+    tableHeight?: string;
+    headerRowClass?: string;
+    trackByFn?: (index: number, row: T) => any;
     hasGlobalFilter?: boolean;
     zeroStateMessage?: string;
     isMasterDetail?: boolean;

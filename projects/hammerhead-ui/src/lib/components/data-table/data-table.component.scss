@@ -16,7 +16,10 @@
     }
 
     cdk-table {
+        display: block;
+        overflow-y: auto;
         width: 100%;
+        will-change: transform; // To minimize scroll jank
 
         cdk-row {
             border-bottom: 1px solid rgba(58, 58, 58, 0.18);
@@ -28,8 +31,12 @@
         }
 
         cdk-header-row {
+            background: white;
             border-bottom: 1px solid rgba(58, 58, 58, 0.33);
             padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1;
 
             p {
                 font-size: 12px;

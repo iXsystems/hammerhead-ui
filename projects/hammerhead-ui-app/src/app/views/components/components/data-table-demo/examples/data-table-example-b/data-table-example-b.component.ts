@@ -8,15 +8,17 @@ import { SystemToken } from '../../data-table.dummy-data';
 @Component({
     selector: 'app-data-table-example-b',
     template: `
-        <div fxLayoutAlign="center center" [style.padding.px]="12">
-            <button mat-flat-button color="primary" (click)="onRefresh()">
-                <div fxLayoutAlign="center center" fxLayoutGap="6px">
-                    <mat-icon>refresh</mat-icon>
-                    <span>Refresh</span>
-                </div>
-            </button>
-        </div>
-        <hh-data-table *ngIf="!isRefreshing" [config]="config"></hh-data-table>
+        <mat-card class="mat-elevation-z4">
+            <div fxLayoutAlign="center center" [style.padding.px]="12">
+                <button mat-flat-button color="primary" (click)="onRefresh()">
+                    <div fxLayoutAlign="center center" fxLayoutGap="6px">
+                        <mat-icon>refresh</mat-icon>
+                        <span>Refresh</span>
+                    </div>
+                </button>
+            </div>
+            <hh-data-table *ngIf="!isRefreshing" [config]="config"></hh-data-table
+        ></mat-card>
     `
 })
 export class DataTableExampleBComponent {

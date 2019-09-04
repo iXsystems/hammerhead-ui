@@ -7,18 +7,20 @@ import { SystemToken } from '../../data-table.dummy-data';
 @Component({
     selector: 'app-data-table-example-g',
     template: `
-        <hh-data-table [config]="config" [zeroStateTemplate]="zeroState">
-            <ng-template #zeroState>
-                <div fxLayoutAlign="center center">
-                    <hh-zero-state
-                        [style.width.px]="320"
-                        message="Custom zero state message"
-                        [hasAction]="true"
-                        (doAction)="onZeroStateAction()"
-                    ></hh-zero-state>
-                </div>
-            </ng-template>
-        </hh-data-table>
+        <mat-card class="mat-elevation-z4">
+            <hh-data-table [config]="config" [zeroStateTemplate]="zeroState">
+                <ng-template #zeroState>
+                    <div fxLayoutAlign="center center">
+                        <hh-zero-state
+                            [style.width.px]="320"
+                            message="Custom zero state message"
+                            [hasAction]="true"
+                            (doAction)="onZeroStateAction()"
+                        ></hh-zero-state>
+                    </div>
+                </ng-template>
+            </hh-data-table>
+        </mat-card>
     `
 })
 export class DataTableExampleGComponent {

@@ -22,6 +22,8 @@
             <cdk-table
                 [class.invisible]="(data.connect() | async)?.length === 0 || details"
                 [dataSource]="data"
+                [trackBy]="config.trackByFn"
+                [style.height]="config.tableHeight || DEFAULT_TABLE_HEIGHT"
             >
                 <ng-container
                     *ngFor="let column of cols"
@@ -103,6 +105,7 @@
                     fxLayoutAlign="start center"
                     fxLayoutGap="16px"
                     *cdkHeaderRowDef="cols"
+                    [className]="config.headerRowClass + ' mat-elevation-z2'"
                 ></cdk-header-row>
                 <cdk-row
                     fxLayoutAlign="start center"

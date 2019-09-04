@@ -6,7 +6,11 @@ import { SystemToken } from '../../data-table.dummy-data';
 
 @Component({
     selector: 'app-data-table-example-e',
-    template: '<hh-data-table [config]="config"></hh-data-table>'
+    template: `
+        <mat-card class="mat-elevation-z4">
+            <hh-data-table [config]="config"></hh-data-table>
+        </mat-card>
+    `
 })
 export class DataTableExampleEComponent {
     public readonly config: DataTableConfig<SystemToken> = {
