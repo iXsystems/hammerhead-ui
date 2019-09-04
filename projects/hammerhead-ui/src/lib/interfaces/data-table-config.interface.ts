@@ -19,6 +19,7 @@ export interface DataTableColumnConfig {
     isSortable?: boolean;
     width?: string;
     name?: string; // Title-cased 'property' by default
+    isAsync?: boolean;
 }
 
 export interface DataTableAction<T> {

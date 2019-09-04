@@ -70,7 +70,7 @@
                             <ng-container *ngIf="cellTemplates[column]">
                                 <ng-container *ngTemplateOutlet="cellTemplates[column]; context: { $implicit: { col: getColumn(column), row: row } };"></ng-container>
                             </ng-container>
-                            <ng-container *ngIf="!cellTemplate && !cellTemplates[column]">{{ row[column] }}</ng-container>
+                            <ng-container *ngIf="!cellTemplate && !cellTemplates[column]">{{ getColumn(column)?.isAsync ? (row[column] | async) : row[column] }}</ng-container>
                         </ng-container>
                         <ng-container *ngIf="column === 'actions'">
                             <div
