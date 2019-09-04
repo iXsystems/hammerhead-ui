@@ -18,7 +18,7 @@ export interface DataTableColumnConfig {
     isHidden?: boolean;
     isSortable?: boolean;
     width?: string;
-    name?: string; // Title-cased 'property' by default
+    name?: string; // Uppercased 'property' by default
     isAsync?: boolean;
 }
 
