@@ -1,4 +1,4 @@
-<ng-container *ngIf="data.connect() | async; else loading;">
+<ng-container *ngIf="data.connect() | async as tableData; else loading;">
     <mat-form-field
         *ngIf="config.hasGlobalFilter"
         [style.width]="'100%'"
@@ -8,7 +8,7 @@
             (keyup)="applyFilter($event.target.value)"
             placeholder="Filter"
             [ngModel]="data.filterString"
-            [disabled]="masterDetailState === 'details-show'"
+            [disabled]="masterDetailState === 'details-show' || tableData?.length === 0"
         >
     </mat-form-field>
 
@@ -44,7 +44,9 @@
                                 <ng-container *ngTemplateOutlet="headerTemplate || defaultHeaderTemplate; context: { $implicit: getColumn(column) };"></ng-container>
                             </span>
                             <ng-template #defaultHeaderTemplate>
-                                <p>{{ (getColumn(column)?.name || column) | uppercase }}</p>
+                                <p>
+                                    {{ (getColumn(column)?.name || column) | uppercase }}
+                                </p>
                             </ng-template>
                             <mat-icon *ngIf="data?.sortColumn?.property === column && data?.sortDirection === 'ascending'">keyboard_arrow_up</mat-icon>
                             <mat-icon *ngIf="data?.sortColumn?.property === column && data?.sortDirection === 'descending'">keyboard_arrow_down</mat-icon>
@@ -70,7 +72,9 @@
                             <ng-container *ngIf="cellTemplates[column]">
                                 <ng-container *ngTemplateOutlet="cellTemplates[column]; context: { $implicit: { col: getColumn(column), row: row } };"></ng-container>
                             </ng-container>
-                            <ng-container *ngIf="!cellTemplate && !cellTemplates[column]">{{ getColumn(column)?.isAsync ? (row[column] | async) : row[column] }}</ng-container>
+                            <ng-container *ngIf="!cellTemplate && !cellTemplates[column]">
+                                {{ getColumn(column)?.isAsync ? (row[column] | async) : row[column] }}
+                            </ng-container>
                         </ng-container>
                         <ng-container *ngIf="column === 'actions'">
                             <div
@@ -78,23 +82,25 @@
                                 fxLayoutGap="16px"
                             >
                                 <ng-container *ngFor="let action of config.rowActions">
-                                    <mat-icon
-                                        *ngIf="action.isIcon; else actionButton;"
-                                        [color]="action.actionColor || 'primary'"
-                                        (click)="$event.stopPropagation(); action.onClick(row, $event)"
-                                        class="cursor-pointer"
-                                    >
-                                        {{ action.icon || 'edit' }}
-                                    </mat-icon>
-                                    <ng-template #actionButton>
-                                        <button
-                                            mat-flat-button
+                                    <ng-container *ngIf="!action.isActionVisible || action.isActionVisible(row)">
+                                        <mat-icon
+                                            *ngIf="action.isIcon; else actionButton;"
                                             [color]="action.actionColor || 'primary'"
                                             (click)="$event.stopPropagation(); action.onClick(row, $event)"
+                                            class="cursor-pointer"
                                         >
-                                            {{ action.actionText | titlecase }}
-                                        </button>
-                                    </ng-template>
+                                            {{ action.icon || 'edit' }}
+                                        </mat-icon>
+                                        <ng-template #actionButton>
+                                            <button
+                                                mat-flat-button
+                                                [color]="action.actionColor || 'primary'"
+                                                (click)="$event.stopPropagation(); action.onClick(row, $event)"
+                                            >
+                                                {{ action.actionText | titlecase }}
+                                            </button>
+                                        </ng-template>
+                                    </ng-container>
                                 </ng-container>
                             </div>
                         </ng-container>

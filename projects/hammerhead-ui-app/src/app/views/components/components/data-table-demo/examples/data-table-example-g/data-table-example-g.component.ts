@@ -26,7 +26,8 @@ import { SystemToken } from '../../data-table.dummy-data';
 export class DataTableExampleGComponent {
     public readonly config: DataTableConfig<SystemToken> = {
         columns: [{ property: 'id' }, { property: 'token' }],
-        data: of([])
+        data: of([]),
+        hasGlobalFilter: true
     };
 
     constructor(private snackBar: MatSnackBar) {}
