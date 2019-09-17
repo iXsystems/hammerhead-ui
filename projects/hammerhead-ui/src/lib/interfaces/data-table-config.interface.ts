@@ -15,7 +15,7 @@ export interface DataTableConfig<T = any> {
     rowIdentifierProperty?: string;
 
     /* If provided, used to generate custom attribute values for action buttons */
-    actionCustomAttributeValue?: (row: any) => string;
+    actionCustomAttributeValue?: (row: any, action: DataTableAction<any>) => string;
 
     data?: Observable<T[]>;
     tableHeight?: string;

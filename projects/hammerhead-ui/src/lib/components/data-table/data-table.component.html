@@ -101,7 +101,7 @@
                                             (click)="$event.stopPropagation(); action.onClick(row, $event)"
                                             class="cursor-pointer"
                                             [hhMetadataAttribute]="config.customAttribute || DEFAULT_CUSTOM_ATTRIBUTE"
-                                            [hhMetadataValue]="'action_' + action.id + '_' + row[config.rowIdentifierProperty || cols[config.isMasterDetail ? 1 : 0]]"
+                                            [hhMetadataValue]="config.actionCustomAttributeValue ? config.actionCustomAttributeValue(row, action) : 'action_' + action.id + '_' + row[config.rowIdentifierProperty || cols[config.isMasterDetail ? 1 : 0]]"
                                         >
                                             {{ action.icon || 'edit' }}
                                         </mat-icon>
@@ -111,7 +111,7 @@
                                                 [color]="action.actionColor || 'primary'"
                                                 (click)="$event.stopPropagation(); action.onClick(row, $event)"
                                                 [hhMetadataAttribute]="config.customAttribute || DEFAULT_CUSTOM_ATTRIBUTE"
-                                                [hhMetadataValue]="config.actionCustomAttributeValue ? config.actionCustomAttributeValue(row) : 'action_' + action.id + '_' + row[config.rowIdentifierProperty || cols[config.isMasterDetail ? 1 : 0]]"
+                                                [hhMetadataValue]="config.actionCustomAttributeValue ? config.actionCustomAttributeValue(row, action) : 'action_' + action.id + '_' + row[config.rowIdentifierProperty || cols[config.isMasterDetail ? 1 : 0]]"
                                             >
                                                 {{ action.actionText | titlecase }}
                                             </button>
