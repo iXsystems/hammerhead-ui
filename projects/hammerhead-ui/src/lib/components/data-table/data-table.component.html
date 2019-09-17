@@ -4,11 +4,12 @@
         [style.width]="'100%'"
     >
         <input
+            #searchFilter
             matInput
             (keyup)="applyFilter($event.target.value)"
             placeholder="Filter"
             [ngModel]="data.filterString"
-            [disabled]="masterDetailState === 'details-show' || tableData?.length === 0"
+            [disabled]="masterDetailState === 'details-show'"
         >
     </mat-form-field>
 
@@ -39,6 +40,8 @@
                             [class.cursor-pointer]="getColumn(column)?.isSortable"
                             fxLayoutAlign="start center"
                             fxLayoutGap="8px"
+                            [hhMetadataAttribute]="config.customAttribute || DEFAULT_CUSTOM_ATTRIBUTE"
+                            [hhMetadataValue]="'header_' + column"
                         >
                             <span>
                                 <ng-container *ngTemplateOutlet="headerTemplate || defaultHeaderTemplate; context: { $implicit: getColumn(column) };"></ng-container>
@@ -61,10 +64,13 @@
                                 class="cursor-pointer"
                                 (click)="$event.stopPropagation(); onViewDetails(row)"
                                 [style.width]="'100%'"
+                                [hhMetadataAttribute]="config.customAttribute || DEFAULT_CUSTOM_ATTRIBUTE"
+                                [hhMetadataValue]="'detail_toggle_' + row[config.rowIdentifierProperty || cols[1]]"
                             >
                                 keyboard_arrow_right
                             </mat-icon>
                         </ng-container>
+
                         <ng-container *ngIf="column !== 'actions' && column !== 'details'">
                             <ng-container *ngIf="!cellTemplates[column]">
                                 <ng-container *ngTemplateOutlet="cellTemplate; context: { $implicit: { col: getColumn(column), row: row } };"></ng-container>
@@ -73,9 +79,15 @@
                                 <ng-container *ngTemplateOutlet="cellTemplates[column]; context: { $implicit: { col: getColumn(column), row: row } };"></ng-container>
                             </ng-container>
                             <ng-container *ngIf="!cellTemplate && !cellTemplates[column]">
-                                {{ getColumn(column)?.isAsync ? (row[column] | async) : row[column] }}
+                                <span
+                                    [hhMetadataAttribute]="config.customAttribute || DEFAULT_CUSTOM_ATTRIBUTE"
+                                    [hhMetadataValue]="'data_cell_' + column + '_' + row[config.rowIdentifierProperty || cols[config.isMasterDetail ? 1 : 0]]"
+                                >
+                                    {{ getColumn(column)?.isAsync ? (row[column] | async) : row[column] }}
+                                </span>
                             </ng-container>
                         </ng-container>
+
                         <ng-container *ngIf="column === 'actions'">
                             <div
                                 fxLayoutAlign="start center"
@@ -88,6 +100,8 @@
                                             [color]="action.actionColor || 'primary'"
                                             (click)="$event.stopPropagation(); action.onClick(row, $event)"
                                             class="cursor-pointer"
+                                            [hhMetadataAttribute]="config.customAttribute || DEFAULT_CUSTOM_ATTRIBUTE"
+                                            [hhMetadataValue]="'action_' + action.id + '_' + row[config.rowIdentifierProperty || cols[config.isMasterDetail ? 1 : 0]]"
                                         >
                                             {{ action.icon || 'edit' }}
                                         </mat-icon>
@@ -96,6 +110,8 @@
                                                 mat-flat-button
                                                 [color]="action.actionColor || 'primary'"
                                                 (click)="$event.stopPropagation(); action.onClick(row, $event)"
+                                                [hhMetadataAttribute]="config.customAttribute || DEFAULT_CUSTOM_ATTRIBUTE"
+                                                [hhMetadataValue]="config.actionCustomAttributeValue ? config.actionCustomAttributeValue(row) : 'action_' + action.id + '_' + row[config.rowIdentifierProperty || cols[config.isMasterDetail ? 1 : 0]]"
                                             >
                                                 {{ action.actionText | titlecase }}
                                             </button>
@@ -143,6 +159,8 @@
             <mat-icon
                 class="cursor-pointer back-arrow"
                 (click)="$event.stopPropagation(); onQuitDetails()"
+                [hhMetadataAttribute]="config.customAttribute || DEFAULT_CUSTOM_ATTRIBUTE"
+                hhMetadataValue="detail_toggle_close"
             >
                 keyboard_arrow_left
             </mat-icon>

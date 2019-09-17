@@ -12,6 +12,7 @@ import { dataTableAnimations, MasterDetailState } from './data-table.animations'
 export class DataTableComponent implements OnInit, OnChanges {
     private static readonly DETAIL_TOGGLE_COLUMN_WIDTH = '36px';
     public readonly DEFAULT_TABLE_HEIGHT = 'auto';
+    public readonly DEFAULT_CUSTOM_ATTRIBUTE = 'hh-data-table-element';
 
     @Input() public config: DataTableConfig;
     @Input() public headerTemplate: TemplateRef<any>;
