@@ -50,4 +50,14 @@
     .wrapper__master-detail {
         width: 200%;
     }
+
+    .wrapper__table {
+        position: relative;
+    }
+
+    .wrapper__no-results {
+        position: absolute;
+        top: 64px;
+        width: 100%;
+    }
 }

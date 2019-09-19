@@ -11,7 +11,6 @@ export class MetadataDirective implements OnChanges {
     constructor(private el: ElementRef<HTMLElement>) {}
 
     public ngOnChanges(): void {
-        console.log(this.attributeValue);
         this.el.nativeElement.setAttribute(this.customAttribute, this.attributeValue);
     }
 }

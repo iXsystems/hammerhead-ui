@@ -19,7 +19,10 @@
         fxLayoutAlign="start start"
         [@masterDetailSlide]="{ value: masterDetailState }"
     >
-        <div fxFlex="50%">
+        <div
+            fxFlex="50%"
+            class="wrapper__table"
+        >
             <cdk-table
                 [class.invisible]="(data.connect() | async)?.length === 0 || details"
                 [dataSource]="data"
@@ -139,15 +142,18 @@
             </cdk-table>
 
             <ng-container *ngIf="(data.connect() | async)?.length === 0">
-                <ng-container *ngTemplateOutlet="zeroStateTemplate || zeroStateDefault"></ng-container>
-                <ng-template #zeroStateDefault>
-                    <div fxLayoutAlign="center center">
+                <div
+                    fxLayoutAlign="center center"
+                    [class.wrapper__no-results]="config.tableHeight"
+                >
+                    <ng-container *ngTemplateOutlet="zeroStateTemplate || zeroStateDefault"></ng-container>
+                    <ng-template #zeroStateDefault>
                         <hh-zero-state
                             [message]="config?.zeroStateMessage || 'No results found'"
                             [style.width.px]="320"
                         ></hh-zero-state>
-                    </div>
-                </ng-template>
+                    </ng-template>
+                </div>
             </ng-container>
         </div>
 
