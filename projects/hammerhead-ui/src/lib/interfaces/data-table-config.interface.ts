@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 export interface DataTableConfig<T = any> {
     columns: DataTableColumnConfig[];
     rowActions?: DataTableAction<T>[];
+    isMultiSelect?: boolean;
+    multiSelectActions?: DataTableAction<T>[];
     rowActionsWidth?: string;
 
     /**
@@ -15,7 +17,7 @@ export interface DataTableConfig<T = any> {
     rowIdentifierProperty?: string;
 
     /* If provided, used to generate custom attribute values for action buttons */
-    actionCustomAttributeValue?: (row: any, action: DataTableAction<any>) => string;
+    actionCustomAttributeValue?: (row: T, action: DataTableAction<T>) => string;
 
     data?: Observable<T[]>;
     tableHeight?: string;

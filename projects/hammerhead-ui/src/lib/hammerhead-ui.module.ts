@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import {
     MatButtonModule,
     MatCardModule,
+    MatCheckboxModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -19,6 +20,7 @@ const SHARED_DEPENDENCIES = [
     FormsModule,
     MatButtonModule,
     MatCardModule,
+    MatCheckboxModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,

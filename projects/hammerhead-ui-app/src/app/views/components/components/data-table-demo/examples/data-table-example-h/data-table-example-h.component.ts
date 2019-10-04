@@ -36,7 +36,19 @@ export class DataTableExampleHComponent {
         ],
         data: of(DUMMY_TABLE_DATA),
         rowActions: [{ id: 'edit', actionText: 'Edit', onClick: this.onEdit.bind(this) }],
+        isMultiSelect: true,
+        multiSelectActions: [
+            {
+                id: 'delete',
+                actionText: 'Delete all',
+                onClick: persons => {
+                    this.snackBar.open(persons.map(person => person.name).join(', '), 'DISMISS', { duration: 3000 });
+                },
+                actionColor: 'warn'
+            }
+        ],
         rowActionsWidth: '112px',
+        trackByFn: (_, person) => person.name,
         isMasterDetail: true,
         hasGlobalFilter: true
     };
