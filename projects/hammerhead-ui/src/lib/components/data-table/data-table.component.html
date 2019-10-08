@@ -19,19 +19,22 @@
 
         <ng-container *ngIf="config.isMultiSelect">
             <ng-container *ngFor="let action of config.multiSelectActions">
-                <button
-                    *ngIf="action.isIcon; else multiActionButton;"
-                    mat-icon-button
-                    [color]="action.actionColor || 'primary'"
-                    (click)="$event.stopPropagation(); action.onClick(selectionCache, $event)"
-                    [hhMetadataAttribute]="config.customAttribute || DEFAULT_CUSTOM_ATTRIBUTE"
-                    [hhMetadataValue]="'multi-action_' + action.id"
-                    [disabled]="selectionCache.length < 1 || masterDetailState === 'details-show'"
-                >
-                    <mat-icon>{{ action.icon || 'edit' }}</mat-icon>
-                </button>
+                <ng-container *ngIf="action.isIcon; else multiActionButton;">
+                    <button
+                        *ngIf="!action.isActionVisible || action.isActionVisible()"
+                        mat-icon-button
+                        [color]="action.actionColor || 'primary'"
+                        (click)="$event.stopPropagation(); action.onClick(selectionCache, $event)"
+                        [hhMetadataAttribute]="config.customAttribute || DEFAULT_CUSTOM_ATTRIBUTE"
+                        [hhMetadataValue]="'multi-action_' + action.id"
+                        [disabled]="selectionCache.length < 1 || masterDetailState === 'details-show'"
+                    >
+                        <mat-icon>{{ action.icon || 'edit' }}</mat-icon>
+                    </button>
+                </ng-container>
                 <ng-template #multiActionButton>
                     <button
+                        *ngIf="!action.isActionVisible || action.isActionVisible()"
                         mat-flat-button
                         [color]="action.actionColor || 'primary'"
                         (click)="$event.stopPropagation(); action.onClick(selectionCache, $event)"
@@ -139,7 +142,7 @@
                         <div
                             *ngIf="column === 'actions'"
                             fxLayoutAlign="start center"
-                            fxLayoutGap="16px"
+                            fxLayoutGap="12px"
                         >
                             <ng-container *ngFor="let action of config.rowActions">
                                 <ng-container *ngIf="!action.isActionVisible || action.isActionVisible(row)">

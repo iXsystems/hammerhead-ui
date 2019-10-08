@@ -44,7 +44,7 @@ export interface DataTableAction<T> {
     actionText?: string;
     isIcon?: boolean;
     icon?: string;
-    isActionVisible?: (row: T) => boolean;
+    isActionVisible?: (row?: T) => boolean;
 }
 
 export interface DataTableSortConfig {
