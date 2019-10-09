@@ -50,6 +50,20 @@ export class DataTableComponent implements OnChanges {
         }
     }
 
+    public clearSelectionCache(): void {
+        this.selectionCache = [];
+        this.rowSelectionEvents$.next();
+    }
+
+    public deselectRow(row: any): void {
+        if (this.config.isMultiSelect) {
+            this.selectionCache = this.selectionCache.filter(
+                r => this.config.trackByFn(0, r) !== this.config.trackByFn(0, row)
+            );
+            this.rowSelectionEvents$.next();
+        }
+    }
+
     public getColumn(columnName: string): DataTableColumnConfig {
         return this.config.columns.find(col => col.property === columnName);
     }

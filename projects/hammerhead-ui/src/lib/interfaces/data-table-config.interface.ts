@@ -45,6 +45,7 @@ export interface DataTableAction<T> {
     isIcon?: boolean;
     icon?: string;
     isActionVisible?: (row?: T) => boolean;
+    minWidth?: string;
 }
 
 export interface DataTableSortConfig {
