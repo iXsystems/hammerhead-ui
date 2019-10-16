@@ -28,6 +28,10 @@
                         [hhMetadataAttribute]="config.customAttribute || DEFAULT_CUSTOM_ATTRIBUTE"
                         [hhMetadataValue]="'multi-action_' + action.id"
                         [disabled]="selectionCache.length < 1 || masterDetailState === 'details-show'"
+                        [matTooltip]="action?.tooltip?.text"
+                        [matTooltipPosition]="action?.tooltip?.position || 'below'"
+                        disableRipple
+                        class="cursor-pointer"
                     >
                         <mat-icon>{{ action.icon || 'edit' }}</mat-icon>
                     </button>
@@ -42,6 +46,10 @@
                         [hhMetadataValue]="'multi-action_' + action.id"
                         [disabled]="selectionCache.length < 1 || masterDetailState === 'details-show'"
                         [style.min-width]="action.minWidth"
+                        [matTooltip]="action?.tooltip?.text"
+                        [matTooltipPosition]="action?.tooltip?.position || 'below'"
+                        disableRipple
+                        class="cursor-pointer"
                     >
                         {{ action.actionText | titlecase }}
                     </button>
@@ -147,27 +155,40 @@
                         >
                             <ng-container *ngFor="let action of config.rowActions">
                                 <ng-container *ngIf="!action.isActionVisible || action.isActionVisible(row)">
-                                    <button
-                                        *ngIf="action.isIcon; else actionButton;"
-                                        mat-icon-button
-                                        [color]="action.actionColor || 'primary'"
-                                        (click)="$event.stopPropagation(); action.onClick(row, $event); deselectRow(row);"
-                                        [hhMetadataAttribute]="config.customAttribute || DEFAULT_CUSTOM_ATTRIBUTE"
-                                        [hhMetadataValue]="config.actionCustomAttributeValue ? config.actionCustomAttributeValue(row, action) : 'action_' + action.id + '_' + row[config.rowIdentifierProperty || cols[config.isMasterDetail ? 1 : 0]]"
-                                    >
-                                        <mat-icon>{{ action.icon || 'edit' }}</mat-icon>
-                                    </button>
-                                    <ng-template #actionButton>
+                                    <ng-container *ngIf="actionTemplates[action.id]; else defaultActions;">
+                                        <ng-container *ngTemplateOutlet="actionTemplates[action.id]; context: { $implicit: { action: action, row: row } };"></ng-container>
+                                    </ng-container>
+                                    <ng-template #defaultActions>
                                         <button
-                                            mat-flat-button
+                                            *ngIf="action.isIcon; else actionButton;"
+                                            mat-icon-button
                                             [color]="action.actionColor || 'primary'"
                                             (click)="$event.stopPropagation(); action.onClick(row, $event); deselectRow(row);"
-                                            [style.min-width]="action.minWidth || '64px'"
                                             [hhMetadataAttribute]="config.customAttribute || DEFAULT_CUSTOM_ATTRIBUTE"
                                             [hhMetadataValue]="config.actionCustomAttributeValue ? config.actionCustomAttributeValue(row, action) : 'action_' + action.id + '_' + row[config.rowIdentifierProperty || cols[config.isMasterDetail ? 1 : 0]]"
+                                            [matTooltip]="action?.tooltip?.text"
+                                            [matTooltipPosition]="action?.tooltip?.position || 'below'"
+                                            disableRipple
+                                            class="cursor-pointer"
                                         >
-                                            {{ action.actionText | titlecase }}
+                                            <mat-icon>{{ action.icon || 'edit' }}</mat-icon>
                                         </button>
+                                        <ng-template #actionButton>
+                                            <button
+                                                mat-flat-button
+                                                [color]="action.actionColor || 'primary'"
+                                                (click)="$event.stopPropagation(); action.onClick(row, $event); deselectRow(row);"
+                                                [style.min-width]="action.minWidth || '64px'"
+                                                [hhMetadataAttribute]="config.customAttribute || DEFAULT_CUSTOM_ATTRIBUTE"
+                                                [hhMetadataValue]="config.actionCustomAttributeValue ? config.actionCustomAttributeValue(row, action) : 'action_' + action.id + '_' + row[config.rowIdentifierProperty || cols[config.isMasterDetail ? 1 : 0]]"
+                                                [matTooltip]="action?.tooltip?.text"
+                                                [matTooltipPosition]="action?.tooltip?.position || 'below'"
+                                                disableRipple
+                                                class="cursor-pointer"
+                                            >
+                                                {{ action.actionText | titlecase }}
+                                            </button>
+                                        </ng-template>
                                     </ng-template>
                                 </ng-container>
                             </ng-container>

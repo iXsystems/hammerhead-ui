@@ -14,6 +14,10 @@
 
     .cursor-pointer {
         cursor: pointer !important;
+
+        &:active {
+            opacity: 0.5;
+        }
     }
 
     mat-icon.back-arrow {

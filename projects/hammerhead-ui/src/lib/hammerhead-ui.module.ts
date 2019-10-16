@@ -10,7 +10,8 @@ import {
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTooltipModule
 } from '@angular/material';
 
 const SHARED_DEPENDENCIES = [
@@ -24,7 +25,8 @@ const SHARED_DEPENDENCIES = [
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTooltipModule
 ];
 
 @NgModule({

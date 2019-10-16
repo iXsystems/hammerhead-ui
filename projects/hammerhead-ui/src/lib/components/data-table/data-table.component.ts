@@ -21,6 +21,7 @@ export class DataTableComponent implements OnChanges {
     @Input() public headerTemplate: TemplateRef<any>;
     @Input() public cellTemplate: TemplateRef<any>;
     @Input() public cellTemplates: { [columnProp: string]: TemplateRef<any> } = {};
+    @Input() public actionTemplates: { [actionId: string]: TemplateRef<any> } = {};
     @Input() public detailsTemplate: TemplateRef<any>;
     @Input() public zeroStateTemplate: TemplateRef<any>;
 

@@ -8,7 +8,7 @@ import { SystemToken } from '../../data-table.dummy-data';
     selector: 'app-data-table-example-a',
     template: `
         <mat-card class="mat-elevation-z4">
-            <hh-data-table [config]="config"> </hh-data-table>
+            <hh-data-table [config]="config"></hh-data-table>
         </mat-card>
     `
 })

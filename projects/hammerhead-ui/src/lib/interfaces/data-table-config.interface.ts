@@ -1,3 +1,4 @@
+import { TooltipPosition } from '@angular/material';
 import { Observable } from 'rxjs';
 
 export interface DataTableConfig<T = any> {
@@ -46,6 +47,10 @@ export interface DataTableAction<T> {
     icon?: string;
     isActionVisible?: (row?: T) => boolean;
     minWidth?: string;
+    tooltip?: {
+        text: string;
+        position?: TooltipPosition;
+    };
 }
 
 export interface DataTableSortConfig {
