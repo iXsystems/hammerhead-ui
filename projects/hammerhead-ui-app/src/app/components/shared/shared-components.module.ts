@@ -1,3 +1,4 @@
+import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -13,14 +14,12 @@ import {
     MatTabsModule,
     MatToolbarModule
 } from '@angular/material';
-import { DataTableModule, ProximityDialogService, ZeroStateModule } from 'hammerhead-ui';
+import { DataTableModule, ZeroStateModule } from 'hammerhead-ui';
 import { MarkdownModule } from 'ngx-markdown';
 import { DemoExampleComponent } from './demo-example/demo-example.component';
 import { DemoComponent } from './demo/demo.component';
 
 const COMPONENTS = [DemoComponent, DemoExampleComponent];
-
-const PROVIDERS = [ProximityDialogService];
 
 const MATERIAL_MODULES = [
     MatButtonModule,
@@ -32,7 +31,8 @@ const MATERIAL_MODULES = [
     MatSidenavModule,
     MatSnackBarModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    OverlayModule
 ];
 
 @NgModule({
@@ -45,13 +45,6 @@ const MATERIAL_MODULES = [
         ...MATERIAL_MODULES,
         ZeroStateModule
     ],
-    exports: [
-        CommonModule,
-        DataTableModule,
-        FlexLayoutModule,
-        ZeroStateModule,
-        ...COMPONENTS,
-        ...MATERIAL_MODULES
-    ]
+    exports: [CommonModule, DataTableModule, FlexLayoutModule, ZeroStateModule, ...COMPONENTS, ...MATERIAL_MODULES]
 })
 export class SharedComponentsModule {}
