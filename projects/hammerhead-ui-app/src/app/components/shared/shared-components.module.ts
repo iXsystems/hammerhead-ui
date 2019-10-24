@@ -37,7 +37,6 @@ const MATERIAL_MODULES = [
 
 @NgModule({
     declarations: COMPONENTS,
-    providers: PROVIDERS,
     imports: [
         CommonModule,
         DataTableModule,
