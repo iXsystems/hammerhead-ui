@@ -1,6 +1,6 @@
 import { Component, EventEmitter } from '@angular/core';
 import { MatButton, MatSnackBar } from '@angular/material';
-import { DataDialog, ProximityDialogService } from 'hammerhead-ui';
+import { DataDialog, ProximityDialogService } from 'projects/hammerhead-ui/src/public-api';
 
 @Component({
     selector: 'app-proximity-dialog-example-a',
