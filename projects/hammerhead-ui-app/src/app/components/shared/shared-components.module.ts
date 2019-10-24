@@ -20,6 +20,8 @@ import { DemoComponent } from './demo/demo.component';
 
 const COMPONENTS = [DemoComponent, DemoExampleComponent];
 
+const PROVIDERS = [ProximityDialogService];
+
 const MATERIAL_MODULES = [
     MatButtonModule,
     MatCardModule,
@@ -35,7 +37,7 @@ const MATERIAL_MODULES = [
 
 @NgModule({
     declarations: COMPONENTS,
-    providers: [ProximityDialogService],
+    providers: PROVIDERS,
     imports: [
         CommonModule,
         DataTableModule,
@@ -44,6 +46,13 @@ const MATERIAL_MODULES = [
         ...MATERIAL_MODULES,
         ZeroStateModule
     ],
-    exports: [CommonModule, DataTableModule, FlexLayoutModule, ZeroStateModule, ...COMPONENTS, ...MATERIAL_MODULES]
+    exports: [
+        CommonModule,
+        DataTableModule,
+        FlexLayoutModule,
+        ZeroStateModule,
+        ...COMPONENTS,
+        ...MATERIAL_MODULES
+    ]
 })
 export class SharedComponentsModule {}

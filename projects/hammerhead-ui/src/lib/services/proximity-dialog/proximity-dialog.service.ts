@@ -5,7 +5,6 @@ import { merge, Observable, Subject } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { DataDialog } from '../../interfaces/data-dialog.interface';
 
-/** @dynamic */
 @Injectable()
 export class ProximityDialogService {
     private static readonly OVERLAY_CONFIG: OverlayConfig = {

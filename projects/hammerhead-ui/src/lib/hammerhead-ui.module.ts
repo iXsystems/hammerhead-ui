@@ -1,3 +1,4 @@
+import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -26,7 +27,8 @@ const SHARED_DEPENDENCIES = [
     MatIconModule,
     MatInputModule,
     MatProgressBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    OverlayModule
 ];
 
 @NgModule({
