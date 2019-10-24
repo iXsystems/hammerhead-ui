@@ -14,22 +14,20 @@
             </a>
         </mat-nav-list>
     </mat-expansion-panel>
+
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>Services</mat-panel-title>
         </mat-expansion-panel-header>
 
-        <mat-list>
-            <mat-list-item>HelloService</mat-list-item>
-        </mat-list>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>Classes</mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <mat-list>
-            <mat-list-item>HelloClass</mat-list-item>
-        </mat-list>
+        <mat-nav-list>
+            <a
+                mat-list-item
+                [routerLink]="'services/' + demo.id"
+                *ngFor="let demo of serviceDemos"
+            >
+                {{ demo.name }}
+            </a>
+        </mat-nav-list>
     </mat-expansion-panel>
 </mat-accordion>

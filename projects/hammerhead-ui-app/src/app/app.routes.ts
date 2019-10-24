@@ -7,5 +7,9 @@ export const ROUTES: Routes = [
         path: 'components',
         loadChildren: () =>
             import('./views/components/components-view.module').then(module => module.ComponentsViewModule)
+    },
+    {
+        path: 'services',
+        loadChildren: () => import('./views/services/services-view.module').then(module => module.ServicesViewModule)
     }
 ];

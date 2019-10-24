@@ -13,7 +13,7 @@ import {
     MatTabsModule,
     MatToolbarModule
 } from '@angular/material';
-import { DataTableModule, ZeroStateModule } from 'hammerhead-ui';
+import { DataTableModule, ProximityDialogService, ZeroStateModule } from 'hammerhead-ui';
 import { MarkdownModule } from 'ngx-markdown';
 import { DemoExampleComponent } from './demo-example/demo-example.component';
 import { DemoComponent } from './demo/demo.component';
@@ -35,6 +35,7 @@ const MATERIAL_MODULES = [
 
 @NgModule({
     declarations: COMPONENTS,
+    providers: [ProximityDialogService],
     imports: [
         CommonModule,
         DataTableModule,
