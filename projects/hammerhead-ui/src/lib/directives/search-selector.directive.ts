@@ -1,11 +1,23 @@
-import { Component, Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import {
+    Component,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    HostListener,
+    Input,
+    OnInit,
+    Output,
+    TemplateRef
+} from '@angular/core';
 import { DataDialog, DisplayValuePair } from '../interfaces';
 import { ProximityDialogService } from '../services/proximity-dialog/proximity-dialog.service';
 
 @Directive({ selector: '[hhSearchSelector]', providers: [ProximityDialogService] })
 export class SearchSelectorDirective {
-    @Input('hhSearchSelector') public readonly options: any[] = [];
+    @Input('hhSearchSelector') public readonly options: DisplayValuePair[] = [];
     @Input() public readonly hhSearchSelectorIsMulti = false;
+    @Input() public readonly hhSearchSelectorSelected: DisplayValuePair[] = [];
+    @Input() public readonly hhSearchSelectorTemplate: TemplateRef<any>;
 
     @Output() public readonly hhSearchSelection = new EventEmitter<any | any[]>();
 
@@ -17,7 +29,9 @@ export class SearchSelectorDirective {
             .open(SearchSelectorDialogComponent, this.el.nativeElement, {
                 title: 'Selection search',
                 options: this.options,
-                isMulti: this.hhSearchSelectorIsMulti
+                selectedOptions: this.hhSearchSelectorSelected,
+                isMulti: this.hhSearchSelectorIsMulti,
+                template: this.hhSearchSelectorTemplate
             })
             .subscribe(selection => this.hhSearchSelection.emit(selection));
     }
@@ -31,6 +45,7 @@ export class SearchSelectorDirective {
                 [options]="data.options"
                 [isMulti]="data.isMulti"
                 [selectedOptions]="selections"
+                [customTemplate]="data.template"
                 (selection)="onSelection($event)"
             ></hh-search-selector>
 
@@ -43,15 +58,26 @@ export class SearchSelectorDirective {
         </mat-card>
     `
 })
-export class SearchSelectorDialogComponent implements DataDialog<DisplayValuePair[]> {
-    public data: { options: DisplayValuePair[]; title: string; isMulti: boolean } = {
+export class SearchSelectorDialogComponent implements DataDialog<DisplayValuePair[]>, OnInit {
+    public data: {
+        options: DisplayValuePair[];
+        title: string;
+        isMulti: boolean;
+        selectedOptions: DisplayValuePair[];
+        template?: TemplateRef<any>;
+    } = {
         options: [],
         title: 'Select',
+        selectedOptions: [],
         isMulti: false
     };
     public onClose = new EventEmitter<any | any[]>();
 
     public selections: DisplayValuePair[] = [];
+
+    public ngOnInit(): void {
+        this.selections = [...this.data.selectedOptions];
+    }
 
     public onSelection(selection: DisplayValuePair): void {
         if (this.selections.some(sel => JSON.stringify(sel.value) === JSON.stringify(selection.value))) {

@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, map, startWith } from 'rxjs/operators';
+import { merge, of } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 import { DisplayValuePair } from '../../interfaces';
 
 @Component({
@@ -13,12 +14,11 @@ export class SearchSelectorComponent {
     @Input() public readonly options: DisplayValuePair[] = [];
     @Input() public readonly selectedOptions: DisplayValuePair[] = [];
     @Input() public readonly isMulti: boolean = false;
+    @Input() public readonly customTemplate: TemplateRef<any>;
     @Output() public readonly selection = new EventEmitter<DisplayValuePair>();
 
     public readonly filterControl = new FormControl('');
-    public options$ = this.filterControl.valueChanges.pipe(
-        startWith(''),
-        debounceTime(300),
+    public options$ = merge(of(''), this.filterControl.valueChanges.pipe(debounceTime(300))).pipe(
         map(filterString =>
             this.options.filter(
                 option =>

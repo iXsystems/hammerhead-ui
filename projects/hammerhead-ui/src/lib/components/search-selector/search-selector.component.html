@@ -13,11 +13,24 @@
         (click)="selection.emit(option)"
         [style.cursor]="'pointer'"
     >
-        <mat-checkbox
-            *ngIf="isMulti"
-            [checked]="isOptionSelected(option)"
-            [style.margin-right.px]="12"
-        ></mat-checkbox>
-        <p [style.margin]="'0'">{{ option.display }}</p>
+        <span
+            fxLayoutAlign="start center"
+            fxLayoutGap="12px"
+        >
+            <mat-checkbox
+                *ngIf="isMulti"
+                [checked]="isOptionSelected(option)"
+            ></mat-checkbox>
+
+            <p
+                *ngIf="!customTemplate; else custom;"
+                [style.margin]="'0'"
+            >
+                {{ option.display }}
+            </p>
+            <ng-template #custom>
+                <ng-container *ngTemplateOutlet="customTemplate; context: { $implicit: option };"></ng-container>
+            </ng-template>
+        </span>
     </mat-list-item>
 </mat-list>
