@@ -14,7 +14,13 @@ import {
     MatTabsModule,
     MatToolbarModule
 } from '@angular/material';
-import { DataTableModule, ZeroStateModule } from 'hammerhead-ui';
+import {
+    DataTableModule,
+    HHDirectivesModule,
+    ProximityDialogService,
+    SearchSelectorModule,
+    ZeroStateModule
+} from 'hammerhead-ui';
 import { MarkdownModule } from 'ngx-markdown';
 import { DemoExampleComponent } from './demo-example/demo-example.component';
 import { DemoComponent } from './demo/demo.component';
@@ -41,10 +47,22 @@ const MATERIAL_MODULES = [
         CommonModule,
         DataTableModule,
         FlexLayoutModule,
+        HHDirectivesModule,
         MarkdownModule.forChild(),
         ...MATERIAL_MODULES,
+        SearchSelectorModule,
         ZeroStateModule
     ],
-    exports: [CommonModule, DataTableModule, FlexLayoutModule, ZeroStateModule, ...COMPONENTS, ...MATERIAL_MODULES]
+    exports: [
+        CommonModule,
+        DataTableModule,
+        FlexLayoutModule,
+        HHDirectivesModule,
+        SearchSelectorModule,
+        ZeroStateModule,
+        ...COMPONENTS,
+        ...MATERIAL_MODULES
+    ],
+    providers: [ProximityDialogService]
 })
 export class SharedComponentsModule {}

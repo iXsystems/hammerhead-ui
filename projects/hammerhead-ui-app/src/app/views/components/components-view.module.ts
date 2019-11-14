@@ -12,6 +12,9 @@ import { DataTableExampleEComponent } from './components/data-table-demo/example
 import { DataTableExampleFComponent } from './components/data-table-demo/examples/data-table-example-f/data-table-example-f.component';
 import { DataTableExampleGComponent } from './components/data-table-demo/examples/data-table-example-g/data-table-example-g.component';
 import { DataTableExampleHComponent } from './components/data-table-demo/examples/data-table-example-h/data-table-example-h.component';
+import { SearchSelectorExampleAComponent } from './components/search-selector-demo/examples/search-selector-example-a/search-selector-example-a.component';
+import { SearchSelectorExampleBComponent } from './components/search-selector-demo/examples/search-selector-example-b/search-selector-example-b.component';
+import { SearchSelectorDemoComponent } from './components/search-selector-demo/search-selector-demo.component';
 import { ZeroStateExample1Component } from './components/zero-state-demo/examples/zero-state-example-1/zero-state-example-1.component';
 import { ZeroStateExample2Component } from './components/zero-state-demo/examples/zero-state-example-2/zero-state-example-2.component';
 import { ZeroStateDemoComponent } from './components/zero-state-demo/zero-state-demo.component';
@@ -24,6 +27,10 @@ export const COMPONENT_DEMOS = [
     {
         id: 'zero-state',
         name: 'Zero State'
+    },
+    {
+        id: 'search-selector',
+        name: 'Search Selector'
     }
 ];
 
@@ -40,6 +47,9 @@ export const COMPONENT_DEMOS = [
         DataTableExampleFComponent,
         DataTableExampleGComponent,
         DataTableExampleHComponent,
+        SearchSelectorDemoComponent,
+        SearchSelectorExampleAComponent,
+        SearchSelectorExampleBComponent,
         ZeroStateDemoComponent,
         ZeroStateExample1Component,
         ZeroStateExample2Component

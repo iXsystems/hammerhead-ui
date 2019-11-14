@@ -1,0 +1,23 @@
+<mat-form-field [style.width]="'100%'">
+    <input
+        [formControl]="filterControl"
+        matInput
+        type="text"
+    >
+    <mat-hint>Search</mat-hint>
+</mat-form-field>
+
+<mat-list>
+    <mat-list-item
+        *ngFor="let option of options$ | async"
+        (click)="selection.emit(option)"
+        [style.cursor]="'pointer'"
+    >
+        <mat-checkbox
+            *ngIf="isMulti"
+            [checked]="isOptionSelected(option)"
+            [style.margin-right.px]="12"
+        ></mat-checkbox>
+        <p [style.margin]="'0'">{{ option.display }}</p>
+    </mat-list-item>
+</mat-list>

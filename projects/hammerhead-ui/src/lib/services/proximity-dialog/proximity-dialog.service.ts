@@ -20,7 +20,7 @@ export class ProximityDialogService {
      * Creates a dialog, without a backdrop, near the anchorEl. Type `T` is the data
      * structure returned by the dialog component when it closes.
      */
-    public open<T = any>(component: ComponentType<DataDialog<T>>, anchorEl: HTMLElement): Observable<T | boolean> {
+    public open<T = any>(component: ComponentType<DataDialog<T>>, anchorEl: HTMLElement, data?: any): Observable<T | boolean> {
         const overlayDestroyed$ = new Subject<void>();
 
         const originRect = anchorEl.getBoundingClientRect();
@@ -42,6 +42,7 @@ export class ProximityDialogService {
         });
 
         const dialog = overlayRef.attach(new ComponentPortal(component));
+        dialog.instance.data = data;
 
         return merge(overlayRef.backdropClick().pipe(map(() => false)), dialog.instance.onClose.asObservable()).pipe(
             take(1),

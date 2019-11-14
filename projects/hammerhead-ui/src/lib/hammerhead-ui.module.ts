@@ -3,7 +3,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
     MatButtonModule,
     MatCardModule,
@@ -11,8 +11,10 @@ import {
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
     MatProgressBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDividerModule
 } from '@angular/material';
 
 const SHARED_DEPENDENCIES = [
@@ -23,12 +25,15 @@ const SHARED_DEPENDENCIES = [
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
     MatProgressBarModule,
     MatTooltipModule,
-    OverlayModule
+    OverlayModule,
+    ReactiveFormsModule
 ];
 
 @NgModule({

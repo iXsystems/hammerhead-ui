@@ -10,8 +10,7 @@ import { DataDialog, ProximityDialogService } from 'projects/hammerhead-ui/src/p
                 Open my dialog
             </button>
         </section>
-    `,
-    providers: [ProximityDialogService]
+    `
 })
 export class ProximityDialogExampleAComponent {
     constructor(private proximityDialogService: ProximityDialogService, private snackBar: MatSnackBar) {}
