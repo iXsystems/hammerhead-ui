@@ -45,9 +45,11 @@ export class SearchSelectorExampleBComponent {
     constructor(private snackBar: MatSnackBar) {}
 
     public onSelection(options: DisplayValuePair[]): void {
-        this.selected = options || [];
+        this.selected = options || this.selected;
         this.snackBar.open(
-            options && options.length > 0 ? options.map(option => option.display).join(', ') : 'No selections',
+            this.selected && this.selected.length > 0
+                ? this.selected.map(option => option.display).join(', ')
+                : 'No selections',
             undefined,
             { duration: 3000 }
         );

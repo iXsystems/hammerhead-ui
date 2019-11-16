@@ -54,28 +54,30 @@ The Hammerhead UI repo consists of two distinct but interrelated projects: the l
 
 Follow these steps to add a component to the library and demo the component in the library's demo app. This tutorial assumes you've cloned the repo to your local machine and you're operating from the root of the repo directory.
 
-#### Create a new library component, `my-component`, using the Angular CLI
+#### Create a new library component named `my-component`
 
-The Angular CLI can be used to scaffold out your new library component with a single command.
+The `create_component.sh` script is a user-friendly wrapper around some Angular CLI commands. Just pass in the name of your new component:
 
 ```sh
-ng g c components/my-component --project=hammerhead-ui --export=true --style=scss
+bash ./create_component.sh my-component
 ```
 
--   **_The `--project` flag is necessary for all Angular CLI commands since there are two Angular projects in the same workspace._**
+The new component can be found at `./projects/hammerhead-ui/src/lib/components/my-component`. Add your desired functionality to the new component.
 
--   **_The `--export` flag ensures that the component will be bundled properly when the library is compiled._**
+#### Expose the component module in the library's public API
 
--   **_The Hammerhead UI library uses SCSS for stylesheets._**
+This important step makes sure your component is available to library consumers. In `./projects/hammerhead-ui/src/public-api.ts`, export your `my-component` module:
 
-Add your desired functionality to the new component.
+```ts
+export * from './lib/components/my-component/my-component.module';
+```
 
 #### Don't forget to build the library!
 
-Remember that the demo application uses the compiled version of the library project. As a general rule, any changes to `my-component` should be followed by a library build.
+Remember that the demo application uses the compiled version of the library project. As a general rule, any changes to `my-component` should be followed by a library build. You can use the `build_and_watch` command to recompile the library whenever changes are made.
 
 ```sh
-yarn build --project=hammerhead-ui
+yarn build_and_watch
 ```
 
 #### Add `my-component` to the project's demo app
