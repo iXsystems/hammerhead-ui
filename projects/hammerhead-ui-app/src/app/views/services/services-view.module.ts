@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ProximityDialogService } from 'projects/hammerhead-ui/src/public-api';
 import { SharedComponentsModule } from '../../components/shared/shared-components.module';
 import {
     ProximityDialogAComponent,
@@ -24,6 +25,7 @@ export const SERVICE_DEMOS = [
         ProximityDialogExampleAComponent,
         ServicesOverviewComponent
     ],
-    entryComponents: [ProximityDialogAComponent]
+    entryComponents: [ProximityDialogAComponent],
+    providers: [ProximityDialogService]
 })
 export class ServicesViewModule {}

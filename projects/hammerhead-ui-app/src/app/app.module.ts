@@ -19,7 +19,7 @@ import { HomeViewComponent } from './views/home/home-view/home-view.component';
         HttpClientModule,
         MarkdownModule.forRoot({ loader: HttpClient }),
         RouterModule.forRoot(ROUTES),
-        SharedComponentsModule
+        SharedComponentsModule.forRoot()
     ],
     exports: [RouterModule],
     providers: [],

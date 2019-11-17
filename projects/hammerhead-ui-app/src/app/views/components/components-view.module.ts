@@ -25,12 +25,12 @@ export const COMPONENT_DEMOS = [
         name: 'Data Table'
     },
     {
-        id: 'zero-state',
-        name: 'Zero State'
-    },
-    {
         id: 'search-selector',
         name: 'Search Selector'
+    },
+    {
+        id: 'zero-state',
+        name: 'Zero State'
     }
 ];
 

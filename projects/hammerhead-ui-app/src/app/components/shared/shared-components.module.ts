@@ -1,6 +1,6 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
     MatButtonModule,
@@ -62,7 +62,13 @@ const MATERIAL_MODULES = [
         ZeroStateModule,
         ...COMPONENTS,
         ...MATERIAL_MODULES
-    ],
-    providers: [ProximityDialogService]
+    ]
 })
-export class SharedComponentsModule {}
+export class SharedComponentsModule {
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: SharedComponentsModule,
+            providers: [ProximityDialogService]
+        };
+    }
+}
