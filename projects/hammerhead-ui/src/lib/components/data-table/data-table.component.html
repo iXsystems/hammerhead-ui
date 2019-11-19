@@ -69,7 +69,7 @@
             class="wrapper__table"
         >
             <cdk-table
-                [class.invisible]="(data.connect() | async)?.length === 0 || details"
+                [class.invisible]="tableData.length === 0 || details"
                 [dataSource]="data"
                 [trackBy]="config.trackByFn"
                 [style.height]="config.tableHeight || DEFAULT_TABLE_HEIGHT"
@@ -107,6 +107,7 @@
                             *ngIf="column === 'multi'"
                             [checked]="areAllRowsSelected$ | async"
                             (change)="toggleRowSelectionAll()"
+                            [disabled]="tableData.length === 0"
                         ></mat-checkbox>
                     </cdk-header-cell>
                     <cdk-cell
@@ -211,7 +212,7 @@
                 ></cdk-row>
             </cdk-table>
 
-            <ng-container *ngIf="(data.connect() | async)?.length === 0">
+            <ng-container *ngIf="tableData.length === 0">
                 <div
                     fxLayoutAlign="center center"
                     [class.wrapper__no-results]="config.tableHeight"

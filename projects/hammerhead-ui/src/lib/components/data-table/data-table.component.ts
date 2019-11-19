@@ -163,7 +163,7 @@ export class DataTableComponent implements OnChanges {
         this.data = this.updateData();
 
         this.areAllRowsSelected$ = combineLatest(this.data.connect(), this.rowSelectionEvents$).pipe(
-            map(([rows]) => rows.length === this.selectionCache.length)
+            map(([rows]) => rows.length > 0 && rows.length === this.selectionCache.length)
         );
     }
 }
