@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HammerheadUiModule } from '../../hammerhead-ui.module';
-import { SharedModule } from '../../shared.module';
 import { ZeroStateModule } from '../zero-state/zero-state.module';
 import { DataTableComponent } from './data-table.component';
 
@@ -10,7 +9,7 @@ describe('DataTableComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [HammerheadUiModule, SharedModule, ZeroStateModule],
+            imports: [HammerheadUiModule, ZeroStateModule],
             declarations: [DataTableComponent]
         }).compileComponents();
     }));

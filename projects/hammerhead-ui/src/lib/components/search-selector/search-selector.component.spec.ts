@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HammerheadUiModule } from '../../hammerhead-ui.module';
-import { SharedModule } from '../../shared.module';
 import { SearchSelectorComponent } from './search-selector.component';
 
 describe('SearchSelectorComponent', () => {
@@ -10,7 +9,7 @@ describe('SearchSelectorComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [BrowserAnimationsModule, HammerheadUiModule, SharedModule],
+            imports: [BrowserAnimationsModule, HammerheadUiModule],
             declarations: [SearchSelectorComponent]
         }).compileComponents();
     }));

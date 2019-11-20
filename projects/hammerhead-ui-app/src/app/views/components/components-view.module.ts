@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { SharedComponentsModule } from '../../components/shared/shared-components.module';
 import { ROUTES_COMPONENTS_VIEW } from './components-view.routes';
 import { ComponentsOverviewComponent } from './components/components-overview/components-overview.component';
+import { ContextMenuDemoComponent } from './components/context-menu-demo/context-menu-demo.component';
+import { ContextMenuExampleAComponent } from './components/context-menu-demo/examples/context-menu-example-a/context-menu-example-a.component';
 import { DataTableDemoComponent } from './components/data-table-demo/data-table-demo.component';
 import { DataTableExampleAComponent } from './components/data-table-demo/examples/data-table-example-a/data-table-example-a.component';
 import { DataTableExampleBComponent } from './components/data-table-demo/examples/data-table-example-b/data-table-example-b.component';
@@ -21,6 +23,10 @@ import { ZeroStateDemoComponent } from './components/zero-state-demo/zero-state-
 
 export const COMPONENT_DEMOS = [
     {
+        id: 'context-menu',
+        name: 'Context Menu'
+    },
+    {
         id: 'data-table',
         name: 'Data Table'
     },
@@ -38,6 +44,8 @@ export const COMPONENT_DEMOS = [
     imports: [RouterModule.forChild(ROUTES_COMPONENTS_VIEW), SharedComponentsModule],
     declarations: [
         ComponentsOverviewComponent,
+        ContextMenuDemoComponent,
+        ContextMenuExampleAComponent,
         DataTableDemoComponent,
         DataTableExampleAComponent,
         DataTableExampleBComponent,

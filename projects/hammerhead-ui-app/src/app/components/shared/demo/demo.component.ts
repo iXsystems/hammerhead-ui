@@ -27,6 +27,14 @@ export class DemoComponent {
         this.templateSource = DemoComponent.URL_REPO_ROOT + url;
     }
 
+    private interfaces: string[];
+    public get interfaceUrls(): string[] {
+        return this.interfaces;
+    }
+    @Input() public set interfaceUrls(urls: string[]) {
+        this.interfaces = urls.map(url => DemoComponent.URL_REPO_ROOT + url);
+    }
+
     public onTabSelection(): void {
         window.dispatchEvent(new Event('resize'));
     }

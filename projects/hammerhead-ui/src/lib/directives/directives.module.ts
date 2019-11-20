@@ -1,15 +1,21 @@
 import { NgModule } from '@angular/core';
 import { SearchSelectorModule } from '../components/search-selector/search-selector.module';
 import { HammerheadUiModule } from '../hammerhead-ui.module';
-import { SharedModule } from '../shared.module';
-import { SearchSelectorDialogComponent, SearchSelectorDirective } from './search-selector.directive';
+import {
+    ContextmenuDialogComponent,
+    ContextmenuDirective
+} from './contextmenu.directive';
+import {
+    SearchSelectorDialogComponent,
+    SearchSelectorDirective
+} from './search-selector.directive';
 
-const DIRECTIVES = [SearchSelectorDirective];
-const DIALOGS = [SearchSelectorDialogComponent];
+const DIRECTIVES = [ContextmenuDirective, SearchSelectorDirective];
+const DIALOGS = [ContextmenuDialogComponent, SearchSelectorDialogComponent];
 
 @NgModule({
     declarations: [...DIALOGS, ...DIRECTIVES],
-    imports: [HammerheadUiModule, SearchSelectorModule, SharedModule],
+    imports: [HammerheadUiModule, SearchSelectorModule],
     exports: [...DIRECTIVES],
     entryComponents: DIALOGS
 })

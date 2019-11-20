@@ -3,6 +3,7 @@ import { ComponentsOverviewComponent } from './components/components-overview/co
 import { DataTableDemoComponent } from './components/data-table-demo/data-table-demo.component';
 import { SearchSelectorDemoComponent } from './components/search-selector-demo/search-selector-demo.component';
 import { ZeroStateDemoComponent } from './components/zero-state-demo/zero-state-demo.component';
+import { ContextMenuDemoComponent } from './components/context-menu-demo/context-menu-demo.component';
 
 export const ROUTES_COMPONENTS_VIEW: Routes = [
     {
@@ -11,8 +12,8 @@ export const ROUTES_COMPONENTS_VIEW: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'zero-state',
-        component: ZeroStateDemoComponent
+        path: 'context-menu',
+        component: ContextMenuDemoComponent
     },
     {
         path: 'data-table',
@@ -21,5 +22,9 @@ export const ROUTES_COMPONENTS_VIEW: Routes = [
     {
         path: 'search-selector',
         component: SearchSelectorDemoComponent
+    },
+    {
+        path: 'zero-state',
+        component: ZeroStateDemoComponent
     }
 ];

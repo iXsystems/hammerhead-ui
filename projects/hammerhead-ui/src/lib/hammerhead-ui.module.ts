@@ -8,14 +8,16 @@ import {
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDialogModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
     MatProgressBarModule,
-    MatTooltipModule,
-    MatDividerModule
+    MatTooltipModule
 } from '@angular/material';
+import { MetadataDirective } from './directives/metadata.directive';
 
 const SHARED_DEPENDENCIES = [
     CdkTableModule,
@@ -25,6 +27,7 @@ const SHARED_DEPENDENCIES = [
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
     MatIconModule,
@@ -36,8 +39,11 @@ const SHARED_DEPENDENCIES = [
     ReactiveFormsModule
 ];
 
+const DECLARATIONS = [MetadataDirective];
+
 @NgModule({
+    declarations: DECLARATIONS,
     imports: SHARED_DEPENDENCIES,
-    exports: SHARED_DEPENDENCIES
+    exports: [...SHARED_DEPENDENCIES, ...DECLARATIONS]
 })
 export class HammerheadUiModule {}

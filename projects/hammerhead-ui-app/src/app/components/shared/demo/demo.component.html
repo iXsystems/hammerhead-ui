@@ -45,4 +45,28 @@
             ></markdown>
         </div>
     </mat-tab>
+    <mat-tab *ngIf="interfaceUrls">
+        <ng-template mat-tab-label>
+            <div
+                fxLayoutAlign="center center"
+                fxLayoutGap="6px"
+            >
+                <mat-icon>public</mat-icon>
+                <p class="no-margin-top no-margin-bottom">Interfaces</p>
+            </div>
+        </ng-template>
+        <div
+            fxLayout.lt-lg="column"
+            fxLayoutAlign="start start"
+            fxLayoutGap="24px"
+            fxLayoutGap.lt-lg="12px"
+        >
+            <markdown
+                *ngFor="let interface of interfaceUrls"
+                fxFlex="calc(50% - 12px)"
+                fxFlex.lt-lg="100%"
+                [src]="interface"
+            ></markdown>
+        </div>
+    </mat-tab>
 </mat-tab-group>
