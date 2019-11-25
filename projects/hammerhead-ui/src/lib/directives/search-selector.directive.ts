@@ -1,3 +1,4 @@
+import { ConnectedPosition } from '@angular/cdk/overlay';
 import {
     Component,
     Directive,
@@ -18,6 +19,12 @@ export class SearchSelectorDirective {
     @Input() public readonly hhSearchSelectorIsMulti = false;
     @Input() public readonly hhSearchSelectorSelected: DisplayValuePair[] = [];
     @Input() public readonly hhSearchSelectorTemplate: TemplateRef<any>;
+    @Input() public readonly hhSearchSelectorPosition: ConnectedPosition = {
+        originX: 'start',
+        originY: 'bottom',
+        overlayX: 'start',
+        overlayY: 'top'
+    };
 
     @Output() public readonly hhSearchSelection = new EventEmitter<any | any[]>();
 
@@ -26,13 +33,18 @@ export class SearchSelectorDirective {
     @HostListener('click')
     public click(): void {
         this.proximityDialogService
-            .open(SearchSelectorDialogComponent, this.el.nativeElement, {
-                title: 'Selection search',
-                options: this.options,
-                selectedOptions: this.hhSearchSelectorSelected,
-                isMulti: this.hhSearchSelectorIsMulti,
-                template: this.hhSearchSelectorTemplate
-            })
+            .open(
+                SearchSelectorDialogComponent,
+                this.el.nativeElement,
+                {
+                    title: 'Selection search',
+                    options: this.options,
+                    selectedOptions: this.hhSearchSelectorSelected,
+                    isMulti: this.hhSearchSelectorIsMulti,
+                    template: this.hhSearchSelectorTemplate
+                },
+                this.hhSearchSelectorPosition
+            )
             .subscribe(selection => this.hhSearchSelection.emit(selection));
     }
 }

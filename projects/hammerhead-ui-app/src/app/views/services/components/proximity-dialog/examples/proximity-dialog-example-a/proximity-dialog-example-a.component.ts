@@ -17,7 +17,12 @@ export class ProximityDialogExampleAComponent {
 
     public onOpenDialog(anchorEl: MatButton): void {
         this.proximityDialogService
-            .open(ProximityDialogAComponent, anchorEl._elementRef.nativeElement)
+            .open(ProximityDialogAComponent, anchorEl._elementRef.nativeElement, undefined, {
+                originX: 'start',
+                originY: 'top',
+                overlayX: 'end',
+                overlayY: 'top'
+            })
             .subscribe(result =>
                 this.snackBar.open(result ? 'You were sure!' : 'You were not sure...', undefined, {
                     duration: 2000

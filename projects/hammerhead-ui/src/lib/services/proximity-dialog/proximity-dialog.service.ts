@@ -1,4 +1,4 @@
-import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
+import { ConnectedPosition, Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
 import { merge, Observable } from 'rxjs';
@@ -23,21 +23,20 @@ export class ProximityDialogService {
     public open<T = any>(
         component: ComponentType<DataDialog<T>>,
         anchorEl: HTMLElement,
-        data?: any
+        data?: any,
+        position: ConnectedPosition = {
+            originX: 'end',
+            originY: 'top',
+            overlayX: 'start',
+            overlayY: 'top'
+        }
     ): Observable<T | boolean> {
         const overlayRef = this.overlay.create({
             ...ProximityDialogService.OVERLAY_CONFIG,
             positionStrategy: this.overlay
                 .position()
                 .flexibleConnectedTo(anchorEl)
-                .withPositions([
-                    {
-                        originX: 'end',
-                        originY: 'top',
-                        overlayX: 'start',
-                        overlayY: 'top'
-                    }
-                ]),
+                .withPositions([position]),
             scrollStrategy: this.overlay.scrollStrategies.block()
         });
 
