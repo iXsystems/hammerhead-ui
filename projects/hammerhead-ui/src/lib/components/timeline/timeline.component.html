@@ -1,0 +1,15 @@
+<p>
+    {{ date?.displayFormatter ? date?.displayFormatter(date?.date, date?.data) : date?.date?.toDateString() }}
+</p>
+
+<mat-slider
+    [value]="selectedDateIndex"
+    [disabled]="dates.length === 1"
+    [thumbLabel]="false"
+    [step]="1"
+    [min]="0"
+    [max]="dates.length - 1 || 1"
+    [tickInterval]="1"
+    (change)="onChange($event)"
+    (input)="onInput($event)"
+></mat-slider>

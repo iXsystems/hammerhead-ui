@@ -1,0 +1,10 @@
+:host {
+    display: block;
+    width: 100%;
+
+    mat-slider {
+        display: block;
+        margin: 0 auto;
+        width: calc(100% - 4px);
+    }
+}

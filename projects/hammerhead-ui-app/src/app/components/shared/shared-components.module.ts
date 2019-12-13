@@ -19,6 +19,7 @@ import {
     HHDirectivesModule,
     ProximityDialogService,
     SearchSelectorModule,
+    TimelineModule,
     ZeroStateModule
 } from 'hammerhead-ui';
 import { MarkdownModule } from 'ngx-markdown';
@@ -49,9 +50,10 @@ const MATERIAL_MODULES = [
         FlexLayoutModule,
         HHDirectivesModule,
         MarkdownModule.forChild(),
-        ...MATERIAL_MODULES,
         SearchSelectorModule,
-        ZeroStateModule
+        TimelineModule,
+        ZeroStateModule,
+        ...MATERIAL_MODULES
     ],
     exports: [
         CommonModule,
@@ -59,6 +61,7 @@ const MATERIAL_MODULES = [
         FlexLayoutModule,
         HHDirectivesModule,
         SearchSelectorModule,
+        TimelineModule,
         ZeroStateModule,
         ...COMPONENTS,
         ...MATERIAL_MODULES

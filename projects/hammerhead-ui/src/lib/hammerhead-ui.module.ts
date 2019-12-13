@@ -15,7 +15,8 @@ import {
     MatInputModule,
     MatListModule,
     MatProgressBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSliderModule
 } from '@angular/material';
 import { MetadataDirective } from './directives/metadata.directive';
 
@@ -34,6 +35,7 @@ const SHARED_DEPENDENCIES = [
     MatInputModule,
     MatListModule,
     MatProgressBarModule,
+    MatSliderModule,
     MatTooltipModule,
     OverlayModule,
     ReactiveFormsModule
