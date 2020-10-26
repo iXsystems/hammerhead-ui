@@ -68,7 +68,7 @@ const MATERIAL_MODULES = [
     ]
 })
 export class SharedComponentsModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<SharedComponentsModule> {
         return {
             ngModule: SharedComponentsModule,
             providers: [ProximityDialogService]

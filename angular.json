@@ -15,7 +15,12 @@
                         "tsConfig": "projects/hammerhead-ui/tsconfig.lib.json",
                         "project": "projects/hammerhead-ui/ng-package.json"
                     }
-                },
+                ,          "configurations": {
+            "production": {
+              "tsConfig": "projects/hammerhead-ui/tsconfig.lib.prod.json"
+            }
+          }
+},
                 "test": {
                     "builder": "@angular-devkit/build-angular:karma",
                     "options": {
@@ -51,7 +56,7 @@
                         "main": "projects/hammerhead-ui-app/src/main.ts",
                         "polyfills": "projects/hammerhead-ui-app/src/polyfills.ts",
                         "tsConfig": "projects/hammerhead-ui-app/tsconfig.app.json",
-                        "aot": false,
+                        "aot": true,
                         "assets": [
                             "projects/hammerhead-ui-app/src/favicon.ico",
                             "projects/hammerhead-ui-app/src/assets"
@@ -80,7 +85,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
@@ -89,7 +93,11 @@
                                     "type": "initial",
                                     "maximumWarning": "2mb",
                                     "maximumError": "5mb"
-                                }
+                                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
                             ]
                         }
                     }
