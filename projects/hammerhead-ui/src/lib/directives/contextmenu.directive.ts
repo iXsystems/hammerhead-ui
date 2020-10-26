@@ -8,7 +8,7 @@ import {
     Input,
     ViewEncapsulation
 } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ContextmenuItem } from '../interfaces/contextmenu-item.interface';

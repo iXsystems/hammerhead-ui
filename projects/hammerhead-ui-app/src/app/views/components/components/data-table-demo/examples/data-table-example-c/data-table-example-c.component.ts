@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataTableConfig } from 'projects/hammerhead-ui/src/public-api';
 import { of } from 'rxjs';
 import { SystemToken } from '../../data-table.dummy-data';

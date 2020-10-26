@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataTableConfig } from 'projects/hammerhead-ui/src/public-api';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';

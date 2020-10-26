@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatSnackBarModule } from '@angular/material';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ZeroStateModule } from 'hammerhead-ui';
 import { DemoExampleComponent } from 'projects/hammerhead-ui-app/src/app/components/shared/demo-example/demo-example.component';
 import { DemoComponent } from 'projects/hammerhead-ui-app/src/app/components/shared/demo/demo.component';

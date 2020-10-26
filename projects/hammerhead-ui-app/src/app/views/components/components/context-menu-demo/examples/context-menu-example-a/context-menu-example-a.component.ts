@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ContextmenuItem } from 'projects/hammerhead-ui/src/lib/interfaces/contextmenu-item.interface';
 
 @Component({

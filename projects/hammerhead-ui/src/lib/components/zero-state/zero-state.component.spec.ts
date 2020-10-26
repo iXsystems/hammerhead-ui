@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatCardModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { take } from 'rxjs/operators';
 import { ZeroStateComponent } from './zero-state.component';
 import { SimpleChange } from '@angular/core';

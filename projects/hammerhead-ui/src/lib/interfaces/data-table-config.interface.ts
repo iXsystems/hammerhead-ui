@@ -1,4 +1,4 @@
-import { TooltipPosition } from '@angular/material';
+import { TooltipPosition } from '@angular/material/tooltip';
 import { Observable } from 'rxjs';
 
 export interface DataTableConfig<T = any> {
