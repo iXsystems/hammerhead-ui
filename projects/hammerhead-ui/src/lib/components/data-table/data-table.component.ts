@@ -130,10 +130,10 @@ export class DataTableComponent implements OnChanges {
             .subscribe((rows) => {
                 if (this.selectionCache.length < rows.length) {
                     this.selectionCache = rows;
-                    return;
+                } else {
+                    this.selectionCache = [];
                 }
-
-                this.selectionCache = [];
+                this.selection.emit(this.selectionCache);
             });
     }
 
