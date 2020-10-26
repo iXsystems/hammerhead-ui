@@ -17,7 +17,7 @@ DOCS_ROOT_DIR="./docs"
 ### Build/publish library routine ###
 
 # Build the library
-sudo yarn build --project=$LIBRARY_PROJECT_NAME
+sudo ng build --project=$LIBRARY_PROJECT_NAME
 
 # Copy root README to root of library package directory
 sudo cp $ROOT_README $DIST_LIB_ROOT
