@@ -17,7 +17,7 @@ DOCS_ROOT_DIR="./docs"
 ### Build/publish library routine ###
 
 # Build the library
-sudo ng build --project=$LIBRARY_PROJECT_NAME
+sudo ng build --project=$LIBRARY_PROJECT_NAME --prod
 
 # Copy root README to root of library package directory
 sudo cp $ROOT_README $DIST_LIB_ROOT
@@ -29,7 +29,7 @@ sudo npm pack $DIST_LIB_ROOT
 sudo mv ./hammerhead-ui-*.tgz $DIST_LIB_ROOT
 
 # Publish the library to npm
-sudo npm publish $DIST_LIB_TARBALL
+sudo npm publish $DIST_LIB_ROOT
 
 #####################################
 
