@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, TemplateRef } from '@angular/core';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { DataTableColumnConfig, DataTableConfig } from '../../interfaces';
@@ -9,7 +9,7 @@ import { dataTableAnimations, MasterDetailState } from './data-table.animations'
     selector: 'hh-data-table',
     templateUrl: './data-table.component.html',
     styleUrls: ['./data-table.component.scss'],
-    animations: [dataTableAnimations.masterDetailSlide]
+    animations: [dataTableAnimations.masterDetailSlide],
 })
 export class DataTableComponent implements OnChanges {
     private static readonly DETAIL_TOGGLE_COLUMN_WIDTH = '36px';
@@ -24,6 +24,8 @@ export class DataTableComponent implements OnChanges {
     @Input() public actionTemplates: { [actionId: string]: TemplateRef<any> } = {};
     @Input() public detailsTemplate: TemplateRef<any>;
     @Input() public zeroStateTemplate: TemplateRef<any>;
+
+    @Output() public selection = new EventEmitter<any[]>();
 
     public cols: string[] = [];
     public data: DataTableSource;
@@ -54,19 +56,21 @@ export class DataTableComponent implements OnChanges {
     public clearSelectionCache(): void {
         this.selectionCache = [];
         this.rowSelectionEvents$.next();
+        this.selection.emit(this.selectionCache);
     }
 
     public deselectRow(row: any): void {
         if (this.config.isMultiSelect) {
             this.selectionCache = this.selectionCache.filter(
-                r => this.config.trackByFn(0, r) !== this.config.trackByFn(0, row)
+                (r) => this.config.trackByFn(0, r) !== this.config.trackByFn(0, row)
             );
             this.rowSelectionEvents$.next();
+            this.selection.emit(this.selectionCache);
         }
     }
 
     public getColumn(columnName: string): DataTableColumnConfig {
-        return this.config.columns.find(col => col.property === columnName);
+        return this.config.columns.find((col) => col.property === columnName);
     }
 
     public getColumnWidth(columnProperty: string): string | undefined {
@@ -82,12 +86,12 @@ export class DataTableComponent implements OnChanges {
             return DataTableComponent.DETAIL_TOGGLE_COLUMN_WIDTH;
         }
 
-        const column = this.config.columns.find(col => col.property === columnProperty);
+        const column = this.config.columns.find((col) => col.property === columnProperty);
         return column ? column.width : undefined;
     }
 
     public isRowSelected(row: any, index: number): boolean {
-        return this.selectionCache.some(r => this.config.trackByFn(index, r) === this.config.trackByFn(index, row));
+        return this.selectionCache.some((r) => this.config.trackByFn(index, r) === this.config.trackByFn(index, row));
     }
 
     public onQuitDetails(): void {
@@ -116,13 +120,14 @@ export class DataTableComponent implements OnChanges {
         }
 
         this.rowSelectionEvents$.next();
+        this.selection.emit(this.selectionCache);
     }
 
     public toggleRowSelectionAll(): void {
         this.data
             .connect()
             .pipe(take(1))
-            .subscribe(rows => {
+            .subscribe((rows) => {
                 if (this.selectionCache.length < rows.length) {
                     this.selectionCache = rows;
                     return;
@@ -141,7 +146,7 @@ export class DataTableComponent implements OnChanges {
     }
 
     private buildColumns(): string[] {
-        let cols = this.config.columns.map(column => column.property);
+        let cols = this.config.columns.map((column) => column.property);
         if (this.config.isMultiSelect && Array.isArray(this.config.multiSelectActions)) {
             cols = ['multi', ...cols];
         }
