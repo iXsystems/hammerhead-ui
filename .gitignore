@@ -22,6 +22,9 @@ speed-measure-plugin.json
 *.launch
 .settings/
 *.sublime-workspace
+.yarn
+.yarnrc
+yarn.lock
 
 # IDE - VSCode
 .vscode/*
@@ -44,5 +47,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-.yarn
-.yarnrc
