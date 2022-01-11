@@ -34,7 +34,7 @@ export class TimelineComponent implements OnInit {
         this.selection.emit(this.dates[this.selectedDateIndex]);
     }
 
-    public onInput(change: MatSelectChange): void {
+    public onInput(change: MatSliderChange): void {
         this.selectedDateIndex = change.value;
     }
 }

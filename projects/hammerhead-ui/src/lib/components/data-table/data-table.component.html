@@ -10,7 +10,7 @@
             <input
                 #searchFilter
                 matInput
-                (keyup)="applyFilter($event.target.value)"
+                (keyup)="applyFilter($any($event.target).value)"
                 placeholder="Filter"
                 [ngModel]="data.filterString"
                 [disabled]="masterDetailState === 'details-show'"

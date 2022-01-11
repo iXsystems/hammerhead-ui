@@ -11,10 +11,10 @@ import { DisplayValuePair } from '../../interfaces';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchSelectorComponent {
-    @Input() public readonly options: DisplayValuePair[] = [];
-    @Input() public readonly selectedOptions: DisplayValuePair[] = [];
-    @Input() public readonly isMulti: boolean = false;
-    @Input() public readonly customTemplate: TemplateRef<any>;
+    @Input() public options: DisplayValuePair[] = [];
+    @Input() public selectedOptions: DisplayValuePair[] = [];
+    @Input() public isMulti: boolean = false;
+    @Input() public customTemplate: TemplateRef<any>;
     @Output() public readonly selection = new EventEmitter<DisplayValuePair>();
 
     public readonly filterControl = new FormControl('');
