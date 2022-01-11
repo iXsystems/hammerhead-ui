@@ -17,7 +17,7 @@ DOCS_ROOT_DIR="./docs"
 ### Build/publish library routine ###
 
 # Build the library
-sudo ng build --project=$LIBRARY_PROJECT_NAME --prod
+sudo ng build --project=$LIBRARY_PROJECT_NAME --configuration production
 
 # Copy root README to root of library package directory
 sudo cp $ROOT_README $DIST_LIB_ROOT
@@ -39,7 +39,7 @@ sudo npm publish $DIST_LIB_ROOT
 sudo cp $ROOT_README $DEMO_APP_ASSETS_DIR
 
 # Build the demo app
-sudo yarn build --project=$DEMO_APP_PROJECT_NAME --base-href . --prod --aot
+sudo yarn build --project=$DEMO_APP_PROJECT_NAME --base-href . --configuration production --aot
 
 ##############################
 
