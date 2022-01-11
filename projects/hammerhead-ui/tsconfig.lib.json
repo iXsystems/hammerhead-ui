@@ -3,12 +3,13 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
     "target": "es2015",
+    "module": "es2020",
     "declaration": true,
     "inlineSources": true,
     "types": [],
     "lib": [
       "dom",
-      "es2018"
+      "es2016"
     ]
   },
   "angularCompilerOptions": {
