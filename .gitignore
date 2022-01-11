@@ -25,6 +25,7 @@ speed-measure-plugin.json
 .yarn
 .yarnrc
 yarn.lock
+.angular
 
 # IDE - VSCode
 .vscode/*

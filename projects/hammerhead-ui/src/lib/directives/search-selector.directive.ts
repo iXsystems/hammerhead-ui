@@ -15,11 +15,11 @@ import { ProximityDialogService } from '../services/proximity-dialog/proximity-d
 
 @Directive({ selector: '[hhSearchSelector]', providers: [ProximityDialogService] })
 export class SearchSelectorDirective {
-    @Input('hhSearchSelector') public readonly options: DisplayValuePair[] = [];
-    @Input() public readonly hhSearchSelectorIsMulti = false;
-    @Input() public readonly hhSearchSelectorSelected: DisplayValuePair[] = [];
-    @Input() public readonly hhSearchSelectorTemplate: TemplateRef<any>;
-    @Input() public readonly hhSearchSelectorPosition: ConnectedPosition = {
+    @Input('hhSearchSelector') public options: DisplayValuePair[] = [];
+    @Input() public hhSearchSelectorIsMulti = false;
+    @Input() public hhSearchSelectorSelected: DisplayValuePair[] = [];
+    @Input() public hhSearchSelectorTemplate: TemplateRef<any>;
+    @Input() public hhSearchSelectorPosition: ConnectedPosition = {
         originX: 'start',
         originY: 'bottom',
         overlayX: 'start',

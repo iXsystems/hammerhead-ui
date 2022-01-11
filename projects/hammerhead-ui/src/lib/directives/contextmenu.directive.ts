@@ -22,9 +22,9 @@ interface ContextmenuData {
 export class ContextmenuDirective {
     public static readonly BACKDROP_CLASS = 'hh-contextmenu-backdrop';
 
-    @Input('hhContextmenu') public readonly entity: any;
+    @Input('hhContextmenu') public entity: any;
     // tslint:disable-next-line: no-input-rename
-    @Input('hhContextmenuItems') public readonly menuItems: ContextmenuItem[];
+    @Input('hhContextmenuItems') public menuItems: ContextmenuItem[];
 
     @HostListener('contextmenu', ['$event'])
     public onRightClick(event: MouseEvent): void {
