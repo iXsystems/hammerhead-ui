@@ -128,8 +128,9 @@ export class DataTableComponent implements OnChanges {
             .connect()
             .pipe(take(1))
             .subscribe((rows) => {
-                if (this.selectionCache.length < rows.length) {
-                    this.selectionCache = rows;
+                const selectable = rows.filter(row => !row.selectionDisabled);
+                if (this.selectionCache.length < selectable.length) {
+                    this.selectionCache = selectable;
                 } else {
                     this.selectionCache = [];
                 }

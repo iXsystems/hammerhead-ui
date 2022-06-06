@@ -130,7 +130,8 @@
                             [checked]="isRowSelected(row, index)"
                             (change)="toggleRowSelection(row, index)"
                             (click)="$event.stopPropagation()"
-                        ></mat-checkbox>
+                            [disabled]="row.selectionDisabled"
+                        ></mat-checkbox>                        
 
                         <ng-container *ngIf="column !== 'actions' && column !== 'details' && column !== 'multi'">
                             <ng-container *ngIf="!cellTemplates[column]">
