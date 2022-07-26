@@ -3889,6 +3889,68 @@
             "templateData": "<!-- Loads the README directly from master source on Github -->\n<!-- <markdown src=\"https://raw.githubusercontent.com/iXsystems/hammerhead-ui/master/README.md\"></markdown> -->\n\n<!-- Load the local README that ships with the application -->\n<markdown [src]=\"readmePath\"></markdown>\n"
         },
         {
+            "name": "InputComponent",
+            "id": "component-InputComponent-4ffe79e560521486c51c79801219add0ee9a1729eda1535ce17de49941f52061def156cecd94ad4b48542f83b065bed24d310437c87165be7870f6bd0c1a9fbd",
+            "file": "projects/hammerhead-ui/src/lib/components/input/input.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "hh-input",
+            "styleUrls": [
+                "./input.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./input.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'hh-input',\n  templateUrl: './input.component.html',\n  styleUrls: ['./input.component.scss']\n})\nexport class InputComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "// @import '~@angular/material/prebuilt-themes/indigo-pink.css';\n// @import '../../../../../../node_modules/@angular/material//prebuilt-themes//indigo-pink.css';\n// @include mat-core();",
+                    "styleUrl": "./input.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<mat-form-field appearance=\"fill\">\n    <mat-label>Input Label</mat-label>\n    <input matInput>\n  </mat-form-field>"
+        },
+        {
             "name": "PageComponent",
             "id": "component-PageComponent-7126d8c2607c946741c651482413b43feb72b2d63cac9d3ac173fde206a5e635eb4cdbf7ca7ac9327c7d4d05cf7ef619144c34c11609ad677081d0ee4e855064",
             "file": "stories/page.component.ts",
@@ -5637,13 +5699,13 @@
         },
         {
             "name": "HammerheadUiModule",
-            "id": "module-HammerheadUiModule-3b1e25a304bef4d1e58e5eab3b2833568ed33477cc96220ed6fd6b08469c8dadcfa44eb2b5dc752b65cd9dacbc60147803b2e50680ae499b2c883a50baa949e1",
+            "id": "module-HammerheadUiModule-993febbdcf78e803ccc9312e2a8381af25f4f3852d5caccddad36d165c56358e89c6c31606f0e25e0a181903a1d39025e6e7f9e07e83f2a8f1190261f73e8139",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "projects/hammerhead-ui/src/lib/hammerhead-ui.module.ts",
             "methods": [],
-            "sourceCode": "import { OverlayModule } from '@angular/cdk/overlay';\nimport { CdkTableModule } from '@angular/cdk/table';\nimport { CommonModule } from '@angular/common';\nimport { NgModule } from '@angular/core';\nimport { FlexLayoutModule } from '@angular/flex-layout';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatCardModule } from '@angular/material/card';\nimport { MatCheckboxModule } from '@angular/material/checkbox';\nimport { MatDialogModule } from '@angular/material/dialog';\nimport { MatDividerModule } from '@angular/material/divider';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatListModule } from '@angular/material/list';\nimport { MatProgressBarModule } from '@angular/material/progress-bar';\nimport { MatSliderModule } from '@angular/material/slider';\nimport { MatTooltipModule } from '@angular/material/tooltip';\nimport { MetadataDirective } from './directives/metadata.directive';\n\n@NgModule({\n    declarations: [MetadataDirective],\n    imports: [\n        CdkTableModule,\n        CommonModule,\n        FlexLayoutModule,\n        FormsModule,\n        MatButtonModule,\n        MatCardModule,\n        MatCheckboxModule,\n        MatDialogModule,\n        MatDividerModule,\n        MatFormFieldModule,\n        MatIconModule,\n        MatInputModule,\n        MatListModule,\n        MatProgressBarModule,\n        MatSliderModule,\n        MatTooltipModule,\n        OverlayModule,\n        ReactiveFormsModule,\n    ],\n    exports: [\n        CdkTableModule,\n        CommonModule,\n        FlexLayoutModule,\n        FormsModule,\n        MatButtonModule,\n        MatCardModule,\n        MatCheckboxModule,\n        MatDialogModule,\n        MatDividerModule,\n        MatFormFieldModule,\n        MatIconModule,\n        MatInputModule,\n        MatListModule,\n        MatProgressBarModule,\n        MatSliderModule,\n        MatTooltipModule,\n        OverlayModule,\n        ReactiveFormsModule,\n        MetadataDirective,\n    ],\n})\nexport class HammerheadUiModule {}\n",
+            "sourceCode": "import { OverlayModule } from '@angular/cdk/overlay';\nimport { CdkTableModule } from '@angular/cdk/table';\nimport { CommonModule } from '@angular/common';\nimport { NgModule } from '@angular/core';\nimport { FlexLayoutModule } from '@angular/flex-layout';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatCardModule } from '@angular/material/card';\nimport { MatCheckboxModule } from '@angular/material/checkbox';\nimport { MatDialogModule } from '@angular/material/dialog';\nimport { MatDividerModule } from '@angular/material/divider';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatListModule } from '@angular/material/list';\nimport { MatProgressBarModule } from '@angular/material/progress-bar';\nimport { MatSliderModule } from '@angular/material/slider';\nimport { MatTooltipModule } from '@angular/material/tooltip';\nimport { MetadataDirective } from './directives/metadata.directive';\n\n@NgModule({\n    declarations: [MetadataDirective],\n    imports: [\n        CdkTableModule,\n        CommonModule,\n        FlexLayoutModule,\n        FormsModule,\n        MatButtonModule,\n        MatCardModule,\n        MatCheckboxModule,\n        MatDialogModule,\n        MatDividerModule,\n        MatFormFieldModule,\n        MatIconModule,\n        MatInputModule,\n        MatListModule,\n        MatProgressBarModule,\n        MatSliderModule,\n        MatTooltipModule,\n        OverlayModule,\n        ReactiveFormsModule,\n        MatFormFieldModule\n    ],\n    exports: [\n        CdkTableModule,\n        CommonModule,\n        FlexLayoutModule,\n        FormsModule,\n        MatButtonModule,\n        MatCardModule,\n        MatCheckboxModule,\n        MatDialogModule,\n        MatDividerModule,\n        MatFormFieldModule,\n        MatIconModule,\n        MatInputModule,\n        MatListModule,\n        MatProgressBarModule,\n        MatSliderModule,\n        MatTooltipModule,\n        OverlayModule,\n        ReactiveFormsModule,\n        MetadataDirective,\n        MatFormFieldModule\n    ],\n})\nexport class HammerheadUiModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -5729,6 +5791,54 @@
                         },
                         {
                             "name": "SearchSelectorDirective"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "InputModule",
+            "id": "module-InputModule-3cf19d8903ac5110a8cd6f24d1f890687056960fafa2dd8b71a591421d4c095fd9aa8ca3def29dcf6f48ca00cd6844adcb4c7061edcce73eacf7295fd3b5ff3d",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "projects/hammerhead-ui/src/lib/components/input/input.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { InputComponent } from './input.component';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { HammerheadUiModule } from '../../hammerhead-ui.module';\n\n\n\n@NgModule({\n  declarations: [\n    InputComponent\n  ],\n  imports: [\n    CommonModule,\n    MatInputModule,\n    MatFormFieldModule,\n    HammerheadUiModule\n  ],\n  exports: [\n    InputComponent\n  ]\n})\nexport class InputModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "InputComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "HammerheadUiModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "InputComponent"
                         }
                     ]
                 },
@@ -6211,6 +6321,16 @@
                 "defaultValue": "{\n  production: false\n}"
             },
             {
+                "name": "Input",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "stories/Input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "() => ({\n    props: {},\n  })"
+            },
+            {
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -6639,6 +6759,18 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{\n  production: false\n}"
+                }
+            ],
+            "stories/Input.stories.ts": [
+                {
+                    "name": "Input",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "stories/Input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "() => ({\n    props: {},\n  })"
                 }
             ],
             "stories/Button.stories.ts": [
@@ -7301,6 +7433,15 @@
                 "status": "low"
             },
             {
+                "filePath": "projects/hammerhead-ui/src/lib/components/input/input.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "InputComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
                 "filePath": "projects/hammerhead-ui/src/lib/components/search-selector/search-selector.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -7578,6 +7719,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "stories/Input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Input",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

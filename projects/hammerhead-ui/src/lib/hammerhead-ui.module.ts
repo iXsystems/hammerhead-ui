@@ -39,6 +39,7 @@ import { MetadataDirective } from './directives/metadata.directive';
         MatTooltipModule,
         OverlayModule,
         ReactiveFormsModule,
+        MatFormFieldModule
     ],
     exports: [
         CdkTableModule,
@@ -60,6 +61,7 @@ import { MetadataDirective } from './directives/metadata.directive';
         OverlayModule,
         ReactiveFormsModule,
         MetadataDirective,
+        MatFormFieldModule
     ],
 })
 export class HammerheadUiModule {}

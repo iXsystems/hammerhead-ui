@@ -11,3 +11,5 @@ export * from './lib/directives/directives.module';
 export * from './lib/directives/search-selector.directive';
 export * from './lib/interfaces';
 export * from './lib/services/proximity-dialog/proximity-dialog.service';
+export * from './lib/components/input/input.component';
+export * from './lib/components/input/input.module';
