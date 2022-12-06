@@ -17,29 +17,29 @@ DOCS_ROOT_DIR="./docs"
 ### Build library routine ###
 
 # Build the library
-sudo yarn build --project=$LIBRARY_PROJECT_NAME
+npm run build --project=$LIBRARY_PROJECT_NAME
 
 # Copy root README to root of library package directory
-sudo cp $ROOT_README $DIST_LIB_ROOT
+cp $ROOT_README $DIST_LIB_ROOT
 
 #############################
 
 ### Build demo app routine ###
 
 # Copy root README to demo app assets
-sudo cp $ROOT_README $DEMO_APP_ASSETS_DIR
+cp $ROOT_README $DEMO_APP_ASSETS_DIR
 
 # Build the demo app
-sudo yarn build --project=$DEMO_APP_PROJECT_NAME --base-href . --prod --aot
+npm run build --project=$DEMO_APP_PROJECT_NAME --base-href '.' --configuration production --aot
 
 ##############################
 
 ### Github pages stuff ###
 
 # Nuke the docs directory
-sudo rm -rf $DOCS_ROOT_DIR
+rm -rf $DOCS_ROOT_DIR
 
 # Copy contents of dist/hammerhead-ui-app to docs directory
-sudo cp -a $DEMO_APP_DIST_DIR $DOCS_ROOT_DIR
+cp -a $DEMO_APP_DIST_DIR $DOCS_ROOT_DIR
 
 ##########################
