@@ -159,5 +159,8 @@
             }
         }
     },
-    "defaultProject": "hammerhead-ui"
+    "defaultProject": "hammerhead-ui",
+    "cli": {
+      "analytics": false
+    }
 }
